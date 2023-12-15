@@ -48,7 +48,7 @@
           propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
-            #!/bin/bash
+            #!/run/current-system/sw/bin/bash
             prefix=${builtins.placeholder "out"}
             export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
             DIR=$(mktemp -d)
