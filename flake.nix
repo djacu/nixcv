@@ -28,7 +28,7 @@
           fontawesome5
           fontaxes
           fontspec
-          inconsolata # need to figure out multiple font dirs
+          inconsolata
           luatexbase
           pgf
           relsize
@@ -40,19 +40,12 @@
           xstring
           ;
       };
-      fonts = pkgs.symlinkJoin {
-        name = "cv-fonts";
-        paths = with pkgs; [
-          font-awesome_5 # might not need this
-          inconsolata
-        ];
-      };
     in rec {
       packages = {
         document = pkgs.stdenvNoCC.mkDerivation rec {
           name = "latex-demo-document";
           src = self;
-          propagatedBuildInputs = [pkgs.coreutils pkgs.biber fonts tex];
+          propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
             #!/bin/bash
@@ -64,7 +57,6 @@
             mkdir -p "$DIR/.texcache/texmf-var"
             env TEXMFHOME="$DIR/.cache" \
                 TEXMFVAR="$DIR/.cache/texmf-var" \
-                OSFONTDIR=${fonts}/share/fonts \
               latexmk -interaction=nonstopmode -pdf -pdflatex \
               -output-directory="$DIR" \
               document.tex
