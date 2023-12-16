@@ -62,6 +62,17 @@
 
 %-------------------------
 % Custom commands
+\newlist{education}{itemize}{1}
+\setlist[education]{label={}, listparindent=1em}
+\newcommand{\educationItem}[4]{
+    \item
+        \textbf{\large{#1}} \\
+        \textbf{#2} \\
+        #3 \\
+        \textit{#4}
+}
+
+
 \newcommand{\resumeItem}[1]{
   \item\small{
     {#1 \vspace{-2pt}}
@@ -121,14 +132,18 @@
 
 %-----------EDUCATION-----------
 \section{Education}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Southwestern University}{Georgetown, TX}
-      {Bachelor of Arts in Computer Science, Minor in Business}{Aug. 2018 -- May 2021}
-    \resumeSubheading
-      {Blinn College}{Bryan, TX}
-      {Associate's in Liberal Arts}{Aug. 2014 -- May 2018}
-  \resumeSubHeadingListEnd
+\begin{education}
+    \educationItem
+        {Southwestern University}
+        {Bachelor of Arts in Computer Science, Minor in Business}
+        {Georgetown, TX}
+        {Aug. 2018 -- May 2021}
+    \educationItem
+        {Blinn College}
+        {Associate's in Liberal Arts}
+        {Bryan, TX}
+        {Aug. 2014 -- May 2018}
+\end{education}
 
 
 %-----------EXPERIENCE-----------
