@@ -9,6 +9,7 @@
 \usepackage[letterpaper, total={7in, 9in}]{geometry}
 \pagestyle{empty}
 
+% Packages
 \usepackage{latexsym}
 \usepackage{titlesec}
 \usepackage{marvosym}
@@ -27,19 +28,14 @@
 % Font
 \usepackage[default]{opensans}
 
-%----------OPTIONS----------
-
-
+% Don't use mono-style fonts for links. Use the default.
 \urlstyle{same}
-
 
 % Sections formatting
 \titleformat{\section}{
   \vspace{-4pt}\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-
-%-------------------------
 % Custom commands
 \newlist{education}{itemize}{1}
 \setlist[education]{label={}, listparindent=1em}
@@ -68,12 +64,11 @@
     \item #1
 }
 
-%----------DOCUMENT---------
+% --------------------------------------
 
 \begin{document}
 
-%----------HEADING----------
-
+% Heading
 \begin{flushleft}
     \textbf{\Huge Daniel Baker} \vspace{0.5em} \\
     Signal Hill, CA, USA \\
@@ -84,8 +79,7 @@
     \href{https://djacu.dev/}{djacu.dev}
 \end{flushleft}
 
-%-----------EXPERIENCE-----------
-
+% Experience
 \section{Experience}
 
 \begin{experience}
@@ -249,8 +243,7 @@
 
 \end{experience}
 
-%-----------EDUCATION-----------
-
+% Education
 \section{Education}
 \begin{education}
     \educationInfo
@@ -269,6 +262,5 @@
         {Terre Haute, Indiana, USA}
         {August 2004 -- May 2008}
 \end{education}
-
 
 \end{document}
