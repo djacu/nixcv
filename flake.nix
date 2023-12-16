@@ -24,6 +24,7 @@
           comment
           csquotes
           curve
+          enumitem
           filehook
           fontawesome5
           fontaxes
