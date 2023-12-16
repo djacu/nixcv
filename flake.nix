@@ -20,11 +20,10 @@
           enumitem
           fontaxes
           hyperref
-          marvosym
           opensans
-          preprint
           titlesec
           xkeyval
+          xcolor
           ;
       };
     in rec {

@@ -10,15 +10,7 @@
 \pagestyle{empty}
 
 % Packages
-\usepackage{latexsym}
-\usepackage{titlesec}
-\usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage[english]{babel}
-\usepackage{tabularx}
+\usepackage[usenames,dvipsnames]{xcolor}
 
 % Ensure that PDF output is machine readable/ATS parsable
 \input{glyphtounicode}
@@ -29,9 +21,12 @@
 \usepackage[default]{opensans}
 
 % Don't use mono-style fonts for links. Use the default.
+\usepackage[hidelinks]{hyperref}
 \urlstyle{same}
 
 % Sections formatting
+\usepackage{titlesec}
+
 \titleformat
 {\section} % command
 {\LARGE} % format
@@ -40,7 +35,9 @@
 {} % before-code
 [\color{black}\titlerule] % after-code
 
-% Custom commands
+% Make custom lists
+\usepackage{enumitem}
+
 \newlist{education}{itemize}{1}
 \setlist[education]{label={}, listparindent=1em}
 \newcommand{\educationInfo}[4]{
