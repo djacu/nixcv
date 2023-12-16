@@ -74,7 +74,8 @@
 }
 
 \newlist{experience}{itemize}{3}
-\setlist[experience]{label={}, listparindent=1em}
+\setlist[experience, 1, 2]{label={}, listparindent=1em}
+\setlist[experience, 3]{label={$\bullet$}, leftmargin=3em, itemindent=-1em}
 \newcommand{\experienceInfo}[4]{
     \item
         \textbf{\large{#1}} \\
