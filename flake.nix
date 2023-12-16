@@ -19,10 +19,13 @@
           latexmk
           enumitem
           fancyhdr
+          fontaxes
           hyperref
           marvosym
+          opensans
           preprint
           titlesec
+          xkeyval
           ;
       };
     in rec {
