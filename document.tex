@@ -18,26 +18,26 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
 
+% Ensure that PDF output is machine readable/ATS parsable
+\input{glyphtounicode}
+\pdfgentounicode=1
+\raggedright % no hyphenated words
+
+% Font
+\usepackage[default]{opensans}
 
 %----------OPTIONS----------
-\usepackage[default]{opensans}
 
 
 \urlstyle{same}
 
-\raggedbottom
-\raggedright
-\setlength{\tabcolsep}{0in}
 
 % Sections formatting
 \titleformat{\section}{
   \vspace{-4pt}\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-% Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
 
 %-------------------------
 % Custom commands
