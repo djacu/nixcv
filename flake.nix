@@ -18,7 +18,6 @@
           scheme-basic
           latexmk
           enumitem
-          fancyhdr
           fontaxes
           hyperref
           marvosym
