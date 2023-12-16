@@ -55,6 +55,7 @@
           installPhase = ''
             mkdir -p $out/{bin,share}
             cp document.tex $out/share/document.tex
+            cp cv.tex $out/share/cv.tex
             cp latex-demo-document $out/bin/latex-demo-document
             chmod u+x $out/bin/latex-demo-document
           '';
