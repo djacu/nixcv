@@ -9,8 +9,16 @@
 \usepackage[letterpaper, total={7in, 9in}]{geometry}
 \pagestyle{empty}
 
-% Packages
+% Use regular color names
 \usepackage[usenames,dvipsnames]{xcolor}
+
+% Multi columns for skills
+\usepackage{multicol}
+\raggedcolumns
+\setlength{\columnseprule}{1pt}
+%\def\columnseprulecolor{\color{blue}}
+%\setcounter{unbalance}{10}
+\setcounter{minrows}{10}
 
 % Ensure that PDF output is machine readable/ATS parsable
 \input{glyphtounicode}
@@ -75,6 +83,28 @@
         \textbf{\large{#1}} \\
         \textbf{#2} \\
         #3
+}
+
+\newlist{skills}{itemize}{2}
+\setlist[skills]{label={}, nosep, listparindent=1em}
+\newcommand{\skillsName}[1]{
+    \item\textbf{\large{#1}}
+}
+\newcommand{\skillsKeyword}[1]{
+    \item #1
+}
+
+% Skills Env
+\newenvironment
+{skillsEnv}
+{
+    \begin{minipage}{\textwidth}
+    \begin{multicols}{2}
+}
+{
+    \end{multicols}
+    \end{minipage}
+    \vspace{2em}
 }
 
 % Blockquote
