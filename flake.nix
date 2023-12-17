@@ -24,6 +24,7 @@
           titlesec
           xkeyval
           xcolor
+          fontawesome5
           ;
       };
     in rec {

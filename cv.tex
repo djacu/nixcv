@@ -9,6 +9,9 @@
 \usepackage[letterpaper, total={7in, 9in}]{geometry}
 \pagestyle{empty}
 
+% Icons
+\usepackage{fontawesome5}
+
 % Use regular color names
 \usepackage[usenames,dvipsnames]{xcolor}
 
@@ -47,9 +50,16 @@
 [\color{black}\titlerule] % after-code
 
 % Make custom lists
-%% education list
 \usepackage{enumitem}
 
+%% profile
+\newlist{profile}{itemize}{1}
+\setlist[profile]{label={}, parsep=0em, itemsep=0.2em}
+\newcommand{\profileItem}[2]{
+    \item[#1] #2
+}
+
+%% education list
 \newlist{education}{itemize}{1}
 \setlist[education]{label={}, listparindent=1em}
 \newcommand{\educationInfo}[4]{
