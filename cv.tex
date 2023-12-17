@@ -68,6 +68,15 @@
     \item #1
 }
 
+\newlist{references}{itemize}{1}
+\setlist[references]{label={}, listparindent=1em}
+\newcommand{\referenceInfo}[3]{
+    \item
+        \textbf{\large{#1}} \\
+        \textbf{#2} \\
+        #3
+}
+
 % Blockquote
 \newenvironment
 {blockquote}
