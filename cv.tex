@@ -47,6 +47,7 @@
 [\color{black}\titlerule] % after-code
 
 % Make custom lists
+%% education list
 \usepackage{enumitem}
 
 \newlist{education}{itemize}{1}
@@ -59,6 +60,7 @@
         \textit{#4}
 }
 
+%% experience list
 \newlist{experience}{itemize}{3}
 \setlist[experience, 1, 2]{label={}, listparindent=1em}
 \setlist[experience, 3]{label={$\bullet$}, leftmargin=3em, itemindent=-1em}
@@ -76,6 +78,7 @@
     \item #1
 }
 
+%% references list
 \newlist{references}{itemize}{1}
 \setlist[references]{label={}, listparindent=1em}
 \newcommand{\referenceInfo}[3]{
@@ -85,12 +88,24 @@
         #3
 }
 
+%% skills list
 \newlist{skills}{itemize}{2}
-\setlist[skills]{label={}, nosep, listparindent=1em}
+\setlist[skills]{label={}, nosep}
 \newcommand{\skillsName}[1]{
     \item\textbf{\large{#1}}
 }
 \newcommand{\skillsKeyword}[1]{
+    \item #1
+}
+
+%% extra list
+\newlist{extra}{itemize}{2}
+\setlist[extra, 1]{label={}}
+\setlist[extra, 2]{label={$\bullet$}}
+\newcommand{\extraName}[1]{
+    \item\textbf{\large{#1}}
+}
+\newcommand{\extraItem}[1]{
     \item #1
 }
 
