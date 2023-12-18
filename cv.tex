@@ -145,7 +145,8 @@
     \par
     \medskip
     \leftskip=2.5em
-    \rightskip=2em
+    \advance\csname @rightskip\endcsname 2em \advance\rightskip 2em
+    %\rightskip=2em % switch above to this for justified and hyphenated right
     \noindent
     \ignorespaces
 }
