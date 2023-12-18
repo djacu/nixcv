@@ -90,13 +90,18 @@
 }
 
 %% references list
-\newlist{references}{itemize}{1}
-\setlist[references]{label={}, listparindent=1em}
-\newcommand{\referenceInfo}[3]{
-    \item
-        \textbf{\large{#1}} \\
-        \textbf{#2} \\
-        #3
+\newlist{references}{itemize}{2}
+\setlist[references]{beginpenalty=10000, midpenalty=10000}
+\setlist[references, 1]{label={}, parsep=0em, itemsep=1em}
+\setlist[references, 2]{label={}, nosep, leftmargin=1em}
+\newcommand{\referenceName}[1]{
+    \item \textbf{\large{#1}}
+}
+\newcommand{\referenceOrg}[1]{
+    \item \textbf{#1}
+}
+\newcommand{\referenceContact}[1]{
+    \item #1
 }
 
 %% skills list
