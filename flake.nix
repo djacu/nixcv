@@ -17,6 +17,8 @@
           (pkgs.texlive)
           scheme-basic
           latexmk
+          biblatex
+          biblatex-ieee
           enumitem
           fontaxes
           hyperref
@@ -57,6 +59,7 @@
             mkdir -p $out/{bin,share}
             cp document.tex $out/share/document.tex
             cp cv.tex $out/share/cv.tex
+            cp self.bib $out/share/self.bib
             cp latex-demo-document $out/bin/latex-demo-document
             chmod u+x $out/bin/latex-demo-document
           '';
