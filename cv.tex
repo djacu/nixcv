@@ -1,0 +1,191 @@
+%-------------------------
+% Resume in Latex
+% Author : Daniel Baker
+% License : MIT
+%------------------------
+
+% Layout
+\documentclass{article}
+\usepackage[letterpaper, total={7in, 9in}]{geometry}
+\pagestyle{empty}
+
+% Icons
+\usepackage[fixed]{fontawesome5}
+
+% Use regular color names
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Multi columns for skills
+\usepackage{multicol}
+\raggedcolumns
+\setlength{\columnseprule}{1pt}
+%\def\columnseprulecolor{\color{blue}}
+%\setcounter{unbalance}{10}
+\setcounter{minrows}{10}
+
+% Ensure that PDF output is machine readable/ATS parsable
+\input{glyphtounicode}
+\pdfgentounicode=1
+\raggedright % no hyphenated words
+
+% Font
+\usepackage[default]{opensans}
+
+% Use utf8
+\usepackage[utf8]{inputenc}
+
+% Don't use mono-style fonts for links. Use the default.
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+% Bibliography
+\usepackage[
+backend=biber,
+style=ieee,
+defernumbers=true,
+]{biblatex}
+\addbibresource{self.bib}
+\nocite{*} % force show all entries
+
+% Sections formatting
+\usepackage[nobottomtitles*]{titlesec}
+
+\titleformat
+{\section} % command
+{\LARGE\bfseries} % format
+{} % label
+{0em} % sep
+{\MakeUppercase} % before-code
+[\color{black}\titlerule] % after-code
+
+% Make custom lists
+\usepackage{enumitem}
+
+%% profile
+\newlist{profile}{itemize}{1}
+\setlist[profile]{label={}, parsep=0em, itemsep=0.2em}
+\newcommand{\profileItem}[2]{
+    \item[#1] #2
+}
+
+%% education list
+\newlist{education}{itemize}{1}
+\setlist[education]{label={}, listparindent=1em}
+\newcommand{\educationInfo}[4]{
+    \item
+        \textbf{\large{#1}} \\
+        \textbf{#2} \\
+        #3 \\
+        \textit{#4}
+}
+
+%% experience list
+\newlist{experience}{itemize}{3}
+\setlist[experience, 1]{label={}, listparindent=1em}
+\setlist[experience, 2]{label=$\bullet$, listparindent=1em}
+\setlist[experience, 3]{label=\textbullet, leftmargin=3em, itemindent=-1em}
+\newcommand{\experienceInfo}[4]{
+    \item
+        \textbf{\large{#1}} \\
+        \textbf{#2} \\
+        #3 \\
+        \textit{#4}
+}
+\newcommand{\experienceRole}[1]{
+    \item #1
+}
+\newcommand{\experienceTask}[1]{
+    \item #1
+}
+
+%% references list
+\newlist{references}{itemize}{2}
+\setlist[references]{beginpenalty=10000, midpenalty=10000}
+\setlist[references, 1]{label={}, parsep=0em, itemsep=1em}
+\setlist[references, 2]{label={}, nosep, leftmargin=1em}
+\newcommand{\referenceName}[1]{
+    \item \textbf{\large{#1}}
+}
+\newcommand{\referenceOrg}[1]{
+    \item \textbf{#1}
+}
+\newcommand{\referenceContact}[1]{
+    \item #1
+}
+
+%% skills list
+\newlist{skills}{itemize}{2}
+\setlist[skills]{label={}, nosep}
+\newcommand{\skillsName}[1]{
+    \item\textbf{\large{#1}}
+}
+\newcommand{\skillsKeyword}[1]{
+    \item #1
+}
+
+%% extra list
+\newlist{extra}{itemize}{2}
+\setlist[extra, 1]{label={}}
+\setlist[extra, 2]{label={$\bullet$}}
+\newcommand{\extraName}[1]{
+    \item\textbf{\large{#1}}
+}
+\newcommand{\extraItem}[1]{
+    \item #1
+}
+
+% Skills Env
+\newenvironment
+{skillsEnv}
+{
+    \begin{minipage}{\linewidth}
+    \begin{multicols}{2}
+}
+{
+    \end{multicols}
+    \end{minipage}
+    \vspace{2em}
+}
+
+% Bibliography indented
+\defbibenvironment{bibliography}
+{\list%
+    {%
+        \printtext[labelnumberwidth]{%
+            \printfield{labelprefix}%
+            \printfield{labelnumber}%
+        }%
+    }%
+    {%
+        \setlength{\labelwidth}{\labelnumberwidth}%
+        \setlength{\leftmargin}{4em}%
+        \setlength{\labelsep}{\biblabelsep}%
+        \addtolength{\leftmargin}{\labelsep}%
+        \addtolength{\leftmargin}{\leftskip}%<----- here
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}%
+    }%
+    \renewcommand*{\makelabel}[1]{\hss##1}}%
+{\endlist}
+{\item}
+
+\defbibheading{subbibliography}[\bibname]{%
+    \titleformat{\subsection}{\large\bfseries}{}{}{\hspace{2em}}%
+    \subsection*{#1}%
+}
+
+% Blockquote
+% https://tex.stackexchange.com/questions/97782/combining-leftskip-rightskip-and-raggedright
+\newenvironment
+{blockquote}
+{
+    \par
+    \medskip
+    \leftskip=2.5em
+    \advance\csname @rightskip\endcsname 2em \advance\rightskip 2em
+    %\rightskip=2em % switch above to this for justified and hyphenated right
+    \noindent
+    \ignorespaces
+}
+{\par\medskip}
+
