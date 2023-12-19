@@ -149,4 +149,123 @@
       ];
     }
   ];
+  skills = [
+    {
+      name = "Languages";
+      keywords = [
+        "Python"
+        "Java"
+        "Nix"
+        "JavaScript"
+        "HTML"
+        "CSS"
+        "Bash"
+        "Matlab"
+      ];
+    }
+    {
+      name = "Software Packaging";
+      keywords = [
+        "Nix"
+        "Nixpkgs"
+        "NixOS"
+        "C toolchain"
+        "Go toolchain"
+        "Python toolchain"
+      ];
+    }
+    {
+      name = "Domains";
+      keywords = [
+        "Software Engineering"
+        "Functional Programming"
+        "Applied Mathematics"
+        "Signal Processing"
+        "Image Processing"
+        "Synthetic Aperture Radar"
+        "Feedback Controls"
+        "Algorithms"
+        "Estimation"
+        "Modeling"
+        "Analysis"
+      ];
+    }
+    {
+      name = "Stabilized Platforms";
+      keywords = [
+        "Gimbals"
+        "Classic Controls"
+        "Newtonian Mechanics"
+        "Rigid Body Dynamics"
+        "Flexible Body Dynamics"
+        "Geo-Pointing"
+        "Quaternions"
+        "Euler Angles"
+      ];
+    }
+    {
+      name = "Network";
+      keywords = [
+        "Layer 2/3 using pfSense and Ubiquiti"
+        "VLAN configuration and routing"
+        "OpenVPN"
+        "Tailscale"
+        "WireGuard"
+      ];
+    }
+    {
+      name = "Front-End Web";
+      keywords = [
+        "HTML"
+        "CSS"
+        "JavaScript"
+        "Astro"
+        "Tailwind"
+      ];
+    }
+    {
+      name = "Operating Systems";
+      keywords = [
+        "Arch"
+        "BSD"
+        "CentOS"
+        "Linux"
+        "NixOS"
+        "RHEL"
+        "Ubuntu"
+        "ZFS"
+        "Btrfs"
+      ];
+    }
+    {
+      name = "DevOps";
+      keywords = [
+        "Bash Scripting"
+        "Git"
+        "CI/CD"
+        "GitHub Actions"
+        "Jenkins"
+        "Nginx"
+        "NixOS"
+        "Docker"
+        "Virtualization"
+        "SSH"
+        "Linode"
+        "Netlify"
+      ];
+    }
+    {
+      name = "Test";
+      keywords = [
+        "Hypothesis"
+        "Pytest"
+      ];
+    }
+    {
+      name = "Typesetting";
+      keywords = [
+        "LaTeX"
+      ];
+    }
+  ];
 }

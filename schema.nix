@@ -259,6 +259,37 @@ in {
       });
       default = {};
     };
+    skills = lib.mkOption {
+      description = "Your skills.";
+      type = types.listOf (types.submodule {
+        options = {
+          name = lib.mkOption {
+            description = "The skill category.";
+            type = types.str;
+            default = "";
+            defaultText = "Web Development";
+          };
+          level = lib.mkOption {
+            description = "The skill category fluency.";
+            type = types.str;
+            default = "";
+            defaultText = "Master";
+          };
+          keywords = lib.mkOption {
+            description = "The skills for this category.";
+            type = types.listOf types.str;
+            default = "";
+            defaultText = ''
+              [
+                "HTML"
+                "CSS"
+                "JavaScript"
+              ]
+            '';
+          };
+        };
+      });
+    };
   };
 
   options = {
@@ -373,6 +404,12 @@ in {
             coursesInfo
           ]
       );
+    parseSkills =
+      lib.concatMapStringsSep
+      "\n"
+      (
+        skill: skill.name + ": " + concatCommaFiltered skill.keywords
+      );
   in {
     all = {inherit (cfg) basics work;};
     plaintext = let
@@ -403,6 +440,7 @@ in {
       educationInfo = "EDUCATION\n" + parseEducationConfig cfg.education;
       workInfo = "EXPERIENCE\n" + parseWorkConfig cfg.work;
       volunteerInfo = "VOLUNTEER\n" + parseWorkConfig cfg.volunteer;
+      skillsInfo = "SKILLS\n" + parseSkills cfg.skills;
     in
       concatStringsSepFiltered
       "\n\n"
@@ -412,6 +450,7 @@ in {
         educationInfo
         workInfo
         volunteerInfo
+        skillsInfo
       ];
   };
 }
