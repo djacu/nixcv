@@ -277,7 +277,7 @@ in {
         cfg.work
       );
     in
-      lib.concatStringsSep
+      concatStringsSepFiltered
       "\n\n"
       [
         basicInfo
