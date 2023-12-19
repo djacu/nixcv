@@ -83,14 +83,17 @@ in {
             network = lib.mkOption {
               description = "The social media platform.";
               type = types.str;
+              default = "";
             };
             username = lib.mkOption {
               description = "Your username on the platform.";
               type = types.str;
+              default = "";
             };
             url = lib.mkOption {
               description = "The social media platform url.";
               type = types.str;
+              default = "";
             };
           };
         });
@@ -183,15 +186,23 @@ in {
     };
   };
 
-  config = {
+  config = let
+    concatStringsSepFiltered = separator: list:
+      lib.concatStringsSep
+      separator
+      (
+        lib.remove
+        ""
+        list
+      );
+    concatNewlineFiltered = concatStringsSepFiltered "\n";
+    concatCommaFiltered = concatStringsSepFiltered ", ";
+  in {
     all = {inherit (cfg) basics work;};
     plaintext = let
-      basicInfo = (
-        lib.concatStringsSep
-        "\n"
-        (
-          lib.remove
-          ""
+      basicInfo = let
+        personalInfo = (
+          concatNewlineFiltered
           [
             cfg.basics.name
             cfg.basics.label
@@ -199,14 +210,9 @@ in {
             cfg.basics.phone
             cfg.basics.url
           ]
-        )
-      );
-      locationInfo = (
-        lib.concatStringsSep
-        ", "
-        (
-          lib.remove
-          ""
+        );
+        locationInfo = (
+          concatCommaFiltered
           [
             cfg.basics.location.address
             cfg.basics.location.city
@@ -214,13 +220,18 @@ in {
             cfg.basics.location.countryCode
             cfg.basics.location.postalCode
           ]
-        )
-      );
-      profileInfo = (
-        lib.concatStringsSep
-        "\n"
-        (builtins.map (x: x.url) cfg.basics.profiles)
-      );
+        );
+        profileInfo = (
+          concatNewlineFiltered
+          (builtins.map (x: x.url) cfg.basics.profiles)
+        );
+      in
+        concatNewlineFiltered
+        [
+          personalInfo
+          locationInfo
+          profileInfo
+        ];
       workInfo = (
         lib.concatMapStringsSep
         "\n\n"
@@ -231,49 +242,33 @@ in {
               "\n"
               (
                 role:
-                  lib.concatStringsSep
-                  "\n"
-                  (
-                    lib.remove
-                    ""
-                    [
-                      role.role
-                      (
-                        lib.concatStringsSep
-                        "\n"
-                        (
-                          lib.remove
-                          ""
-                          role.responsibilities
-                        )
-                      )
-                    ]
-                  )
+                  concatNewlineFiltered
+                  [
+                    role.role
+                    (
+                      concatNewlineFiltered
+                      role.responsibilities
+                    )
+                  ]
               )
               job.roles
             );
           in
-            lib.concatStringsSep
-            "\n"
-            (
-              lib.remove
-              ""
-              [
-                job.name
-                job.position
-                job.location
-                job.url
-                # add conditionals if one or both dates are not present
-                "${job.startDate} - ${job.endDate}"
-                job.summary
-                (
-                  lib.concatStringsSep
-                  "\n"
-                  job.highlights
-                )
-                rolesInfo
-              ]
-            )
+            concatNewlineFiltered
+            [
+              job.name
+              job.position
+              job.location
+              job.url
+              # add conditionals if one or both dates are not present
+              "${job.startDate} - ${job.endDate}"
+              job.summary
+              (
+                concatNewlineFiltered
+                job.highlights
+              )
+              rolesInfo
+            ]
         )
         cfg.work
       );
@@ -281,15 +276,7 @@ in {
       lib.concatStringsSep
       "\n\n"
       [
-        (
-          lib.concatStringsSep
-          "\n"
-          [
-            basicInfo
-            locationInfo
-            profileInfo
-          ]
-        )
+        basicInfo
         workInfo
       ];
   };
