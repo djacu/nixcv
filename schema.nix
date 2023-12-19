@@ -106,6 +106,72 @@ in {
         '';
       };
     };
+    work = lib.mkOption {
+      description = "Your work experience.";
+      type = types.listOf (types.submodule {
+        options = {
+          name = lib.mkOption {
+            description = "The company name.";
+            type = types.str;
+            default = "";
+          };
+          position = lib.mkOption {
+            description = "Your position.";
+            type = types.str;
+            default = "";
+          };
+          location = lib.mkOption {
+            description = "The location where you worked.";
+            type = types.str;
+            default = "";
+          };
+          url = lib.mkOption {
+            description = "The company website.";
+            type = types.str;
+            default = "";
+          };
+          startDate = lib.mkOption {
+            description = "Your start date.";
+            type = types.str;
+            default = "";
+          };
+          endDate = lib.mkOption {
+            description = "Your end date.";
+            type = types.str;
+            default = "";
+          };
+          summary = lib.mkOption {
+            description = "A summary of your job.";
+            type = types.str;
+            default = "";
+          };
+          highlights = lib.mkOption {
+            description = "Highlights of your work.";
+            type = types.listOf types.str;
+            default = [];
+          };
+          roles = lib.mkOption {
+            description = "A collection of your roles and responsibilities.";
+            type = types.listOf (types.submodule {
+              options = {
+                role = lib.mkOption {
+                  description = "Your role.";
+                  type = types.str;
+                  default = "";
+                };
+                responsibilities = lib.mkOption {
+                  description = "Your responsibilities for this role.";
+                  type = types.listOf types.str;
+                  default = [];
+                };
+              };
+            });
+            default = [];
+          };
+        };
+      });
+      default = [];
+    };
   };
 
   options = {
@@ -118,7 +184,7 @@ in {
   };
 
   config = {
-    all = cfg.basics;
+    all = {inherit (cfg) basics work;};
     plaintext = let
       basicInfo = (
         lib.concatStringsSep
@@ -155,13 +221,76 @@ in {
         "\n"
         (builtins.map (x: x.url) cfg.basics.profiles)
       );
+      workInfo = (
+        lib.concatMapStringsSep
+        "\n\n"
+        (
+          job: let
+            rolesInfo = (
+              lib.concatMapStringsSep
+              "\n"
+              (
+                role:
+                  lib.concatStringsSep
+                  "\n"
+                  (
+                    lib.remove
+                    ""
+                    [
+                      role.role
+                      (
+                        lib.concatStringsSep
+                        "\n"
+                        (
+                          lib.remove
+                          ""
+                          role.responsibilities
+                        )
+                      )
+                    ]
+                  )
+              )
+              job.roles
+            );
+          in
+            lib.concatStringsSep
+            "\n"
+            (
+              lib.remove
+              ""
+              [
+                job.name
+                job.position
+                job.location
+                job.url
+                # add conditionals if one or both dates are not present
+                "${job.startDate} - ${job.endDate}"
+                job.summary
+                (
+                  lib.concatStringsSep
+                  "\n"
+                  job.highlights
+                )
+                rolesInfo
+              ]
+            )
+        )
+        cfg.work
+      );
     in
       lib.concatStringsSep
-      "\n"
+      "\n\n"
       [
-        basicInfo
-        locationInfo
-        profileInfo
+        (
+          lib.concatStringsSep
+          "\n"
+          [
+            basicInfo
+            locationInfo
+            profileInfo
+          ]
+        )
+        workInfo
       ];
   };
 }
