@@ -30,7 +30,9 @@
     {
       name = "Tweag";
       position = "Software Engineer";
-      location = "Remote, USA";
+      location = {
+        fullAddress = "Remote, USA";
+      };
       url = "https://www.tweag.io/";
       startDate = "February 2022";
       endDate = "April 2023";
@@ -59,7 +61,9 @@
     {
       name = "The Aerospace Corporation";
       position = "Senior Member of Technical Staff";
-      location = "El Segundo, CA, USA";
+      location = {
+        fullAddress = "El Segundo, CA, USA";
+      };
       url = "https://aerospace.org/";
       startDate = "July 2020";
       endDate = "February 2022";

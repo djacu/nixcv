@@ -5,6 +5,46 @@
 }: let
   inherit (lib) types;
   cfg = config;
+  locationOptions = {
+    options = {
+      fullAddress = lib.mkOption {
+        description = "The full address.";
+        type = types.str;
+        default = "";
+        defaultText = "123 Cherry Lane";
+      };
+      address = lib.mkOption {
+        description = "The street address.";
+        type = types.str;
+        default = "";
+        defaultText = "123 Cherry Lane";
+      };
+      postalCode = lib.mkOption {
+        description = "The postal code.";
+        type = types.str;
+        default = "";
+        defaultText = "12345";
+      };
+      city = lib.mkOption {
+        description = "The city.";
+        type = types.str;
+        default = "";
+        defaultText = "San Francisco";
+      };
+      countryCode = lib.mkOption {
+        description = "The country code.";
+        type = types.str;
+        default = "";
+        defaultText = "US";
+      };
+      region = lib.mkOption {
+        description = "The region/state.";
+        type = types.str;
+        default = "";
+        defaultText = "California";
+      };
+    };
+  };
 in {
   options = {
     basics = {
@@ -44,37 +84,10 @@ in {
         default = "";
         defaultText = "John doe is a ...";
       };
-      location = {
-        address = lib.mkOption {
-          description = "Your street address.";
-          type = types.str;
-          default = "";
-          defaultText = "123 Cherry Lane";
-        };
-        postalCode = lib.mkOption {
-          description = "Your postal code.";
-          type = types.str;
-          default = "";
-          defaultText = "12345";
-        };
-        city = lib.mkOption {
-          description = "Your city.";
-          type = types.str;
-          default = "";
-          defaultText = "San Francisco";
-        };
-        countryCode = lib.mkOption {
-          description = "Your country code.";
-          type = types.str;
-          default = "";
-          defaultText = "US";
-        };
-        region = lib.mkOption {
-          description = "Your region/state.";
-          type = types.str;
-          default = "";
-          defaultText = "California";
-        };
+      location = lib.mkOption {
+        description = "Your location information.";
+        type = types.submodule locationOptions;
+        default = {};
       };
       profiles = lib.mkOption {
         description = "Your social media profiles.";
@@ -125,8 +138,8 @@ in {
           };
           location = lib.mkOption {
             description = "The location where you worked.";
-            type = types.str;
-            default = "";
+            type = types.submodule locationOptions;
+            default = {};
           };
           url = lib.mkOption {
             description = "The company website.";
@@ -197,6 +210,18 @@ in {
       );
     concatNewlineFiltered = concatStringsSepFiltered "\n";
     concatCommaFiltered = concatStringsSepFiltered ", ";
+    parseLocation = location:
+      if (location.fullAddress != "")
+      then location.fullAddress
+      else
+        concatCommaFiltered
+        [
+          location.address
+          location.city
+          location.region
+          location.countryCode
+          location.postalCode
+        ];
   in {
     all = {inherit (cfg) basics work;};
     plaintext = let
@@ -211,16 +236,7 @@ in {
             cfg.basics.url
           ]
         );
-        locationInfo = (
-          concatCommaFiltered
-          [
-            cfg.basics.location.address
-            cfg.basics.location.city
-            cfg.basics.location.region
-            cfg.basics.location.countryCode
-            cfg.basics.location.postalCode
-          ]
-        );
+        locationInfo = parseLocation cfg.basics.location;
         profileInfo = (
           concatNewlineFiltered
           (builtins.map (x: x.url) cfg.basics.profiles)
@@ -263,7 +279,7 @@ in {
             [
               job.name
               job.position
-              job.location
+              (parseLocation job.location)
               job.url
               dateInfo
               job.summary
