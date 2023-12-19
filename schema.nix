@@ -253,6 +253,11 @@ in {
               )
               job.roles
             );
+            dateInfo = (
+              if (job.endDate == "" || job.startDate == "")
+              then ""
+              else job.startDate + " - " + job.endDate
+            );
           in
             concatNewlineFiltered
             [
@@ -260,8 +265,7 @@ in {
               job.position
               job.location
               job.url
-              # add conditionals if one or both dates are not present
-              "${job.startDate} - ${job.endDate}"
+              dateInfo
               job.summary
               (
                 concatNewlineFiltered
