@@ -106,4 +106,40 @@
       ];
     }
   ];
+  education = [
+    {
+      institution = "University of Southern California";
+      url = "https://www.usc.edu/";
+      area = "Electrical Engineering";
+      studyType = "Master of Science";
+      startDate = "August 2016";
+      endDate = "May 2018";
+    }
+    {
+      institution = "Rose-Hulman Institute of Technology";
+      url = "https://www.rose-hulman.edu/";
+      area = "Electrical Engineering";
+      studyType = "Bachelor of Science";
+      startDate = "August 2004";
+      endDate = "May 2008";
+      score = "3.45/4.00";
+      courses = [
+        "DSP System Design"
+        "Discrete-Time Control Systems"
+      ];
+    }
+    {
+      institution = "Rose-Hulman Institute of Technology";
+      url = "https://www.rose-hulman.edu/";
+      area = "Applied Mathematics";
+      studyType = "Bachelor of Science";
+      startDate = "August 2004";
+      endDate = "May 2008";
+      score = "3.45/4.00";
+      courses = [
+        "Stochastic Models in Operational Research"
+        "Numerical Analysis"
+      ];
+    }
+  ];
 }

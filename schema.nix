@@ -199,6 +199,66 @@ in {
       type = types.listOf (types.submodule workOptions);
       default = [];
     };
+    education = lib.mkOption {
+      description = "Your education history.";
+      type = types.listOf (types.submodule {
+        options = {
+          institution = lib.mkOption {
+            description = "The name of the institution of learning.";
+            type = types.str;
+            default = "";
+            defaultText = "South Hemet Institute of Technology";
+          };
+          url = lib.mkOption {
+            description = "The institution website.";
+            type = types.str;
+            default = "";
+            defaultText = "https://www.southhemetit.edu/";
+          };
+          area = lib.mkOption {
+            description = "Your area of study or major.";
+            type = types.str;
+            default = "";
+            defaultText = "Software Development";
+          };
+          studyType = lib.mkOption {
+            description = "The degree you received.";
+            type = types.str;
+            default = "";
+            defaultText = "Bachelor";
+          };
+          startDate = lib.mkOption {
+            description = "The date you started.";
+            type = types.str;
+            default = "";
+            defaultText = "September 2000";
+          };
+          endDate = lib.mkOption {
+            description = "The date you finished.";
+            type = types.str;
+            default = "";
+            defaultText = "May 2004";
+          };
+          score = lib.mkOption {
+            description = "Your grade point average.";
+            type = types.str;
+            default = "";
+            defaultText = "4.0";
+          };
+          courses = lib.mkOption {
+            description = "Courses you took.";
+            type = types.listOf types.str;
+            default = [];
+            defaultText = ''
+              [
+                "DB1101 - Basic SQL"
+              ]
+            '';
+          };
+        };
+      });
+      default = {};
+    };
   };
 
   options = {
@@ -233,6 +293,11 @@ in {
           location.countryCode
           location.postalCode
         ];
+    parseDates = attr: (
+      if (attr.endDate == "" || attr.startDate == "")
+      then ""
+      else attr.startDate + " - " + attr.endDate
+    );
     parseWorkConfig =
       lib.concatMapStringsSep
       "\n\n"
@@ -254,11 +319,7 @@ in {
             )
             job.roles
           );
-          dateInfo = (
-            if (job.endDate == "" || job.startDate == "")
-            then ""
-            else job.startDate + " - " + job.endDate
-          );
+          dateInfo = parseDates job;
         in
           concatNewlineFiltered
           [
@@ -277,6 +338,39 @@ in {
               job.highlights
             )
             rolesInfo
+          ]
+      );
+    parseEducationConfig =
+      lib.concatMapStringsSep
+      "\n\n"
+      (
+        edu: let
+          studyInfo =
+            edu.studyType
+            + (
+              if (edu.area == "")
+              then ""
+              else " in " + edu.area
+            );
+          scoreInfo = (
+            if (edu.score == "")
+            then ""
+            else "Score: " + edu.score
+          );
+          coursesInfo = (
+            if (builtins.length edu.courses == 0)
+            then ""
+            else "Courses: " + (concatCommaFiltered edu.courses)
+          );
+        in
+          concatNewlineFiltered
+          [
+            edu.institution
+            edu.url
+            studyInfo
+            (parseDates edu)
+            scoreInfo
+            coursesInfo
           ]
       );
   in {
@@ -307,11 +401,13 @@ in {
         ];
       workInfo = parseWorkConfig cfg.work;
       volunteerInfo = parseWorkConfig cfg.volunteer;
+      educationInfo = parseEducationConfig cfg.education;
     in
       concatStringsSepFiltered
       "\n\n"
       [
         basicInfo
+        educationInfo
         workInfo
         volunteerInfo
       ];
