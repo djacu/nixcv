@@ -30,9 +30,7 @@
     {
       organization = "Tweag";
       position = "Software Engineer";
-      location = {
-        fullAddress = "Remote, USA";
-      };
+      location.fullAddress = "Remote, USA";
       url = "https://www.tweag.io/";
       startDate = "February 2022";
       endDate = "April 2023";
@@ -61,9 +59,7 @@
     {
       organization = "The Aerospace Corporation";
       position = "Senior Member of Technical Staff";
-      location = {
-        fullAddress = "El Segundo, CA, USA";
-      };
+      location.fullAddress = "El Segundo, CA, USA";
       url = "https://aerospace.org/";
       startDate = "July 2020";
       endDate = "February 2022";
@@ -84,6 +80,27 @@
             "Responsible for code quality and accuracy reviews for multiple programs."
             "Accelerated the use of the latest Python tools and other open source software tools."
             "Mentored and guided new developers in good software practices."
+          ];
+        }
+      ];
+    }
+  ];
+  volunteer = [
+    {
+      organization = "Los Angeles County - Department of Public Health";
+      position = "Software Engineer";
+      location.fullAddress = "Remote, USA";
+      startDate = "Februray 2021";
+      endDate = "November 2021";
+      roles = [
+        {
+          role = "Front-End Developer";
+          responsibilities = [
+            "As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries."
+            "Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website."
+            "Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features."
+            "Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products."
+            "Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development."
           ];
         }
       ];
