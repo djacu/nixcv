@@ -45,6 +45,68 @@
       };
     };
   };
+  workOptions = {
+    options = {
+      name = lib.mkOption {
+        description = "The company name.";
+        type = types.str;
+        default = "";
+      };
+      position = lib.mkOption {
+        description = "Your position.";
+        type = types.str;
+        default = "";
+      };
+      location = lib.mkOption {
+        description = "The location where you worked.";
+        type = types.submodule locationOptions;
+        default = {};
+      };
+      url = lib.mkOption {
+        description = "The company website.";
+        type = types.str;
+        default = "";
+      };
+      startDate = lib.mkOption {
+        description = "Your start date.";
+        type = types.str;
+        default = "";
+      };
+      endDate = lib.mkOption {
+        description = "Your end date.";
+        type = types.str;
+        default = "";
+      };
+      summary = lib.mkOption {
+        description = "A summary of your work.";
+        type = types.str;
+        default = "";
+      };
+      highlights = lib.mkOption {
+        description = "Highlights of your work.";
+        type = types.listOf types.str;
+        default = [];
+      };
+      roles = lib.mkOption {
+        description = "A collection of your roles and responsibilities.";
+        type = types.listOf (types.submodule {
+          options = {
+            role = lib.mkOption {
+              description = "Your role.";
+              type = types.str;
+              default = "";
+            };
+            responsibilities = lib.mkOption {
+              description = "Your responsibilities for this role.";
+              type = types.listOf types.str;
+              default = [];
+            };
+          };
+        });
+        default = [];
+      };
+    };
+  };
 in {
   options = {
     basics = {
@@ -124,68 +186,12 @@ in {
     };
     work = lib.mkOption {
       description = "Your work experience.";
-      type = types.listOf (types.submodule {
-        options = {
-          name = lib.mkOption {
-            description = "The company name.";
-            type = types.str;
-            default = "";
-          };
-          position = lib.mkOption {
-            description = "Your position.";
-            type = types.str;
-            default = "";
-          };
-          location = lib.mkOption {
-            description = "The location where you worked.";
-            type = types.submodule locationOptions;
-            default = {};
-          };
-          url = lib.mkOption {
-            description = "The company website.";
-            type = types.str;
-            default = "";
-          };
-          startDate = lib.mkOption {
-            description = "Your start date.";
-            type = types.str;
-            default = "";
-          };
-          endDate = lib.mkOption {
-            description = "Your end date.";
-            type = types.str;
-            default = "";
-          };
-          summary = lib.mkOption {
-            description = "A summary of your job.";
-            type = types.str;
-            default = "";
-          };
-          highlights = lib.mkOption {
-            description = "Highlights of your work.";
-            type = types.listOf types.str;
-            default = [];
-          };
-          roles = lib.mkOption {
-            description = "A collection of your roles and responsibilities.";
-            type = types.listOf (types.submodule {
-              options = {
-                role = lib.mkOption {
-                  description = "Your role.";
-                  type = types.str;
-                  default = "";
-                };
-                responsibilities = lib.mkOption {
-                  description = "Your responsibilities for this role.";
-                  type = types.listOf types.str;
-                  default = [];
-                };
-              };
-            });
-            default = [];
-          };
-        };
-      });
+      type = types.listOf (types.submodule workOptions);
+      default = [];
+    };
+    volunteer = lib.mkOption {
+      description = "Your volunteer experience.";
+      type = types.listOf (types.submodule workOptions);
       default = [];
     };
   };
@@ -222,6 +228,48 @@ in {
           location.countryCode
           location.postalCode
         ];
+    parseWorkConfig =
+      lib.concatMapStringsSep
+      "\n\n"
+      (
+        job: let
+          rolesInfo = (
+            lib.concatMapStringsSep
+            "\n"
+            (
+              role:
+                concatNewlineFiltered
+                [
+                  role.role
+                  (
+                    concatNewlineFiltered
+                    role.responsibilities
+                  )
+                ]
+            )
+            job.roles
+          );
+          dateInfo = (
+            if (job.endDate == "" || job.startDate == "")
+            then ""
+            else job.startDate + " - " + job.endDate
+          );
+        in
+          concatNewlineFiltered
+          [
+            job.name
+            job.position
+            (parseLocation job.location)
+            job.url
+            dateInfo
+            job.summary
+            (
+              concatNewlineFiltered
+              job.highlights
+            )
+            rolesInfo
+          ]
+      );
   in {
     all = {inherit (cfg) basics work;};
     plaintext = let
@@ -248,56 +296,15 @@ in {
           locationInfo
           profileInfo
         ];
-      workInfo = (
-        lib.concatMapStringsSep
-        "\n\n"
-        (
-          job: let
-            rolesInfo = (
-              lib.concatMapStringsSep
-              "\n"
-              (
-                role:
-                  concatNewlineFiltered
-                  [
-                    role.role
-                    (
-                      concatNewlineFiltered
-                      role.responsibilities
-                    )
-                  ]
-              )
-              job.roles
-            );
-            dateInfo = (
-              if (job.endDate == "" || job.startDate == "")
-              then ""
-              else job.startDate + " - " + job.endDate
-            );
-          in
-            concatNewlineFiltered
-            [
-              job.name
-              job.position
-              (parseLocation job.location)
-              job.url
-              dateInfo
-              job.summary
-              (
-                concatNewlineFiltered
-                job.highlights
-              )
-              rolesInfo
-            ]
-        )
-        cfg.work
-      );
+      workInfo = parseWorkConfig cfg.work;
+      volunteerInfo = parseWorkConfig cfg.volunteer;
     in
       concatStringsSepFiltered
       "\n\n"
       [
         basicInfo
         workInfo
+        volunteerInfo
       ];
   };
 }
