@@ -5,7 +5,14 @@
     email = "daniel.n.baker@gmail.com";
     phone = "407-474-5339";
     url = "https://djacu.dev/";
-    summary = "I love Nix!";
+    summary = ''
+      Seeking a full-time role in software engineering, signal processing, scientific data processing, or general analysis.
+      I am passionate about creating clear, maintainable, and well tested code and reproducible systems and software.
+      Experienced with large scale data processing.
+      Experienced with creating production ready software for a variety of scientific algorithms.
+      Looking to grow my data processing, application development, and functional programming skills.
+      Experienced working in a remote environment and would prefer a remote based role but also willing to work in an office part time.
+    '';
     location = {
       address = "123 Nunya Lane";
       postalCode = "90755";

@@ -84,7 +84,7 @@
       };
       summary = lib.mkOption {
         description = "A summary of your work.";
-        type = types.str;
+        type = types.either types.str types.lines;
         default = "";
       };
       highlights = lib.mkOption {
@@ -399,14 +399,16 @@ in {
           locationInfo
           profileInfo
         ];
-      workInfo = parseWorkConfig cfg.work;
-      volunteerInfo = parseWorkConfig cfg.volunteer;
-      educationInfo = parseEducationConfig cfg.education;
+      objectiveInfo = "OBJECTIVE\n" + (builtins.replaceStrings ["\n"] [" "] cfg.basics.summary);
+      educationInfo = "EDUCATION\n" + parseEducationConfig cfg.education;
+      workInfo = "EXPERIENCE\n" + parseWorkConfig cfg.work;
+      volunteerInfo = "VOLUNTEER\n" + parseWorkConfig cfg.volunteer;
     in
       concatStringsSepFiltered
       "\n\n"
       [
         basicInfo
+        objectiveInfo
         educationInfo
         workInfo
         volunteerInfo
