@@ -28,7 +28,7 @@
   };
   work = [
     {
-      name = "Tweag";
+      organization = "Tweag";
       position = "Software Engineer";
       location = {
         fullAddress = "Remote, USA";
@@ -59,7 +59,7 @@
       ];
     }
     {
-      name = "The Aerospace Corporation";
+      organization = "The Aerospace Corporation";
       position = "Senior Member of Technical Staff";
       location = {
         fullAddress = "El Segundo, CA, USA";

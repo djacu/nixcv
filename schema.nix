@@ -48,6 +48,11 @@
   workOptions = {
     options = {
       name = lib.mkOption {
+        description = "The company name (alternative to organization).";
+        type = types.str;
+        default = "";
+      };
+      organization = lib.mkOption {
         description = "The company name.";
         type = types.str;
         default = "";
@@ -257,7 +262,11 @@ in {
         in
           concatNewlineFiltered
           [
-            job.name
+            (
+              if job.organization != ""
+              then job.organization
+              else job.name
+            )
             job.position
             (parseLocation job.location)
             job.url
