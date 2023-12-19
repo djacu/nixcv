@@ -119,16 +119,49 @@ in {
 
   config = {
     all = cfg.basics;
-    plaintext = (
+    plaintext = let
+      basicInfo = (
+        lib.concatStringsSep
+        "\n"
+        (
+          lib.remove
+          ""
+          [
+            cfg.basics.name
+            cfg.basics.label
+            cfg.basics.email
+            cfg.basics.phone
+            cfg.basics.url
+          ]
+        )
+      );
+      locationInfo = (
+        lib.concatStringsSep
+        ", "
+        (
+          lib.remove
+          ""
+          [
+            cfg.basics.location.address
+            cfg.basics.location.city
+            cfg.basics.location.region
+            cfg.basics.location.countryCode
+            cfg.basics.location.postalCode
+          ]
+        )
+      );
+      profileInfo = (
+        lib.concatStringsSep
+        "\n"
+        (builtins.map (x: x.url) cfg.basics.profiles)
+      );
+    in
       lib.concatStringsSep
       "\n"
       [
-        cfg.basics.name
-        cfg.basics.label
-        cfg.basics.email
-        cfg.basics.phone
-        cfg.basics.url
-      ]
-    );
+        basicInfo
+        locationInfo
+        profileInfo
+      ];
   };
 }
