@@ -10,7 +10,9 @@ let
 in
   pkgs.lib.evalModules {
     modules = [
-      ./schema.nix
-      ./myInfo.nix
+      #./schema.nix
+      #./myInfo.nix
+      ./modules
+      ./modules/test.nix
     ];
   }
