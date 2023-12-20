@@ -5,6 +5,7 @@
 }: let
   inherit (lib) types;
   cfg = config;
+  utils = import ./utils.nix {inherit lib;};
 in {
   options = {
     day = lib.mkOption {
@@ -36,13 +37,24 @@ in {
       type = types.str;
       default = "/";
     };
+    order = lib.mkOption {
+      description = "The order to display the year, month, and day.";
+      type = types.enum (utils.permutationsConcat ["y" "m" "d"]);
+      default = "ymd";
+    };
     out = lib.mkOption {
       type = types.str;
     };
   };
   config = {
     out = let
-      parsedDate =
+      parsedDate = let
+        lookup = {
+          d = cfg.day;
+          m = cfg.month;
+          y = cfg.year;
+        };
+      in
         lib.concatStringsSep
         cfg.sep
         (
@@ -51,7 +63,11 @@ in {
           (
             builtins.filter
             (x: ! builtins.isNull x)
-            [cfg.year cfg.month cfg.day]
+            (
+              builtins.map
+              (x: lookup.${x})
+              (lib.stringToCharacters cfg.order)
+            )
           )
         );
     in
