@@ -148,6 +148,7 @@ defernumbers=true,
 }
 
 % Bibliography indented
+% https://tex.stackexchange.com/questions/342467/indent-on-printbibliography
 \defbibenvironment{bibliography}
 {\list%
     {%
@@ -169,6 +170,8 @@ defernumbers=true,
 {\endlist}
 {\item}
 
+% see \defbibheading def in biblatex docs ~ pg.99
+% see \titleformat def in titlesec docs ~ pg.4
 \defbibheading{subbibliography}[\bibname]{%
     \titleformat{\subsection}{\large\bfseries}{}{}{\hspace{2em}}%
     \subsection*{#1}%
