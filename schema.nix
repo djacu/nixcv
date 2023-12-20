@@ -400,8 +400,8 @@ in {
             #edu.url
             studyInfo
             (parseDates edu)
-            scoreInfo
-            coursesInfo
+            #scoreInfo
+            #coursesInfo
           ]
       );
     parseSkills =
