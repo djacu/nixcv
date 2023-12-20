@@ -91,6 +91,109 @@
         }
       ];
     }
+    {
+      organization = "Raytheon";
+      position = "Senior Systems Engineer";
+      location.fullAddress = "El Segundo, CA, USA";
+      url = "https://www.rtx.com/";
+      startDate = "November 2014";
+      endDate = "July 2020";
+      roles = [
+        {
+          role = "SOLDIER";
+          responsibilities = [
+            "Lead developer on a year long research and development effort implementing a radar signal processing algorithm."
+            "Leveraged the distributed computing capabilities of PySpark in an AWS EMR environment."
+            "Effort concluded with the customer being completely satisfied and a robust algorithm ready for deployment as part of a larger radar signal processing pipeline."
+          ];
+        }
+        {
+          role = "BELLAGIO";
+          responsibilities = [
+            "Key developer and systems engineering for an agile, behavior-driven, multi-contractor, radar signal processing development effort on AWS."
+            "Made significant contributions to requirement flow down and mapping, feature development, software architecture, coding, and testing."
+            "Worked with radar signal processing subject matter experts to convert pseudocode into production ready software."
+            "Worked on several specialized radar signal processing algorithms."
+          ];
+        }
+        {
+          role = "DRACO";
+          responsibilities = [
+            "Responsible for the integrating, testing, and characterizing a gimbal stabilized platform for a space payload."
+            "Created specialized tests to capture nanoradian angular movements in order to develop a high fidelity friction model."
+            "Planned and built a test system and prepared test procedures for future production units."
+          ];
+        }
+        {
+          role = "MFEOIR";
+          responsibilities = [
+            "Modeled a high-friction, low-inertia fluid rotary unit (FRU) with high fidelity gearing and friction."
+            "Designed a non-linear control algorithm to command the FRU to follow a decoupled gimbal."
+            "Used Matlab to auto-generate the controls algorithm code for the embedded system."
+          ];
+        }
+        {
+          role = "MFL";
+          responsibilities = [
+            "Responsible for designing and modeling an infrared auto-alignment loop."
+            "Created high fidelity models for fast steering mirros and an infrared sensor."
+          ];
+        }
+        {
+          role = "NGJ";
+          responsibilities = [
+            "Modeled the rigid body dynamics, sensors and actuators for a door controlled ram air turbine."
+            "Worked with mechanical designers to incorporate a flexible body model into the simulation."
+          ];
+        }
+        {
+          role = "JTO";
+          responsibilities = [
+            "Worked with multiple functional roles to architect, design, integrate, and test a power supply and a communications module."
+            "Created thermal and electrical simulations and analyses to drive design decisions."
+            "Mentored other junior engineers on good system and mechanical design."
+          ];
+        }
+      ];
+    }
+    {
+      organization = "DRS Sensors & Targeting Systems";
+      position = "Senior Systems Engineer";
+      location.fullAddress = "Cypress, CA, USA";
+      url = "https://www.leonardodrs.com/";
+      startDate = "June 2008";
+      endDate = "November 2014";
+      roles = [
+        {
+          role = "Full Lifecycle Engineer";
+          responsibilities = [
+            "Responsible for designing, integrating, testing, fielding and supporting LRIP of multiple gimbal stabilized platforms."
+            "Modeling, analysis and design of control algorithms for a gimbal and isolator stabilized EO/IR system using MATLAB/SIMULINK."
+            "Responsible for integrating, calibrating and testing the sensor and actuator hardware for stabilized platforms."
+            "Derive algorithms for target location and geo-pointing including the use of Euler angles and quaternion rotations."
+          ];
+        }
+        {
+          role = "Systems Analysis";
+          responsibilities = [
+            "Responsible for first principles based synthetic imagery generation, modeling and analysis."
+            "Create complex urban scenery including using Blender."
+            "Apply material properties and render synthetic imagery for visible, infrared, hyperspectral and LIDAR systems using DIRSIG and supporting tools."
+            "Process raw imagery for analysis and exploitation algorithms using MATLAB and correlate results to real-world phenomenology."
+            "Rigid body and multi-body simulation using Newtonian mechanics."
+          ];
+        }
+        {
+          role = "Systems Engineer";
+          responsibilities = [
+            "Well versed with the roles and duties of a System Engineer."
+            "Performed requirements decomposition and allocation and developed specifications, processes and metrics."
+            "Performed analysis, modeling and trade studies at all levels and of the total system product."
+            "Prepared for and participated in program milestone events."
+          ];
+        }
+      ];
+    }
   ];
   volunteer = [
     {
