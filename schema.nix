@@ -361,7 +361,7 @@ in {
             )
             job.position
             (parseLocation job.location)
-            job.url
+            #job.url
             dateInfo
             job.summary
             (
@@ -397,7 +397,7 @@ in {
           concatNewlineFiltered
           [
             edu.institution
-            edu.url
+            #edu.url
             studyInfo
             (parseDates edu)
             scoreInfo
