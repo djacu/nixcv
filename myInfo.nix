@@ -17,8 +17,8 @@
       address = "123 Nunya Lane";
       postalCode = "90755";
       city = "Signal Hill";
-      countryCode = "US";
-      region = "California";
+      countryCode = "USA";
+      region = "CA";
     };
     profiles = [
       {
