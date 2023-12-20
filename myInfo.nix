@@ -202,17 +202,12 @@
       location.fullAddress = "Remote, USA";
       startDate = "02/2021";
       endDate = "11/2021";
-      roles = [
-        {
-          role = "Front-End Developer";
-          responsibilities = [
-            "As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries."
-            "Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website."
-            "Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features."
-            "Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products."
-            "Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development."
-          ];
-        }
+      highlights = [
+        "As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries."
+        "Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website."
+        "Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features."
+        "Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products."
+        "Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development."
       ];
     }
   ];
