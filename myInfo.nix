@@ -39,8 +39,8 @@
       position = "Software Engineer";
       location.fullAddress = "Remote, USA";
       url = "https://www.tweag.io/";
-      startDate = "February 2022";
-      endDate = "April 2023";
+      startDate = "02/2022";
+      endDate = "04/2023";
       roles = [
         {
           role = "jupyenv";
@@ -68,8 +68,8 @@
       position = "Senior Member of Technical Staff";
       location.fullAddress = "El Segundo, CA, USA";
       url = "https://aerospace.org/";
-      startDate = "July 2020";
-      endDate = "February 2022";
+      startDate = "07/2020";
+      endDate = "02/2022";
       roles = [
         {
           role = "AMIGOS";
@@ -96,8 +96,8 @@
       position = "Senior Systems Engineer";
       location.fullAddress = "El Segundo, CA, USA";
       url = "https://www.rtx.com/";
-      startDate = "November 2014";
-      endDate = "July 2020";
+      startDate = "11/2014";
+      endDate = "07/2020";
       roles = [
         {
           role = "SOLDIER";
@@ -161,8 +161,8 @@
       position = "Senior Systems Engineer";
       location.fullAddress = "Cypress, CA, USA";
       url = "https://www.leonardodrs.com/";
-      startDate = "June 2008";
-      endDate = "November 2014";
+      startDate = "06/2008";
+      endDate = "11/2014";
       roles = [
         {
           role = "Full Lifecycle Engineer";
@@ -200,8 +200,8 @@
       organization = "Los Angeles County: Department of Public Health";
       position = "Software Engineer";
       location.fullAddress = "Remote, USA";
-      startDate = "Februray 2021";
-      endDate = "November 2021";
+      startDate = "02/2021";
+      endDate = "11/2021";
       roles = [
         {
           role = "Front-End Developer";
@@ -222,16 +222,16 @@
       url = "https://www.usc.edu/";
       area = "Electrical Engineering";
       studyType = "Master of Science";
-      startDate = "August 2016";
-      endDate = "May 2018";
+      startDate = "08/2016";
+      endDate = "05/2018";
     }
     {
       institution = "Rose-Hulman Institute of Technology";
       url = "https://www.rose-hulman.edu/";
       area = "Electrical Engineering";
       studyType = "Bachelor of Science";
-      startDate = "August 2004";
-      endDate = "May 2008";
+      startDate = "08/2004";
+      endDate = "05/2008";
       score = "3.45/4.00";
       courses = [
         "DSP System Design"
@@ -243,8 +243,8 @@
       url = "https://www.rose-hulman.edu/";
       area = "Applied Mathematics";
       studyType = "Bachelor of Science";
-      startDate = "August 2004";
-      endDate = "May 2008";
+      startDate = "08/2004";
+      endDate = "05/2008";
       score = "3.45/4.00";
       courses = [
         "Stochastic Models in Operational Research"
