@@ -341,7 +341,7 @@ in {
               role:
                 concatNewlineFiltered
                 [
-                  role.role
+                  ("Role in " + role.role + ".")
                   (
                     concatNewlineFiltered
                     role.responsibilities
