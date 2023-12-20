@@ -197,7 +197,7 @@
   ];
   volunteer = [
     {
-      organization = "Los Angeles County - Department of Public Health";
+      organization = "Los Angeles County: Department of Public Health";
       position = "Software Engineer";
       location.fullAddress = "Remote, USA";
       startDate = "Februray 2021";
