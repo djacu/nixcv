@@ -73,7 +73,7 @@ in {
     };
   };
   config = {
-    _months = {
+    _months = lib.mkDefault {
       english = {
         short = {
           "1" = "Jan.";
