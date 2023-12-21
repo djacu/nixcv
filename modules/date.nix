@@ -131,18 +131,18 @@ in {
     _months = {
       english = {
         short = {
-          "1" = "Jan.";
-          "2" = "Feb.";
-          "3" = "Mar.";
-          "4" = "Apr.";
+          "1" = "Jan";
+          "2" = "Feb";
+          "3" = "Mar";
+          "4" = "Apr";
           "5" = "May";
           "6" = "June";
           "7" = "July";
-          "8" = "Aug.";
-          "9" = "Sept.";
-          "10" = "Oct.";
-          "11" = "Nov.";
-          "12" = "Dec.";
+          "8" = "Aug";
+          "9" = "Sept";
+          "10" = "Oct";
+          "11" = "Nov";
+          "12" = "Dec";
         };
         long = {
           "1" = "January";
@@ -157,6 +157,66 @@ in {
           "10" = "October";
           "11" = "November";
           "12" = "December";
+        };
+      };
+      spanish = {
+        short = {
+          "1" = "Enero";
+          "2" = "Feb";
+          "3" = "Marzo";
+          "4" = "Abr";
+          "5" = "Mayo";
+          "6" = "Jun";
+          "7" = "Jul";
+          "8" = "Agosto";
+          "9" = "Sep";
+          "10" = "Oct";
+          "11" = "Nov";
+          "12" = "Dic";
+        };
+        long = {
+          "1" = "Enero";
+          "2" = "Febrero";
+          "3" = "Marzo";
+          "4" = "Abril";
+          "5" = "Mayo";
+          "6" = "Junio";
+          "7" = "Julio";
+          "8" = "Agosto";
+          "9" = "Septiembre";
+          "10" = "Octubre";
+          "11" = "Noviembre";
+          "12" = "Diciembre";
+        };
+      };
+      french = {
+        short = {
+          "1" = "Janv";
+          "2" = "Févr";
+          "3" = "Mars";
+          "4" = "Avr";
+          "5" = "Mai";
+          "6" = "Juin";
+          "7" = "Juil";
+          "8" = "Août";
+          "9" = "Sept";
+          "10" = "Oct";
+          "11" = "Nov";
+          "12" = "Déc";
+        };
+        long = {
+          "1" = "Janvier";
+          "2" = "Février";
+          "3" = "Mars";
+          "4" = "Avril";
+          "5" = "Mai";
+          "6" = "Juin";
+          "7" = "Juillet";
+          "8" = "Août";
+          "9" = "Septembre";
+          "10" = "Octobre";
+          "11" = "Novembre";
+          "12" = "Décembre";
         };
       };
     };
