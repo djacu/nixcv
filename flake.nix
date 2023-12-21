@@ -66,5 +66,18 @@
         };
       };
       defaultPackage = packages.document;
+
+      moduleOptions = pkgs.nixosOptionsDoc {
+        options = (
+          builtins.removeAttrs
+          (pkgs.lib.evalModules {
+            modules = [
+              ./modules/default.nix
+            ];
+          })
+          .options
+          ["_module"]
+        );
+      };
     });
 }
