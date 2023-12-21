@@ -13,6 +13,10 @@
       day = 14;
       order = "ymd";
       monthFormat = "long";
+      _months.foo = {
+        short = {"1" = "blah";};
+        long = {"1" = "bleh";};
+      };
     };
   };
 }

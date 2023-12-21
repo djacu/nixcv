@@ -63,14 +63,10 @@ in {
           short = lib.mkOption {
             description = "Months short name.";
             type = types.attrsOf types.str;
-            default = null;
-            defaultText = "";
           };
           long = lib.mkOption {
             description = "Months long name.";
             type = types.attrsOf types.str;
-            default = null;
-            defaultText = "";
           };
         };
       });
