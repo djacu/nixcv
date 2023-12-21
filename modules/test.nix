@@ -12,6 +12,7 @@
       month = 12;
       day = 14;
       order = "ymd";
+      monthFormat = "long";
     };
   };
 }
