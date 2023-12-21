@@ -72,7 +72,7 @@
           builtins.removeAttrs
           (pkgs.lib.evalModules {
             modules = [
-              ./modules/default.nix
+              ./modules/date.nix
             ];
           })
           .options

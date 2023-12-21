@@ -11,54 +11,108 @@ in {
   options = {
     day = lib.mkOption {
       description = "The day.";
-      type = types.nullOr (types.numbers.between 1 31);
+      type = types.nullOr (types.ints.between 1 31);
       default = null;
-      defaultText = "1";
+      example = "1";
     };
     month = lib.mkOption {
       description = "The month.";
-      type = types.nullOr (types.numbers.between 1 12);
+      type = types.nullOr (types.ints.between 1 12);
       default = null;
-      defaultText = "1";
+      example = "1";
     };
     year = lib.mkOption {
       description = "The year.";
-      type = types.nullOr types.numbers.positive;
+      type = types.nullOr types.ints.positive;
       default = null;
-      defaultText = "1970";
+      example = "1970";
     };
-    rawStr = lib.mkOption {
-      description = "A date string with no formatting.";
+    userStr = lib.mkOption {
+      description = ''
+        A user override of the date output.
+        Use this if you want to specify your date as a string.
+      '';
       type = types.nullOr types.str;
       default = null;
-      defaultText = "1970/01/01";
+      example = "1970/01/01";
     };
     sep = lib.mkOption {
-      description = "The date separator.";
+      description = "The separator between the year, month, and day.";
       type = types.str;
       default = "/";
+      example = ".";
     };
     order = lib.mkOption {
       description = "The order to display the year, month, and day.";
       type = types.enum (utils.permutationsConcat ["y" "m" "d"]);
       default = "ymd";
+      example = "dmy";
     };
     out = lib.mkOption {
       description = "This modules output.";
       type = types.str;
+      readOnly = true;
     };
     monthFormat = lib.mkOption {
-      description = "The month format.";
+      description = ''
+        The month format.
+        `int` will use the integer value of the month.
+        `short` and `long` will use the respective month name declared in `_months` depending on the language set in `monthLanguage`.
+      '';
       type = types.enum ["int" "short" "long"];
       default = "int";
+      example = "long";
     };
     monthLanguage = lib.mkOption {
-      description = "The language to use for months as words.";
+      description = ''
+        The language to use for the month if `monthFormat` is set to `short` or `long`.
+        Currently only these languages are built in: ${lib.concatStringsSep ", " (builtins.attrNames cfg._months)}.
+      '';
       type = types.str;
       default = "english";
+      example = "spanish";
     };
     _months = lib.mkOption {
-      description = "Short and long month names by language.";
+      description = ''
+        Short and long month names by language.
+        Used with `monthFromat` and `monthLanguage`.
+        If you need a language that is not provided, override `_months` in your config.
+      '';
+      visible = "shallow";
+      example = lib.literalExpression ''
+        {
+          english = {
+            short = {
+              "1" = "Jan.";
+              "2" = "Feb.";
+              "3" = "Mar.";
+              "4" = "Apr.";
+              "5" = "May";
+              "6" = "June";
+              "7" = "July";
+              "8" = "Aug.";
+              "9" = "Sept.";
+              "10" = "Oct.";
+              "11" = "Nov.";
+              "12" = "Dec.";
+            };
+            long = {
+              "1" = "January";
+              "2" = "February";
+              "3" = "March";
+              "4" = "April";
+              "5" = "May";
+              "6" = "June";
+              "7" = "July";
+              "8" = "August";
+              "9" = "September";
+              "10" = "October";
+              "11" = "November";
+              "12" = "December";
+            };
+          };
+        }
+      '';
       type = types.attrsOf (types.submodule {
         options = {
           short = lib.mkOption {
@@ -82,10 +136,10 @@ in {
           "3" = "Mar.";
           "4" = "Apr.";
           "5" = "May";
-          "6" = "Jun.";
-          "7" = "Jul.";
+          "6" = "June";
+          "7" = "July";
           "8" = "Aug.";
-          "9" = "Sep.";
+          "9" = "Sept.";
           "10" = "Oct.";
           "11" = "Nov.";
           "12" = "Dec.";
@@ -107,8 +161,8 @@ in {
       };
     };
     out =
-      if ! builtins.isNull cfg.rawStr
-      then cfg.rawStr
+      if ! builtins.isNull cfg.userStr
+      then cfg.userStr
       else if cfg.monthFormat == "int"
       then let
         lookup = {
