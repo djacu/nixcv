@@ -48,11 +48,6 @@ in {
       default = "ymd";
       example = "dmy";
     };
-    out = lib.mkOption {
-      description = "This modules output.";
-      type = types.str;
-      readOnly = true;
-    };
     monthFormat = lib.mkOption {
       description = ''
         The month format.
@@ -125,6 +120,12 @@ in {
           };
         };
       });
+    };
+    _outPlaintext = lib.mkOption {
+      description = "This modules plaintext output.";
+      type = types.str;
+      visible = false;
+      readOnly = true;
     };
   };
   config = {
@@ -220,7 +221,7 @@ in {
         };
       };
     };
-    out =
+    _outPlaintext =
       if ! builtins.isNull cfg.userStr
       then cfg.userStr
       else if cfg.monthFormat == "int"

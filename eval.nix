@@ -18,7 +18,7 @@ in (
   (
     moduleName: moduleValue: (
       pkgs.lib.mapAttrs'
-      (testName: testValue: pkgs.lib.nameValuePair testName (testValue.out))
+      (testName: testValue: pkgs.lib.nameValuePair testName (testValue._outPlaintext))
       moduleValue
     )
   )
