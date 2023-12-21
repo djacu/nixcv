@@ -2,7 +2,7 @@
 # nix-instantiate --eval eval.nix -A config.plaintext | jq -r
 # nix eval -f eval.nix config.plaintext --raw
 let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-22.11";
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-unstable";
   pkgs = import nixpkgs {
     config = {};
     overlays = [];
@@ -12,7 +12,7 @@ in
     modules = [
       #./schema.nix
       #./myInfo.nix
-      ./modules
+      #./modules
       ./modules/test.nix
     ];
   }
