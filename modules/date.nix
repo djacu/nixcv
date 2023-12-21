@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  options,
   ...
 }: let
   inherit (lib) types;
@@ -131,29 +132,32 @@ in {
             )
           )
         )
+      else if (builtins.isNull cfg.month)
+      then let
+        parents = utils.getSubmoduleParents options;
+      in
+        throw ''
+          Value of ${parents}.month is not defined but ${parents}.monthFormat is set to "${cfg.monthFormat}".
+          Change monthFormat to "int" or set a value for month.''
       else
-        # FIXME: error only goes up 1 parent. can we go all the way up?
-        if (builtins.isNull cfg.month)
-        then throw "Value of ${cfg._module.args.name}.month is not defined."
-        else
-          lib.concatStringsSep
-          " "
-          (
-            builtins.filter
-            (x: ! builtins.isNull x)
-            [
-              (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
-              (
-                if (! builtins.isNull cfg.day)
-                then builtins.toString cfg.day + ","
-                else null
-              )
-              (
-                if (! builtins.isNull cfg.year)
-                then builtins.toString cfg.year
-                else null
-              )
-            ]
-          );
+        lib.concatStringsSep
+        " "
+        (
+          builtins.filter
+          (x: ! builtins.isNull x)
+          [
+            (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
+            (
+              if (! builtins.isNull cfg.day)
+              then builtins.toString cfg.day + ","
+              else null
+            )
+            (
+              if (! builtins.isNull cfg.year)
+              then builtins.toString cfg.year
+              else null
+            )
+          ]
+        );
   };
 }

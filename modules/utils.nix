@@ -36,4 +36,25 @@
     builtins.map
     lib.concatStrings
     (permutations xs);
+
+  /*
+  Given a submodule options, return all the parent configuration names.
+  Return as a string with each name delimited by a period.
+
+  Type: getSubmoduleParents :: AttrSet -> String
+
+  Example:
+    # Given a submodule, date, defined in a config as `nixcv.startDate.date`.
+    getSubmoduleParents options
+    => "nixcv.startDate"
+  */
+
+  getSubmoduleParents = opt:
+    lib.concatStringsSep
+    "."
+    (
+      lib.subtractLists
+      ["_module" "args"]
+      opt._module.args.loc
+    );
 }
