@@ -6,43 +6,11 @@ in {
       date = lib.mkOption {
         description = "Your CV.";
         type = types.submodule {
-          options = {
-            basic = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            separator = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            order = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            rawStr = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            monthLong = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            monthShort = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-            monthLanguage = lib.mkOption {
-              type = types.submoduleWith {
-                modules = [./date.nix];
-              };
-            };
-          };
+          options = (
+            lib.genAttrs
+            ["basic" "separator" "order" "rawStr" "monthLong" "monthShort" "monthLanguage"]
+            (name: lib.mkOption {type = types.submoduleWith {modules = [./date.nix];};})
+          );
         };
       };
     };
