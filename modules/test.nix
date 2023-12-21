@@ -22,7 +22,22 @@ in {
                 modules = [./date.nix];
               };
             };
-            monthFormat = lib.mkOption {
+            rawStr = lib.mkOption {
+              type = types.submoduleWith {
+                modules = [./date.nix];
+              };
+            };
+            monthLong = lib.mkOption {
+              type = types.submoduleWith {
+                modules = [./date.nix];
+              };
+            };
+            monthShort = lib.mkOption {
+              type = types.submoduleWith {
+                modules = [./date.nix];
+              };
+            };
+            monthLanguage = lib.mkOption {
               type = types.submoduleWith {
                 modules = [./date.nix];
               };
@@ -53,11 +68,26 @@ in {
           day = 4;
           order = "dmy";
         };
-        monthFormat = {
+        rawStr = {
+          rawStr = "I can write anything!";
+        };
+        monthLong = {
+          year = 2021;
+          month = 11;
+          day = 4;
+          monthFormat = "long";
+        };
+        monthShort = {
+          year = 2021;
+          month = 11;
+          day = 4;
+          monthFormat = "short";
+        };
+        monthLanguage = {
           year = 2023;
           month = 12;
           day = 14;
-          order = "ymd";
+          monthLanguage = "blah";
           monthFormat = "long";
           _months.blah = {
             short = {
