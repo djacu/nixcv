@@ -132,25 +132,28 @@ in {
           )
         )
       else
-        # FIXME: fails if month is not declared
-        lib.concatStringsSep
-        " "
-        (
-          builtins.filter
-          (x: ! builtins.isNull x)
-          [
-            (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
-            (
-              if (! builtins.isNull cfg.day)
-              then builtins.toString cfg.day + ","
-              else null
-            )
-            (
-              if (! builtins.isNull cfg.year)
-              then builtins.toString cfg.year
-              else null
-            )
-          ]
-        );
+        # FIXME: error only goes up 1 parent. can we go all the way up?
+        if (builtins.isNull cfg.month)
+        then throw "Value of ${cfg._module.args.name}.month is not defined."
+        else
+          lib.concatStringsSep
+          " "
+          (
+            builtins.filter
+            (x: ! builtins.isNull x)
+            [
+              (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
+              (
+                if (! builtins.isNull cfg.day)
+                then builtins.toString cfg.day + ","
+                else null
+              )
+              (
+                if (! builtins.isNull cfg.year)
+                then builtins.toString cfg.year
+                else null
+              )
+            ]
+          );
   };
 }
