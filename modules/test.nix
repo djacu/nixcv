@@ -8,7 +8,7 @@ in {
         type = types.submodule {
           options = (
             lib.genAttrs
-            ["basic" "separator" "order" "rawStr" "monthLong" "monthShort" "monthLanguage"]
+            ["basic" "separator" "order" "userStr" "monthLong" "monthShort" "monthLanguage"]
             (name: lib.mkOption {type = types.submoduleWith {modules = [./date.nix];};})
           );
         };
@@ -36,8 +36,8 @@ in {
           day = 4;
           order = "dmy";
         };
-        rawStr = {
-          rawStr = "I can write anything!";
+        userStr = {
+          userStr = "I can write anything!";
         };
         monthLong = {
           year = 2021;
