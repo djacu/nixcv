@@ -7,12 +7,20 @@ let
     config = {};
     overlays = [];
   };
-in
-  pkgs.lib.evalModules {
+  eval = pkgs.lib.evalModules {
     modules = [
-      #./schema.nix
-      #./myInfo.nix
-      #./modules
       ./modules/test.nix
     ];
-  }
+  };
+  evalConfig = eval.config.nixcv;
+in (
+  builtins.mapAttrs
+  (
+    moduleName: moduleValue: (
+      pkgs.lib.mapAttrs'
+      (testName: testValue: pkgs.lib.nameValuePair testName (testValue.out))
+      moduleValue
+    )
+  )
+  evalConfig
+)
