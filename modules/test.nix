@@ -4,12 +4,29 @@ in {
   options = {
     nixcv = {
       date = lib.mkOption {
-        description = "Your CV.";
+        description = "A single date.";
         type = types.submodule {
           options = (
             lib.genAttrs
             ["basic" "separator" "order" "userStr" "monthLong" "monthShort" "monthLanguage"]
             (name: lib.mkOption {type = types.submoduleWith {modules = [./date.nix];};})
+          );
+        };
+      };
+      dates = lib.mkOption {
+        description = "A date range.";
+        type = types.submodule {
+          options = (
+            lib.genAttrs
+            ["basic" "separator"]
+            (
+              name:
+                lib.mkOption {
+                  type = types.submoduleWith {
+                    modules = [./dateRange.nix];
+                  };
+                }
+            )
           );
         };
       };
@@ -105,6 +122,33 @@ in {
               "12" = "YYYDecember";
             };
           };
+        };
+      };
+      dates = {
+        basic = {
+          start = {
+            year = 2021;
+            month = 11;
+            day = 4;
+          };
+          end = {
+            year = 2022;
+            month = 7;
+            day = 16;
+          };
+        };
+        separator = {
+          start = {
+            year = 2021;
+            month = 11;
+            day = 4;
+          };
+          end = {
+            year = 2022;
+            month = 7;
+            day = 16;
+          };
+          sep = " to ";
         };
       };
       socials = {
