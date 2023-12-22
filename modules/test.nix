@@ -26,7 +26,7 @@ in {
         type = types.submodule {
           options = (
             lib.genAttrs
-            ["basic"]
+            ["basic" "format"]
             (name: lib.mkOption {type = types.submoduleWith {modules = [./address.nix];};})
           );
         };
@@ -115,10 +115,24 @@ in {
       address = {
         basic = {
           street = "123 Nunya Drive Unit 42";
-          city = "Long Beach";
-          state = "CA";
+          city = "Clinton";
+          state = "MI";
           country = "USA";
-          postalCode = "90755";
+          postalCode = "64735";
+        };
+        format = {
+          street = "123 Nunya Drive Unit 42";
+          town = "Clinton";
+          state = "MI";
+          country = "USA";
+          postalCode = "64735";
+          format = [
+            "street"
+            "town"
+            "state"
+            "country"
+            "postalCode"
+          ];
         };
       };
     };

@@ -14,17 +14,42 @@ in {
       type = types.nullOr types.str;
     };
     district = lib.mkOption {
-      description = "The district/suburb/area.";
+      description = "The district.";
+      default = null;
+      type = types.nullOr types.str;
+    };
+    suburb = lib.mkOption {
+      description = "The suburb.";
       default = null;
       type = types.nullOr types.str;
     };
     city = lib.mkOption {
-      description = "The city/town/village.";
+      description = "The city.";
+      default = null;
+      type = types.nullOr types.str;
+    };
+    town = lib.mkOption {
+      description = "The town.";
+      default = null;
+      type = types.nullOr types.str;
+    };
+    village = lib.mkOption {
+      description = "The village.";
       default = null;
       type = types.nullOr types.str;
     };
     state = lib.mkOption {
-      description = "The state/province/region.";
+      description = "The state.";
+      default = null;
+      type = types.nullOr types.str;
+    };
+    province = lib.mkOption {
+      description = "The province.";
+      default = null;
+      type = types.nullOr types.str;
+    };
+    region = lib.mkOption {
+      description = "The region.";
       default = null;
       type = types.nullOr types.str;
     };
@@ -38,6 +63,17 @@ in {
       default = null;
       type = types.nullOr types.str;
     };
+    format = lib.mkOption {
+      description = "The elements of the address to incude in order.";
+      type = types.listOf types.str;
+      default = [
+        "street"
+        "city"
+        "state"
+        "country"
+        "postalCode"
+      ];
+    };
     _outPlaintext = lib.mkOption {
       description = "This modules output.";
       type = types.str;
@@ -48,14 +84,11 @@ in {
     _outPlaintext = (
       utils.concatCommaFiltered
       null
-      [
-        cfg.street
-        cfg.district
-        cfg.city
-        cfg.state
-        cfg.country
-        cfg.postalCode
-      ]
+      (
+        builtins.map
+        (x: cfg.${x})
+        cfg.format
+      )
     );
   };
 }
