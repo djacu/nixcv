@@ -22,6 +22,15 @@ in {
           );
         };
       };
+      address = lib.mkOption {
+        type = types.submodule {
+          options = (
+            lib.genAttrs
+            ["basic"]
+            (name: lib.mkOption {type = types.submoduleWith {modules = [./address.nix];};})
+          );
+        };
+      };
     };
   };
   config = {
@@ -101,6 +110,15 @@ in {
       socials = {
         basic = {
           url = "https://djacu.dev/";
+        };
+      };
+      address = {
+        basic = {
+          street = "123 Nunya Drive Unit 42";
+          city = "Long Beach";
+          state = "CA";
+          country = "USA";
+          postalCode = "90755";
         };
       };
     };
