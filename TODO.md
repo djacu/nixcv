@@ -1,0 +1,28 @@
+# TODO
+
+- [ ] Modules
+  - [ ] Address
+    - [x] MVP address module done
+    - [ ] Add a `sep` option.
+    - [ ] Consider a format submodule that will handle address formatting.
+  - [ ] Date
+    - [x] MVP date module done
+    - [x] MVP dateRange module done
+    - [ ] Consider a format submodule that will handle date formatting.
+  - [ ] Education
+    - [x] MVP education module done
+  - [ ] Experience
+    - [x] MVP experience module done
+  - [ ] Publications & Talks
+  - [ ] Refernces
+    - [ ] MVP references module done
+  - [ ] Section
+    - [ ] MVP section module done
+  - [ ] Socials
+    - [x] MVP socials module done
+  - [ ] Skills
+    - [ ] MVP skill module done
+    - [ ] MVP skills module done
+- [ ] Flavors
+- [ ] Build plaintext doc
+- [ ] Build LaTeX doc
