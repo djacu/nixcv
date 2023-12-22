@@ -15,7 +15,7 @@
     - [x] MVP experience module done
   - [ ] Publications & Talks
   - [ ] Refernces
-    - [ ] MVP references module done
+    - [x] MVP reference module done
   - [ ] Section
     - [ ] MVP section module done
   - [ ] Socials

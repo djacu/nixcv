@@ -100,7 +100,7 @@ in {
         };
       };
       skills = lib.mkOption {
-        description = "A skill entry.";
+        description = "A skills entry.";
         type = types.submodule {
           options = (
             lib.genAttrs
@@ -110,6 +110,23 @@ in {
                 lib.mkOption {
                   type = types.submoduleWith {
                     modules = [./skills.nix];
+                  };
+                }
+            )
+          );
+        };
+      };
+      reference = lib.mkOption {
+        description = "A reference entry.";
+        type = types.submodule {
+          options = (
+            lib.genAttrs
+            ["basic"]
+            (
+              name:
+                lib.mkOption {
+                  type = types.submoduleWith {
+                    modules = [./reference.nix];
                   };
                 }
             )
@@ -338,6 +355,14 @@ in {
             }
           ];
           sep = "; ";
+        };
+      };
+      reference = {
+        basic = {
+          name = "John Doe";
+          organization = "The NixOS Foundation";
+          phone = "123.456.7890";
+          email = "jdoe@nixos.org";
         };
       };
     };
