@@ -22,7 +22,7 @@
     - [x] MVP socials module done
   - [ ] Skills
     - [x] MVP skill module done
-    - [ ] MVP skills module done
+    - [x] MVP skills module done
 - [ ] Flavors
 - [ ] Build plaintext doc
 - [ ] Build LaTeX doc
