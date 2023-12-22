@@ -18,7 +18,7 @@ in {
         type = types.submodule {
           options = (
             lib.genAttrs
-            ["basic" "separator"]
+            ["empty" "basic" "separator"]
             (
               name:
                 lib.mkOption {
@@ -125,6 +125,7 @@ in {
         };
       };
       dates = {
+        empty = {};
         basic = {
           start = {
             year = 2021;
