@@ -57,4 +57,32 @@
       ["_module" "args"]
       opt._module.args.loc
     );
+
+  /*
+  Same as concatStringsSep but filters the list first.
+
+  Type: concatStringsSepFiltered :: string -> any -> [string] -> string
+
+  Example
+    concatStringsSepFiltered "," "" ["a" "" "b"]
+    => "a,b"
+  */
+  concatStringsSepFiltered = separator: filter: list:
+    lib.concatStringsSep
+    separator
+    (
+      lib.remove
+      filter
+      list
+    );
+
+  /*
+  Same as concatStringsSepFiltered but the separator is a new line.
+  */
+  concatNewlineFiltered = concatStringsSepFiltered "\n";
+
+  /*
+  Same as concatStringsSepFiltered but the separator is a comma and space.
+  */
+  concatCommaFiltered = concatStringsSepFiltered ", ";
 }
