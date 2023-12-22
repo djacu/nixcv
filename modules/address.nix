@@ -74,6 +74,14 @@ in {
         "postalCode"
       ];
     };
+    userStr = lib.mkOption {
+      description = ''
+        A user override of the address output.
+      '';
+      type = types.nullOr types.str;
+      default = null;
+      example = "Remote, USA";
+    };
     _outPlaintext = lib.mkOption {
       description = "This modules output.";
       type = types.str;
@@ -81,14 +89,18 @@ in {
     };
   };
   config = {
-    _outPlaintext = (
-      utils.concatCommaFiltered
-      null
-      (
-        builtins.map
-        (x: cfg.${x})
-        cfg.format
-      )
-    );
+    _outPlaintext =
+      if ! builtins.isNull cfg.userStr
+      then cfg.userStr
+      else
+        (
+          utils.concatCommaFiltered
+          null
+          (
+            builtins.map
+            (x: cfg.${x})
+            cfg.format
+          )
+        );
   };
 }
