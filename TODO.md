@@ -21,7 +21,7 @@
   - [ ] Socials
     - [x] MVP socials module done
   - [ ] Skills
-    - [ ] MVP skill module done
+    - [x] MVP skill module done
     - [ ] MVP skills module done
 - [ ] Flavors
 - [ ] Build plaintext doc

@@ -82,6 +82,23 @@ in {
           );
         };
       };
+      skill = lib.mkOption {
+        description = "A skill entry.";
+        type = types.submodule {
+          options = (
+            lib.genAttrs
+            ["basic" "sep"]
+            (
+              name:
+                lib.mkOption {
+                  type = types.submoduleWith {
+                    modules = [./skill.nix];
+                  };
+                }
+            )
+          );
+        };
+      };
     };
   };
   config = {
@@ -264,6 +281,17 @@ in {
               ];
             }
           ];
+        };
+      };
+      skill = {
+        basic = {
+          label = "Web Development";
+          keywords = ["HTML" "CSS" "JavaScript"];
+        };
+        sep = {
+          label = "Web Development";
+          keywords = ["HTML" "CSS" "JavaScript"];
+          sep = " - ";
         };
       };
     };
