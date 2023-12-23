@@ -16,7 +16,7 @@ let
   };
   test = pkgs.lib.evalModules {
     modules = [
-      ./modules/test.nix
+      ./modules/test
     ];
   };
   testConfig = test.config.nixcv;
