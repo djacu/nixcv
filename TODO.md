@@ -17,13 +17,15 @@
   - [ ] Refernces
     - [x] MVP reference module done
     - [x] MVP references module done
+    - [ ] Look at removing references (listOf reference) module as section takes over.
   - [ ] Section
-    - [ ] MVP section module done
+    - [x] MVP section module done
   - [ ] Socials
     - [x] MVP socials module done
   - [ ] Skills
     - [x] MVP skill module done
     - [x] MVP skills module done
+    - [ ] Look at removing skills (listOf skill) module as section takes over.
 - [ ] Flavors
 - [ ] Build plaintext doc
 - [ ] Build LaTeX doc
