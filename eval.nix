@@ -19,7 +19,7 @@ let
       ./modules/test
     ];
   };
-  testConfig = test.config.nixcv;
+  testConfig = test.config.nixcv.test;
 in {
   old = old.config.plaintext;
   test = (
