@@ -26,7 +26,7 @@ in {
       default = "\n\n";
       example = "\n";
     };
-    content = builtins.trace config lib.mkOption {
+    content = lib.mkOption {
       description = "A list of module type.";
       type = types.nullOr (types.listOf (types.submoduleWith {
         inherit modules;
