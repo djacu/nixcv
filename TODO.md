@@ -16,6 +16,7 @@
   - [ ] Publications & Talks
   - [ ] Refernces
     - [x] MVP reference module done
+    - [x] MVP references module done
   - [ ] Section
     - [ ] MVP section module done
   - [ ] Socials
