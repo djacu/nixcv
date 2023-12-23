@@ -43,7 +43,7 @@ in {
         type = types.submodule {
           options = (
             lib.genAttrs
-            ["basic" "format"]
+            ["basic" "format" "separator"]
             (name: lib.mkOption {type = types.submoduleWith {modules = [./address.nix];};})
           );
         };
@@ -263,6 +263,14 @@ in {
             "country"
             "postalCode"
           ];
+        };
+        separator = {
+          street = "123 Nunya Drive Unit 42";
+          city = "Clinton";
+          state = "MI";
+          country = "USA";
+          postalCode = "64735";
+          sep = "\n";
         };
       };
       education = {

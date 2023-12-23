@@ -63,6 +63,12 @@ in {
       default = null;
       type = types.nullOr types.str;
     };
+    sep = lib.mkOption {
+      description = "The separator between sections of the address.";
+      type = types.str;
+      default = ", ";
+      example = "\n";
+    };
     format = lib.mkOption {
       description = "The elements of the address to incude in order.";
       type = types.listOf types.str;
@@ -94,7 +100,8 @@ in {
       then cfg.userStr
       else
         (
-          utils.concatCommaFiltered
+          utils.concatStringsSepFiltered
+          cfg.sep
           null
           (
             builtins.map

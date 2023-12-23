@@ -3,7 +3,7 @@
 - [ ] Modules
   - [ ] Address
     - [x] MVP address module done
-    - [ ] Add a `sep` option.
+    - [x] Add a `sep` option.
     - [ ] Consider a format submodule that will handle address formatting.
   - [ ] Date
     - [x] MVP date module done
