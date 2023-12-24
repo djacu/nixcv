@@ -1,6 +1,10 @@
 # TODO
 
 - [ ] Modules
+  - [ ] Top Level CV
+    - [x] MVP CV working
+    - [ ] Add format for ordering.
+    - [ ] Make it so you can config multiple CVs (maybe attrsOf?).
   - [ ] Address
     - [x] MVP address module done
     - [x] Add a `sep` option.
