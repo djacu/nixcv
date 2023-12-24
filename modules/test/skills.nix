@@ -24,26 +24,6 @@ in {
             );
           };
         };
-        skills = lib.mkOption {
-          description = "A skills entry.";
-          type = types.submodule {
-            options = (
-              lib.genAttrs
-              [
-                "basic"
-                "sep"
-              ]
-              (
-                name:
-                  lib.mkOption {
-                    type = types.submoduleWith {
-                      modules = [../skills.nix];
-                    };
-                  }
-              )
-            );
-          };
-        };
       };
     };
   };
@@ -59,35 +39,6 @@ in {
             label = "Web Development";
             keywords = ["HTML" "CSS" "JavaScript"];
             sep = " - ";
-          };
-        };
-        skills = {
-          basic = {
-            skills = [
-              {
-                label = "Web Development";
-                keywords = ["HTML" "CSS" "JavaScript"];
-              }
-              {
-                label = "Nix Development";
-                keywords = ["Nixpkgs" "NixOS" "Modules"];
-              }
-            ];
-          };
-          sep = {
-            skills = [
-              {
-                label = "Web Development";
-                keywords = ["HTML" "CSS" "JavaScript"];
-                sep = " - ";
-              }
-              {
-                label = "Nix Development";
-                keywords = ["Nixpkgs" "NixOS" "Modules"];
-                sep = " - ";
-              }
-            ];
-            sep = "; ";
           };
         };
       };
