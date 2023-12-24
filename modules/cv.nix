@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib) types;
-  cfg = config.nixcv;
+  cfg = config;
 
   sections = {
     experience = ./experience.nix;
@@ -14,68 +14,64 @@
     references = ./reference.nix;
   };
 in {
-  options = {
-    nixcv =
+  options =
+    (
+      lib.mapAttrs'
       (
-        lib.mapAttrs'
-        (
-          name: value:
-            lib.nameValuePair
-            name
-            (lib.mkOption {
-              description = "The ${name} section.";
-              type = types.submoduleWith {
-                modules = [./section.nix];
-              };
-            })
-        )
-        sections
+        name: value:
+          lib.nameValuePair
+          name
+          (lib.mkOption {
+            description = "The ${name} section.";
+            type = types.submoduleWith {
+              modules = [./section.nix];
+            };
+          })
       )
-      // {
-        sep = lib.mkOption {
-          description = "The separator between sections.";
-          type = types.str;
-          default = "\n\n";
-          example = "\n";
-        };
-        _outPlaintext = lib.mkOption {
-          description = "This modules plaintext output.";
-          type = types.str;
-          visible = false;
-          readOnly = true;
-        };
+      sections
+    )
+    // {
+      sep = lib.mkOption {
+        description = "The separator between sections.";
+        type = types.str;
+        default = "\n\n";
+        example = "\n";
       };
-  };
-  config = {
-    nixcv =
+      _outPlaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+    };
+  config =
+    (
+      lib.mapAttrs'
       (
-        lib.mapAttrs'
-        (
-          name: value:
-            lib.nameValuePair
-            name
-            {
-              _module.args = {modules = [value];};
-              content = [];
-            }
-        )
-        sections
+        name: value:
+          lib.nameValuePair
+          name
+          {
+            _module.args = {modules = [value];};
+            content = [];
+          }
       )
-      // {
-        _outPlaintext = let
-          cfgSections = builtins.removeAttrs cfg ["sep" "_outPlaintext"];
-        in
-          lib.concatStringsSep
-          cfg.sep
+      sections
+    )
+    // {
+      _outPlaintext = let
+        cfgSections = builtins.removeAttrs cfg ["_module" "sep" "_outPlaintext"];
+      in
+        lib.concatStringsSep
+        cfg.sep
+        (
+          builtins.filter
+          (x: x != "")
           (
-            builtins.filter
-            (x: x != "")
-            (
-              (builtins.map)
-              (x: x._outPlaintext)
-              (builtins.attrValues cfgSections)
-            )
-          );
-      };
-  };
+            (builtins.map)
+            (x: x._outPlaintext)
+            (builtins.attrValues cfgSections)
+          )
+        );
+    };
 }

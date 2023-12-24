@@ -23,7 +23,7 @@ let
   testConfig = test.config.nixcv.test;
   examples = pkgs.lib.evalModules {
     modules = [
-      ./modules/cv.nix
+      ./modules/nixcv.nix
       ./examples/basic.nix
     ];
   };
