@@ -15,13 +15,17 @@
     - [ ] Consider a format submodule that will handle date formatting.
   - [ ] Education
     - [x] MVP education module done
+    - [ ] Add parsing for courses
+    - [ ] Add parsing for scores
+    - [ ] Add a separator
   - [ ] Experience
     - [x] MVP experience module done
   - [ ] Publications & Talks
   - [ ] Refernces
     - [x] MVP reference module done
     - [x] MVP references module done
-    - [ ] Look at removing references (listOf reference) module as section takes over.
+    - [x] Look at removing references (listOf reference) module as section takes over.
+    - [ ] Add a separator
   - [ ] Section
     - [x] MVP section module done
   - [ ] Socials
@@ -29,7 +33,12 @@
   - [ ] Skills
     - [x] MVP skill module done
     - [x] MVP skills module done
-    - [ ] Look at removing skills (listOf skill) module as section takes over.
+    - [x] Look at removing skills (listOf skill) module as section takes over.
+    - [ ] Add more formatting options like a second separator between keywords.
+    - [ ] Let the label be empty and don't add the label separator if it is.
+- [ ] Docs
+  - [ ] Figure out how to build everything together without Nix complaining about duplicate options.
+  - [ ] Some of the defaults need a defaultText with a literalExpression to render correctly. Same for example.
 - [ ] Flavors
 - [ ] Build plaintext doc
 - [ ] Build LaTeX doc
