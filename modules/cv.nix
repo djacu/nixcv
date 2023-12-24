@@ -9,23 +9,23 @@
   sections = [
     {
       name = "education";
-      value = ./education.nix;
+      value = ./sections/education.nix;
     }
     {
       name = "experience";
-      value = ./experience.nix;
+      value = ./sections/experience.nix;
     }
     {
       name = "volunteer";
-      value = ./experience.nix;
+      value = ./sections/experience.nix;
     }
     {
       name = "skills";
-      value = ./skill.nix;
+      value = ./sections/skill.nix;
     }
     {
       name = "references";
-      value = ./reference.nix;
+      value = ./sections/reference.nix;
     }
   ];
 in {
@@ -39,7 +39,7 @@ in {
           (lib.mkOption {
             description = "The ${name} section.";
             type = types.submoduleWith {
-              modules = [./section.nix];
+              modules = [./sections/section.nix];
             };
             visible = "shallow";
           })

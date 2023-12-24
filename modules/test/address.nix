@@ -17,7 +17,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../address.nix];
+                      modules = [../components/address.nix];
                     };
                   }
               )

@@ -5,7 +5,7 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  utils = import ./utils.nix {inherit lib;};
+  utils = import ../utils.nix {inherit lib;};
 in {
   options = {
     organization = lib.mkOption {
@@ -24,7 +24,7 @@ in {
       description = "The organization location or place where you worked.";
       type = types.nullOr (types.submoduleWith {
         modules = [
-          ./address.nix
+          ../components/address.nix
         ];
       });
       default = null;
@@ -39,7 +39,7 @@ in {
       description = "The dates at this organization.";
       type = types.nullOr (types.submoduleWith {
         modules = [
-          ./dateRange.nix
+          ../components/dateRange.nix
         ];
       });
       default = null;

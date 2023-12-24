@@ -18,7 +18,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../section.nix];
+                      modules = [../sections/section.nix];
                     };
                   }
               )
@@ -44,7 +44,7 @@ in {
                 keywords = ["Nixpkgs" "NixOS" "Modules"];
               }
             ];
-            _module.args = {modules = [../skill.nix];};
+            _module.args = {modules = [../sections/skill.nix];};
           };
           sep = {
             header = "Skills";
@@ -60,7 +60,7 @@ in {
                 sep = " - ";
               }
             ];
-            _module.args = {modules = [../skill.nix];};
+            _module.args = {modules = [../sections/skill.nix];};
             sep = "; ";
           };
           headerFunc = {
@@ -76,7 +76,7 @@ in {
                 keywords = ["Nixpkgs" "NixOS" "Modules"];
               }
             ];
-            _module.args = {modules = [../skill.nix];};
+            _module.args = {modules = [../sections/skill.nix];};
           };
         };
       };

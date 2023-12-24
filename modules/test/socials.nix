@@ -14,7 +14,7 @@ in {
               (name:
                 lib.mkOption {
                   type = types.submoduleWith {
-                    modules = [../socials.nix];
+                    modules = [../components/socials.nix];
                   };
                 })
             );

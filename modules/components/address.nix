@@ -5,7 +5,7 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  utils = import ./utils.nix {inherit lib;};
+  utils = import ../utils.nix {inherit lib;};
 in {
   options = {
     street = lib.mkOption {
