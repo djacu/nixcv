@@ -29,6 +29,17 @@
           fontawesome5
           ;
       };
+
+      nixcvEvalModules = pkgs.lib.evalModules {
+        # FIXME: Try using special args like `specialArgs = {modules = [ ... ]};
+        # Might be able to get section to build properly.
+        modules = [
+          ./modules/nixcv.nix
+          # why is this here?
+          # src says "Whether to check whether all option definitions have matching declarations."
+          # {_module.check = false;}
+        ];
+      };
     in rec {
       packages = {
         document = pkgs.stdenvNoCC.mkDerivation rec {
@@ -70,12 +81,7 @@
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
           builtins.removeAttrs
-          (pkgs.lib.evalModules {
-            modules = [
-              ./modules/date.nix
-            ];
-          })
-          .options
+          nixcvEvalModules.options
           ["_module"]
         );
       };

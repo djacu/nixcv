@@ -41,6 +41,7 @@ in {
             type = types.submoduleWith {
               modules = [./section.nix];
             };
+            visible = "shallow";
           })
       )
       (builtins.listToAttrs sections)
