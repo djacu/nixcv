@@ -3,7 +3,7 @@
 - [ ] Modules
   - [ ] Top Level CV
     - [x] MVP CV working
-    - [ ] Add format for ordering.
+    - [x] Add format for ordering.
     - [x] Make it so you can config multiple CVs (maybe attrsOf?).
   - [ ] Address
     - [x] MVP address module done

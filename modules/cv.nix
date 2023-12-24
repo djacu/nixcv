@@ -6,13 +6,28 @@
   inherit (lib) types;
   cfg = config;
 
-  sections = {
-    experience = ./experience.nix;
-    education = ./education.nix;
-    volunteer = ./experience.nix;
-    skills = ./skill.nix;
-    references = ./reference.nix;
-  };
+  sections = [
+    {
+      name = "education";
+      value = ./education.nix;
+    }
+    {
+      name = "experience";
+      value = ./experience.nix;
+    }
+    {
+      name = "volunteer";
+      value = ./experience.nix;
+    }
+    {
+      name = "skills";
+      value = ./skill.nix;
+    }
+    {
+      name = "references";
+      value = ./reference.nix;
+    }
+  ];
 in {
   options =
     (
@@ -28,7 +43,7 @@ in {
             };
           })
       )
-      sections
+      (builtins.listToAttrs sections)
     )
     // {
       sep = lib.mkOption {
@@ -43,6 +58,15 @@ in {
         visible = false;
         readOnly = true;
       };
+      order = lib.mkOption {
+        description = "The order the sections are written.";
+        type = types.listOf types.str;
+        default = (
+          builtins.map
+          (x: x.name)
+          sections
+        );
+      };
     };
   config =
     (
@@ -56,12 +80,10 @@ in {
             content = [];
           }
       )
-      sections
+      (builtins.listToAttrs sections)
     )
     // {
-      _outPlaintext = let
-        cfgSections = builtins.removeAttrs cfg ["_module" "sep" "_outPlaintext"];
-      in
+      _outPlaintext =
         lib.concatStringsSep
         cfg.sep
         (
@@ -69,8 +91,8 @@ in {
           (x: x != "")
           (
             (builtins.map)
-            (x: x._outPlaintext)
-            (builtins.attrValues cfgSections)
+            (x: cfg."${x}"._outPlaintext)
+            (cfg.order)
           )
         );
     };
