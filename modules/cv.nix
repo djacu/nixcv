@@ -8,6 +8,10 @@
 
   sections = [
     {
+      name = "personal";
+      value = ./components/personal.nix;
+    }
+    {
       name = "education";
       value = ./sections/education.nix;
     }
