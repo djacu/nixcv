@@ -5,11 +5,11 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  #listInfo = {
-  #  optionName = "profiles";
-  #  description = "A list of social media profiles.";
-  #  subType = [../components/socials.nix];
-  #};
+  listInfo = {
+    optionName = "socials";
+    description = "A list of social media profiles.";
+    subType = [../components/socials.nix];
+  };
 in {
   options = {
     name = lib.mkOption {
@@ -51,16 +51,15 @@ in {
       });
       default = null;
     };
-    #FIXME: The genericList didn't work as I thought. Need to fix... maybe make it's own module.
-    #profiles = lib.mkOption {
-    #  description = "Your social media profiles.";
-    #  type = types.nullOr (types.submoduleWith {
-    #    modules = [
-    #      (import ../components/genericList.nix listInfo)
-    #    ];
-    #  });
-    #  default = null;
-    #};
+    profiles = lib.mkOption {
+      description = "Your social media profiles.";
+      type = types.nullOr (types.submoduleWith {
+        modules = [
+          (import ../components/genericList.nix listInfo)
+        ];
+      });
+      default = null;
+    };
 
     order = lib.mkOption {
       description = "The order of the profile items.";
@@ -72,7 +71,7 @@ in {
         "phone"
         "url"
         "location"
-        #"profiles"
+        "profiles"
       ];
     };
 
@@ -88,11 +87,10 @@ in {
       cfg
       ["_module" "_outPlaintext"];
   in {
-    # FIXME: if it's a str then get the str otherwise it's a submoudle and get _outPlaintext
     _outPlaintext = (
       lib.concatStringsSep
       "\n"
-      ( # get plaintext if its a module otherwise get the value
+      ( # get plaintext if its a submodule otherwise get the value
         (builtins.map)
         (x: x._outPlaintext or x)
         ( # remove the nulls

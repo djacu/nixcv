@@ -42,16 +42,16 @@ in {
               country = "USA";
               postalCode = "64735";
             };
-            #profiles = {
-            #  profiles = [
-            #    {
-            #      url = "https://github.com/jdoe";
-            #    }
-            #    {
-            #      url = "https://mastodon.com/@jdoe";
-            #    }
-            #  ];
-            #};
+            profiles = {
+              socials = [
+                {
+                  url = "https://github.com/jdoe";
+                }
+                {
+                  url = "https://mastodon.com/@jdoe";
+                }
+              ];
+            };
           };
         };
       };
