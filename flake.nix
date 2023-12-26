@@ -40,7 +40,7 @@
           # {_module.check = false;}
         ];
       };
-    in rec {
+    in {
       packages = {
         document = pkgs.stdenvNoCC.mkDerivation rec {
           name = "latex-demo-document";
@@ -76,7 +76,6 @@
           '';
         };
       };
-      defaultPackage = packages.document;
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
