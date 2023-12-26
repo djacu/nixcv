@@ -75,7 +75,7 @@
           role = "AMIGOS";
           responsibilities = [
             "Member of a software team developing a distributed federated satellite communications simulation tool in Java."
-            "Worked with laser physics subject matter experts and scientists to covert their pseudocode into production ready software."
+            "Worked with laser physics subject matter experts and scientists to convert their pseudocode into production ready software."
             "Created a rigorous set of regression tests to verify that the newly created software matched the original code to within floating point precision."
             "Created a simple, light-weight, units library to help with units conversions and minimize the chance for errors."
           ];
