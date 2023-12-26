@@ -5,6 +5,7 @@
     ./education.nix
     ./experience.nix
     ./genericList.nix
+    ./objective.nix
     ./personal.nix
     ./references.nix
     ./section.nix
