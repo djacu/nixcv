@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -67,6 +68,12 @@ in {
         visible = false;
         readOnly = true;
       };
+      _outPlaintextFile = lib.mkOption {
+        description = "The _outPlaintext as a file.";
+        type = types.package;
+        visible = false;
+        readOnly = true;
+      };
       order = lib.mkOption {
         description = "The order the sections are written.";
         type = types.listOf types.str;
@@ -91,7 +98,7 @@ in {
       )
       (builtins.listToAttrs sections)
     )
-    // {
+    // rec {
       _outPlaintext =
         lib.concatStringsSep
         cfg.sep
@@ -104,5 +111,6 @@ in {
             (cfg.order)
           )
         );
+      _outPlaintextFile = pkgs.writeText "my-resume" _outPlaintext;
     };
 }

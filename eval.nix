@@ -23,6 +23,7 @@ let
   testConfig = test.config.nixcv.test;
   examples = pkgs.lib.evalModules {
     modules = [
+      ({config, ...}: {config._module.args = {inherit pkgs;};})
       ./modules/nixcv.nix
       ./examples/basic.nix
     ];

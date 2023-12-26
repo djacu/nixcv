@@ -77,6 +77,19 @@
         };
       };
 
+      example =
+        (pkgs.lib.evalModules {
+          modules = [
+            ({config, ...}: {config._module.args = {inherit pkgs;};})
+            ./modules/nixcv.nix
+            ./examples/basic.nix
+          ];
+        })
+        .config
+        .nixcv
+        .basic
+        ._outPlaintextFile;
+
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
           builtins.removeAttrs

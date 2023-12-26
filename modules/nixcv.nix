@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   inherit (lib) types;
 in {
   options = {
@@ -6,7 +10,10 @@ in {
       description = "A CV.";
       type = types.attrsOf (
         types.submoduleWith {
-          modules = [./cv.nix];
+          modules = [
+            ./cv.nix
+            ({config, ...}: {config._module.args = {inherit pkgs;};})
+          ];
         }
       );
     };
