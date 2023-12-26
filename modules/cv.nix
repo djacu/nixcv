@@ -12,6 +12,10 @@
       value = ./sections/personal.nix;
     }
     {
+      name = "objective";
+      value = ./sections/objective.nix;
+    }
+    {
       name = "education";
       value = ./sections/education.nix;
     }

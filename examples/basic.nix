@@ -29,6 +29,24 @@
           }
         ];
       };
+      objective = {
+        header = "Objective";
+        headerFunc = lib.toUpper;
+        content = [
+          {
+            sections = [
+              "I want to do nix!"
+            ];
+          }
+          {
+            sections = [
+              "A lot of nix!"
+              "So much of it!"
+            ];
+            sep = "\n";
+          }
+        ];
+      };
       education = {
         header = "Education";
         headerFunc = lib.toUpper;
