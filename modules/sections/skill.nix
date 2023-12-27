@@ -26,6 +26,11 @@ in {
       default = ": ";
       example = " - ";
     };
+    keywordsSep = lib.mkOption {
+      description = "The separator between `keywords`.";
+      type = types.str;
+      default = ", ";
+    };
     keywords = lib.mkOption {
       description = "The skills for this category.";
       type = types.nullOr (types.listOf types.str);
@@ -49,6 +54,11 @@ in {
     _outPlaintext =
       cfg.label
       + cfg.sep
-      + (utils.concatCommaFiltered null cfg.keywords);
+      + (
+        utils.concatStringsSepFiltered
+        cfg.keywordsSep
+        null
+        cfg.keywords
+      );
   };
 }
