@@ -17,7 +17,7 @@
     - [x] MVP education module done
     - [ ] Add parsing for courses
     - [ ] Add parsing for scores
-    - [ ] Add a separator
+    - [x] ~~Add a separator~~
   - [ ] Experience
     - [x] MVP experience module done
   - [ ] Publications & Talks
@@ -25,7 +25,7 @@
     - [x] MVP reference module done
     - [x] MVP references module done
     - [x] Look at removing references (listOf reference) module as section takes over.
-    - [ ] Add a separator
+    - [x] ~~Add a separator~~
   - [ ] Section
     - [x] MVP section module done
   - [ ] Socials
