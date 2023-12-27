@@ -86,10 +86,6 @@ in {
       else if (builtins.isNull cfg.credential && builtins.isNull cfg.discipline)
       then null
       else cfg.credential + " in " + cfg.discipline;
-    _dates =
-      if (! builtins.isNull cfg.dates)
-      then cfg.dates._outPlaintext
-      else null;
     _outPlaintext =
       utils.concatNewlineFiltered
       null
@@ -97,7 +93,7 @@ in {
         cfg.organization
         cfg.url
         cfg._title
-        cfg._dates
+        (cfg.dates._outPlaintext or null)
         # FIXME: add scores and courses
       ];
   };
