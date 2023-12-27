@@ -40,5 +40,5 @@
   - [ ] Figure out how to build everything together without Nix complaining about duplicate options.
   - [ ] Some of the defaults need a defaultText with a literalExpression to render correctly. Same for example.
 - [ ] Flavors
-- [ ] Build plaintext doc
+- [x] Build plaintext doc
 - [ ] Build LaTeX doc
