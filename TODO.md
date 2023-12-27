@@ -34,8 +34,8 @@
     - [x] MVP skill module done
     - [x] MVP skills module done
     - [x] Look at removing skills (listOf skill) module as section takes over.
-    - [ ] Add more formatting options like a second separator between keywords.
-    - [ ] Let the label be empty and don't add the label separator if it is.
+    - [x] Add more formatting options like a second separator between keywords.
+    - [x] Let the label be empty and don't add the label separator if it is.
 - [ ] Docs
   - [ ] Figure out how to build everything together without Nix complaining about duplicate options.
   - [ ] Some of the defaults need a defaultText with a literalExpression to render correctly. Same for example.

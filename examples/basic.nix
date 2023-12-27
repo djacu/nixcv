@@ -135,6 +135,10 @@
             label = "Nix Development";
             keywords = ["Nixpkgs" "NixOS" "Modules"];
           }
+          {
+            keywords = ["Random" "Things" "I" "Like"];
+            keywordsSep = ".";
+          }
         ];
       };
       references = {

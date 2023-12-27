@@ -52,8 +52,11 @@ in {
   };
   config = {
     _outPlaintext =
-      cfg.label
-      + cfg.sep
+      (
+        if (builtins.isNull cfg.label)
+        then ""
+        else (cfg.label + cfg.sep)
+      )
       + (
         utils.concatStringsSepFiltered
         cfg.keywordsSep
