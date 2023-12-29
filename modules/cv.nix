@@ -93,7 +93,7 @@ in {
           name
           {
             _module.args = {modules = [value];};
-            content = [];
+            content = {};
           }
       )
       (builtins.listToAttrs sections)

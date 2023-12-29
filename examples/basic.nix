@@ -2,8 +2,8 @@
   nixcv = {
     basic = {
       personal = {
-        content = [
-          {
+        content = {
+          basic = {
             name = "John Doe";
             label = "Programmer";
             email = "john@doe.com";
@@ -26,32 +26,32 @@
                 }
               ];
             };
-          }
-        ];
+          };
+        };
       };
       objective = {
         header = "Objective";
         headerFunc = lib.toUpper;
-        content = [
-          {
+        content = {
+          "001" = {
             sections = [
               "I want to do nix!"
             ];
-          }
-          {
+          };
+          "002" = {
             sections = [
               "A lot of nix!"
               "So much of it!"
             ];
             sep = "\n";
-          }
-        ];
+          };
+        };
       };
       education = {
         header = "Education";
         headerFunc = lib.toUpper;
-        content = [
-          {
+        content = {
+          "77Bach" = {
             organization = "South Hemet Institute of Technology";
             discipline = "Software Development";
             credential = "Bachelor of Science";
@@ -67,8 +67,8 @@
                 day = 18;
               };
             };
-          }
-          {
+          };
+          "78Mast" = {
             organization = "South Hemet Institute of Technology";
             discipline = "Software Development";
             credential = "Master of Science";
@@ -79,14 +79,14 @@
                 day = 18;
               };
             };
-          }
-        ];
+          };
+        };
       };
       experience = {
         header = "Experience";
         headerFunc = lib.toUpper;
-        content = [
-          {
+        content = {
+          nixos-foundation = {
             organization = "The NixOS Foundation";
             position = "Software Engineer";
             location.userStr = "Remote";
@@ -101,14 +101,14 @@
                 ];
               }
             ];
-          }
-        ];
+          };
+        };
       };
       volunteer = {
         header = "Volunteer";
         headerFunc = lib.toUpper;
-        content = [
-          {
+        content = {
+          cat-lounge = {
             organization = "The Cat Lounge";
             position = "Volunteer";
             location = {
@@ -119,45 +119,45 @@
               postalCode = "64735";
             };
             summary = "I pet the kitties.";
-          }
-        ];
+          };
+        };
       };
       skills = {
         header = "Skills";
         headerFunc = lib.toUpper;
         sep = "\n";
-        content = [
-          {
+        content = {
+          web-dev = {
             label = "Web Development";
             keywords = ["HTML" "CSS" "JavaScript"];
-          }
-          {
+          };
+          nix-dev = {
             label = "Nix Development";
             keywords = ["Nixpkgs" "NixOS" "Modules"];
-          }
-          {
+          };
+          random = {
             keywords = ["Random" "Things" "I" "Like"];
             keywordsSep = ".";
-          }
-        ];
+          };
+        };
       };
       references = {
         header = "References";
         headerFunc = lib.toUpper;
-        content = [
-          {
+        content = {
+          john-doe = {
             name = "John Doe";
             organization = "The NixOS Foundation";
             phone = "123.456.7890";
             email = "johndoe@nixos.org";
-          }
-          {
+          };
+          jane-doe = {
             name = "Jane Doe";
             organization = "The NixOS Foundation";
             phone = "111.222.3333";
             email = "janedoe@nixos.org";
-          }
-        ];
+          };
+        };
       };
     };
   };

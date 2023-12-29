@@ -28,7 +28,7 @@ in {
     };
     content = lib.mkOption {
       description = "A list of module type.";
-      type = types.nullOr (types.listOf (types.submoduleWith {
+      type = types.nullOr (types.attrsOf (types.submoduleWith {
         inherit modules;
       }));
       default = null;
@@ -59,7 +59,7 @@ in {
         (
           builtins.map
           (x: x._outPlaintext)
-          cfg.content
+          (builtins.attrValues cfg.content)
         )
       );
   };
