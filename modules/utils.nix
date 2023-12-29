@@ -23,6 +23,27 @@
       xs;
 
   /*
+  Return all combinations of the input, including the identity.
+  Order does not matter, no repeated elements.
+
+  Type: combinations :: [a] -> [[a]]
+  Example:
+    combinations false ["a" "b" "c"]
+    => [ [ ] [ "a" ] [ "b" ] [ "a" "b" ] [ "c" ] [ "a" "c" ] [ "b" "c" ] [ "a" "b" "c" ] ]
+
+    combinations true ["a" "b" "c"]
+    => [ [ "a" ] [ "b" ] [ "a" "b" ] [ "c" ] [ "a" "c" ] [ "b" "c" ] [ "a" "b" "c" ] ]
+  */
+  combinations = noEmpty: xs: let
+    addElement = set: element:
+      set ++ builtins.map (e: [element] ++ e) set;
+    result = builtins.foldl' addElement [[]] xs;
+  in
+    if noEmpty
+    then builtins.tail result # Exclude the empty list from the result
+    else result;
+
+  /*
   Return the concatenated permutations of the input.
   All possible orderings, no repeated elements.
 
