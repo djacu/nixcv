@@ -20,6 +20,8 @@
     - [x] ~~Add a separator~~
   - [ ] Experience
     - [x] MVP experience module done
+    - [ ] Add a separator.
+    - [ ] Make roles a submodule.
   - [ ] Publications & Talks
   - [ ] Refernces
     - [x] MVP reference module done
@@ -36,6 +38,7 @@
     - [x] Look at removing skills (listOf skill) module as section takes over.
     - [x] Add more formatting options like a second separator between keywords.
     - [x] Let the label be empty and don't add the label separator if it is.
+    - [ ] Add a format option for skills
 - [ ] Docs
   - [ ] Figure out how to build everything together without Nix complaining about duplicate options.
   - [ ] Some of the defaults need a defaultText with a literalExpression to render correctly. Same for example.
