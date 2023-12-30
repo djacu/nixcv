@@ -1,17 +1,11 @@
 {...}: {
-  personal = {
-    content = [
-      {
-        order = [
-          "name"
-          "label"
-          "location"
-          "url"
-          "email"
-          "phone"
-          "profiles"
-        ];
-      }
-    ];
-  };
+  order = [
+    "name"
+    "label"
+    "location"
+    "url"
+    "email"
+    "phone"
+    "profiles"
+  ];
 }

@@ -25,13 +25,7 @@
   pathToFileName = x:
     lib.removeSuffix
     ".nix"
-    (
-      lib.last (
-        builtins.split
-        "/"
-        (builtins.toString x)
-      )
-    );
+    (builtins.baseNameOf x);
 
   fileNames =
     builtins.map
@@ -49,49 +43,75 @@
 
   allImports =
     builtins.map
-    (combo: {imports = [combo];})
-    allCombos;
+    lib.attrsets.mergeAttrsList
+    (
+      builtins.map
+      (
+        x:
+          builtins.map
+          (y: import y {})
+          x
+      )
+      allCombos
+    );
 
-  #allConfigs = lib.zipListsWith (a: b: {${a} = b;}) fileNames allImports;
   allConfigs =
     builtins.listToAttrs
     (
       lib.zipListsWith (a: b: {
         name = a;
-        value = b;
+        value = {personal.content.${a} = b;};
+        #value = {personal.content = b;};
       })
       fileNames
       allImports
     );
-in {
-  inherit
-    allCombos
-    fileNames
-    allImports
-    allConfigs
-    ;
-}
+in
+  # blah
+  {
+    inherit
+      #    allCombos
+      fileNames
+      #allImports
+      
+      allConfigs
+      ;
+  }
 #{
-#  options = {
-#    personal = lib.mkOption {
-#      type = types.submodule {
-#        options = (
-#          lib.genAttrs
-#          (builtins.attrNames allConfigs)
-#          (
-#            name:
-#              lib.mkOption {
-#                type = types.submoduleWith {
-#                  modules = [../../modules/sections/personal.nix];
-#                };
-#              }
-#          )
-#        );
-#      };
-#    };
-#  };
-#  config = {
-#    personal = allConfigs;
+#  personal-example = lib.evalModules {
+#    modules = [
+#      {
+#        options = {
+#          personal = lib.mkOption {
+#            type = types.submodule {
+#              options = (
+#                lib.genAttrs
+#                #(builtins.attrNames allConfigs)
+#                fileNames
+#                (
+#                  name:
+#                    lib.mkOption {
+#                      type = types.submoduleWith {
+#                        modules = [../../modules/sections/personal.nix];
+#                      };
+#                    }
+#                )
+#              );
+#            };
+#          };
+#        };
+#        #config = {
+#        #  personal = allConfigs;
+#        #};
+#        config = allConfigs;
+#        #config = {
+#        #  personal = {
+#        #    basic = {};
+#        #    basic-order = {};
+#        #  };
+#        #};
+#      }
+#    ];
 #  };
 #}
 
