@@ -76,7 +76,7 @@
           '';
         };
 
-        example =
+        exampleBasic =
           (pkgs.lib.evalModules {
             modules = [
               ({config, ...}: {config._module.args = {inherit pkgs;};})
@@ -87,6 +87,19 @@
           .config
           .nixcv
           .basic
+          ._outPlaintextFile;
+
+        exampleAllOptions =
+          (pkgs.lib.evalModules {
+            modules = [
+              ({config, ...}: {config._module.args = {inherit pkgs;};})
+              ./modules/nixcv.nix
+              ./examples/allOptions.nix
+            ];
+          })
+          .config
+          .nixcv
+          .allOptions
           ._outPlaintextFile;
       };
 
