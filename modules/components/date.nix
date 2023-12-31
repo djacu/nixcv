@@ -6,7 +6,7 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  utils = import ../utils.nix {inherit lib;};
+  utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
     day = lib.mkOption {
