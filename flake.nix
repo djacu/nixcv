@@ -12,6 +12,7 @@
   }:
     flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      lib = pkgs.lib;
       tex = pkgs.texlive.combine {
         inherit
           (pkgs.texlive)
@@ -40,68 +41,68 @@
           # {_module.check = false;}
         ];
       };
+      examples = lib.listToAttrs (
+        builtins.map
+        (
+          file:
+            lib.nameValuePair
+            ("example-" + (lib.removeSuffix ".nix" file))
+            (pkgs.lib.evalModules {
+              modules = [
+                ({config, ...}: {config._module.args = {inherit pkgs;};})
+                ./modules/nixcv.nix
+                ./examples/${file}
+              ];
+            })
+            .config
+            .nixcv
+            ."${lib.removeSuffix ".nix" file}"
+            ._outPlaintextFile
+        )
+        (builtins.attrNames (builtins.readDir ./examples))
+      );
     in {
-      packages = {
-        document = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "latex-demo-document";
-          src = self;
-          propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
-          phases = ["unpackPhase" "buildPhase" "installPhase"];
-          SCRIPT = ''
-            #!/bin/bash
-            prefix=${builtins.placeholder "out"}
-            export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
-            DIR=$(mktemp -d)
-            RES=$(pwd)/document.pdf
-            cd $prefix/share
-            mkdir -p "$DIR/.texcache/texmf-var"
-            env TEXMFHOME="$DIR/.cache" \
-                TEXMFVAR="$DIR/.cache/texmf-var" \
-              latexmk -interaction=nonstopmode -pdf -pdflatex \
-              -output-directory="$DIR" \
-              document.tex
-            mv "$DIR/document.pdf" $RES
-            rm -rf "$DIR"
-          '';
-          buildPhase = ''
-            printenv SCRIPT >latex-demo-document
-          '';
-          installPhase = ''
-            mkdir -p $out/{bin,share}
-            cp document.tex $out/share/document.tex
-            cp cv.tex $out/share/cv.tex
-            cp self.bib $out/share/self.bib
-            cp latex-demo-document $out/bin/latex-demo-document
-            chmod u+x $out/bin/latex-demo-document
-          '';
-        };
+      packages =
+        {
+          document = pkgs.stdenvNoCC.mkDerivation rec {
+            name = "latex-demo-document";
+            src = self;
+            propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
+            phases = ["unpackPhase" "buildPhase" "installPhase"];
+            SCRIPT = ''
+              #!/bin/bash
+              prefix=${builtins.placeholder "out"}
+              export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
+              DIR=$(mktemp -d)
+              RES=$(pwd)/document.pdf
+              cd $prefix/share
+              mkdir -p "$DIR/.texcache/texmf-var"
+              env TEXMFHOME="$DIR/.cache" \
+                  TEXMFVAR="$DIR/.cache/texmf-var" \
+                latexmk -interaction=nonstopmode -pdf -pdflatex \
+                -output-directory="$DIR" \
+                document.tex
+              mv "$DIR/document.pdf" $RES
+              rm -rf "$DIR"
+            '';
+            buildPhase = ''
+              printenv SCRIPT >latex-demo-document
+            '';
+            installPhase = ''
+              mkdir -p $out/{bin,share}
+              cp document.tex $out/share/document.tex
+              cp cv.tex $out/share/cv.tex
+              cp self.bib $out/share/self.bib
+              cp latex-demo-document $out/bin/latex-demo-document
+              chmod u+x $out/bin/latex-demo-document
+            '';
+          };
+        }
+        // examples;
 
-        exampleBasic =
-          (pkgs.lib.evalModules {
-            modules = [
-              ({config, ...}: {config._module.args = {inherit pkgs;};})
-              ./modules/nixcv.nix
-              ./examples/basic.nix
-            ];
-          })
-          .config
-          .nixcv
-          .basic
-          ._outPlaintextFile;
-
-        exampleAllOptions =
-          (pkgs.lib.evalModules {
-            modules = [
-              ({config, ...}: {config._module.args = {inherit pkgs;};})
-              ./modules/nixcv.nix
-              ./examples/allOptions.nix
-            ];
-          })
-          .config
-          .nixcv
-          .allOptions
-          ._outPlaintextFile;
-      };
+      checks =
+        {}
+        // examples;
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
