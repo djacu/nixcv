@@ -4,7 +4,7 @@ in {
   options = {
     nixcv = {
       test = {
-        skillsSection = lib.mkOption {
+        skillSection = lib.mkOption {
           description = "A references entry.";
           type = types.submodule {
             options = (
@@ -31,15 +31,17 @@ in {
   config = {
     nixcv = {
       test = {
-        skillsSection = {
+        skillSection = {
           basic = {
             header = "Skills";
             content = {
               web-dev = {
+                type = "skill";
                 label = "Web Development";
                 keywords = ["HTML" "CSS" "JavaScript"];
               };
               nix-dev = {
+                type = "skill";
                 label = "Nix Development";
                 keywords = ["Nixpkgs" "NixOS" "Modules"];
               };
@@ -50,11 +52,13 @@ in {
             header = "Skills";
             content = {
               web-dev = {
+                type = "skill";
                 label = "Web Development";
                 keywords = ["HTML" "CSS" "JavaScript"];
                 sep = " - ";
               };
               nix-dev = {
+                type = "skill";
                 label = "Nix Development";
                 keywords = ["Nixpkgs" "NixOS" "Modules"];
                 sep = " - ";
@@ -68,10 +72,12 @@ in {
             headerFunc = lib.toUpper;
             content = {
               web-dev = {
+                type = "skill";
                 label = "Web Development";
                 keywords = ["HTML" "CSS" "JavaScript"];
               };
               nix-dev = {
+                type = "skill";
                 label = "Nix Development";
                 keywords = ["Nixpkgs" "NixOS" "Modules"];
               };

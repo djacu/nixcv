@@ -8,6 +8,12 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["objective"];
+      default = "objective";
+      internal = true;
+      description = "Type";
+    };
     sections = lib.mkOption {
       description = "Paragraphs describing your objective.";
       type = types.nullOr (types.listOf types.str);

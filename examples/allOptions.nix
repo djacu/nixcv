@@ -4,6 +4,7 @@
       personal = {
         content = {
           basic = {
+            type = "personal";
             name = "John Doe";
             label = "Programmer";
             email = "john@doe.com";
@@ -35,11 +36,13 @@
         headerSep = "\n--------\n";
         content = {
           "001" = {
+            type = "objective";
             sections = [
               "I want to do nix!"
             ];
           };
           "002" = {
+            type = "objective";
             sections = [
               "A lot of nix!"
               "So much of it!"
@@ -53,6 +56,7 @@
         headerFunc = lib.toUpper;
         content = {
           "77Bach" = {
+            type = "education";
             organization = "South Hemet Institute of Technology";
             url = "https://www.southhemetit.edu/";
             discipline = "Software Development";
@@ -75,6 +79,7 @@
             ];
           };
           "78Mast" = {
+            type = "education";
             organization = "South Hemet Institute of Technology";
             discipline = "Software Development";
             credential = "Master of Science";
@@ -95,6 +100,7 @@
         sep = "\n---\n";
         content = {
           "1982-nixos-foundation" = {
+            type = "experience";
             organization = "The NixOS Foundation";
             position = "Software Engineer";
             location.userStr = "Remote";
@@ -128,6 +134,7 @@
             ];
           };
           "1980-guix-foundation" = {
+            type = "experience";
             organization = "The Guix Foundation";
             position = "Software Engineer";
             dates = {
@@ -156,6 +163,7 @@
         headerFunc = lib.toUpper;
         content = {
           cat-lounge = {
+            type = "experience";
             organization = "The Cat Lounge";
             position = "Volunteer";
             location = {
@@ -175,16 +183,19 @@
         sep = "\n";
         content = {
           web-dev = {
+            type = "skill";
             label = "Web Development";
             sep = " - ";
             keywords = ["HTML" "CSS" "JavaScript"];
           };
           nix-dev = {
+            type = "skill";
             label = "Nix Development";
             level = "Master";
             keywords = ["Nixpkgs" "NixOS" "Modules"];
           };
           random = {
+            type = "skill";
             keywords = ["Random" "Things" "I" "Like"];
             keywordsSep = ".";
           };
@@ -195,12 +206,14 @@
         headerFunc = lib.toUpper;
         content = {
           john-doe = {
+            type = "reference";
             name = "John Doe";
             organization = "The NixOS Foundation";
             phone = "123.456.7890";
             email = "johndoe@nixos.org";
           };
           jane-doe = {
+            type = "reference";
             name = "Jane Doe";
             organization = "The NixOS Foundation";
             phone = "111.222.3333";

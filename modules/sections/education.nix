@@ -8,6 +8,12 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["education"];
+      default = "education";
+      internal = true;
+      description = "Type";
+    };
     organization = lib.mkOption {
       description = "The name of the organization.";
       type = types.nullOr types.str;

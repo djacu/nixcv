@@ -8,6 +8,12 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["references"];
+      default = "references";
+      internal = true;
+      description = "Type";
+    };
     name = lib.mkOption {
       description = "The reference's name.";
       type = types.nullOr types.str;

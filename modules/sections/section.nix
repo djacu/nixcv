@@ -1,11 +1,27 @@
 {
   lib,
   config,
-  modules,
   ...
 }: let
   inherit (lib) types;
   cfg = config;
+  modulesLib = import ../../lib/modules.nix {inherit lib;};
+  sectionTypes = lib.listToAttrs (
+    builtins.map
+    (
+      file:
+        lib.nameValuePair
+        (lib.removeSuffix ".nix" file)
+        (types.submodule ./${file})
+    )
+    (
+      builtins.attrNames (
+        builtins.removeAttrs
+        (builtins.readDir ./.)
+        ["section.nix"]
+      )
+    )
+  );
 in {
   options = {
     header = lib.mkOption {
@@ -28,9 +44,11 @@ in {
     };
     content = lib.mkOption {
       description = "A list of module type.";
-      type = types.nullOr (types.attrsOf (types.submoduleWith {
-        inherit modules;
-      }));
+      type = types.nullOr (types.attrsOf (
+        modulesLib.taggedSubmodules {
+          types = sectionTypes;
+        }
+      ));
       default = null;
     };
     sep = lib.mkOption {

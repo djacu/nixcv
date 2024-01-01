@@ -12,6 +12,12 @@
   };
 in {
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["personal"];
+      default = "personal";
+      internal = true;
+      description = "Type";
+    };
     name = lib.mkOption {
       description = "Your full name.";
       type = types.nullOr types.str;

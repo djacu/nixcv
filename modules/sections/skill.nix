@@ -8,6 +8,12 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["skill"];
+      default = "skill";
+      internal = true;
+      description = "Type";
+    };
     label = lib.mkOption {
       description = "A category name for the skills.";
       type = types.nullOr types.str;
