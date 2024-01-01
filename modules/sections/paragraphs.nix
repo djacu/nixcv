@@ -9,13 +9,13 @@
 in {
   options = {
     type = lib.mkOption {
-      type = lib.types.enum ["objective"];
-      default = "objective";
+      type = lib.types.enum ["paragraphs"];
+      default = "paragraphs";
       internal = true;
       description = "Type";
     };
     sections = lib.mkOption {
-      description = "Paragraphs describing your objective.";
+      description = "Paragraphs describing whatever you want.";
       type = types.nullOr (types.listOf types.str);
       default = null;
       example = ''

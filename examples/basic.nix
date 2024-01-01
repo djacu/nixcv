@@ -36,13 +36,13 @@
           headerFunc = lib.toUpper;
           content = {
             "001" = {
-              type = "objective";
+              type = "paragraphs";
               sections = [
                 "I want to do nix!"
               ];
             };
             "002" = {
-              type = "objective";
+              type = "paragraphs";
               sections = [
                 "A lot of nix!"
                 "So much of it!"

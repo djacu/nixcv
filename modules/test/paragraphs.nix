@@ -4,8 +4,8 @@ in {
   options = {
     nixcv = {
       test = {
-        objective = lib.mkOption {
-          description = "An objective entry.";
+        paragraphs = lib.mkOption {
+          description = "A paragraphs entry.";
           type = types.submodule {
             options = (
               lib.genAttrs
@@ -17,7 +17,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../sections/objective.nix];
+                      modules = [../sections/paragraphs.nix];
                     };
                   }
               )
@@ -30,7 +30,7 @@ in {
   config = {
     nixcv = {
       test = {
-        objective = rec {
+        paragraphs = rec {
           basic = {
             sections = [
               "I want to do nix!"
@@ -43,7 +43,7 @@ in {
           sep =
             basic
             // {
-              sep = " - ";
+              sep = "\n---\n";
             };
         };
       };
