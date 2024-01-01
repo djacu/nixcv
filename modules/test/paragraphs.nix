@@ -32,13 +32,13 @@ in {
       test = {
         paragraphs = rec {
           basic = {
-            sections = [
-              "I want to do nix!"
-              ''
+            paragraphs = {
+              intro = "I want to do nix!";
+              more = ''
                 A lot of nix!
                 So much of it!
-              ''
-            ];
+              '';
+            };
           };
           sep =
             basic

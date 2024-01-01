@@ -14,9 +14,9 @@ in {
       internal = true;
       description = "Type";
     };
-    sections = lib.mkOption {
+    paragraphs = lib.mkOption {
       description = "Paragraphs describing whatever you want.";
-      type = types.nullOr (types.listOf types.str);
+      type = types.nullOr (types.attrsOf types.str);
       default = null;
       example = ''
         [
@@ -42,7 +42,7 @@ in {
       utils.concatStringsSepFiltered
       cfg.sep
       null
-      cfg.sections
+      (builtins.attrValues cfg.paragraphs)
     );
   };
 }

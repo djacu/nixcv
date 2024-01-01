@@ -37,16 +37,16 @@
           content = {
             "001" = {
               type = "paragraphs";
-              sections = [
-                "I want to do nix!"
-              ];
+              paragraphs = {
+                intro = "I want to do nix!";
+              };
             };
             "002" = {
               type = "paragraphs";
-              sections = [
-                "A lot of nix!"
-                "So much of it!"
-              ];
+              paragraphs = {
+                more01 = "A lot of nix!";
+                more02 = "So much of it!";
+              };
               sep = "\n";
             };
           };
