@@ -64,12 +64,6 @@ in {
         ]
       '';
     };
-    _dates = lib.mkOption {
-      description = "The date range";
-      type = types.nullOr types.str;
-      visible = false;
-      readOnly = true;
-    };
     _title = lib.mkOption {
       description = "The credential and discipline.";
       type = types.nullOr types.str;
