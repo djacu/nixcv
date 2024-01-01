@@ -6,111 +6,59 @@
 }: let
   inherit (lib) types;
   cfg = config;
-
-  sections = [
-    {
-      name = "personal";
-      value = ./sections/personal.nix;
-    }
-    {
-      name = "objective";
-      value = ./sections/objective.nix;
-    }
-    {
-      name = "education";
-      value = ./sections/education.nix;
-    }
-    {
-      name = "experience";
-      value = ./sections/experience.nix;
-    }
-    {
-      name = "volunteer";
-      value = ./sections/experience.nix;
-    }
-    {
-      name = "skills";
-      value = ./sections/skill.nix;
-    }
-    {
-      name = "references";
-      value = ./sections/reference.nix;
-    }
-  ];
 in {
-  options =
-    (
-      lib.mapAttrs'
-      (
-        name: value:
-          lib.nameValuePair
-          name
-          (lib.mkOption {
-            description = "The ${name} section.";
-            type = types.submoduleWith {
-              modules = [./sections/section.nix];
-            };
-            visible = "shallow";
-          })
-      )
-      (builtins.listToAttrs sections)
-    )
-    // {
-      sep = lib.mkOption {
-        description = "The separator between sections.";
-        type = types.str;
-        default = "\n\n";
-        example = "\n";
-      };
-      _outPlaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-      _outPlaintextFile = lib.mkOption {
-        description = "The _outPlaintext as a file.";
-        type = types.package;
-        visible = false;
-        readOnly = true;
-      };
-      order = lib.mkOption {
-        description = "The order the sections are written.";
-        type = types.listOf types.str;
-        default = (
-          builtins.map
-          (x: x.name)
-          sections
-        );
-      };
+  options = {
+    sections = lib.mkOption {
+      description = "The sections of the CV.";
+      type = types.nullOr (types.attrsOf (types.submoduleWith {
+        modules = [./sections/section.nix];
+      }));
+      default = null;
+      visible = "shallow";
     };
-  config =
-    (
-      lib.mapAttrs'
+    sep = lib.mkOption {
+      description = "The separator between sections.";
+      type = types.str;
+      default = "\n\n";
+      example = "\n";
+    };
+    _outPlaintext = lib.mkOption {
+      description = "This modules plaintext output.";
+      type = types.str;
+      visible = false;
+      readOnly = true;
+    };
+    _outPlaintextFile = lib.mkOption {
+      description = "The _outPlaintext as a file.";
+      type = types.package;
+      visible = false;
+      readOnly = true;
+    };
+    order = lib.mkOption {
+      description = "The order the sections are written.";
+      type = types.nullOr (types.listOf types.str);
+      default = null;
+    };
+  };
+  config = {
+    _outPlaintext =
+      lib.concatStringsSep
+      cfg.sep
       (
-        name: value:
-          lib.nameValuePair
-          name
-          {
-            _module.args = {modules = [value];};
-            content = {};
-          }
-      )
-      (builtins.listToAttrs sections)
-    )
-    // rec {
-      _outPlaintext =
-        lib.concatStringsSep
-        cfg.sep
+        builtins.filter
+        (x: x != "")
         (
-          builtins.filter
-          (x: x != "")
-          (
+          if (! builtins.isNull cfg.order)
+          then
             (builtins.map)
-            (x: cfg."${x}"._outPlaintext)
+            (y: cfg.sections."${y}"._outPlaintext or "")
             (cfg.order)
-          )
-        );
-      _outPlaintextFile = pkgs.writeText "my-resume" _outPlaintext;
-    };
+          else
+            (builtins.map)
+            (y: y._outPlaintext)
+            (builtins.attrValues cfg.sections or "")
+        )
+      );
+    _outPlaintextFile = pkgs.writeText "my-resume" cfg._outPlaintext;
+  };
 }
