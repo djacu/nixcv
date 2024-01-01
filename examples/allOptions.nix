@@ -1,6 +1,15 @@
 {lib, ...}: {
   nixcv = {
     allOptions = {
+      order = [
+        "personal"
+        "objective"
+        "education"
+        "experience"
+        "volunteer"
+        "skills"
+        "references"
+      ];
       sections = {
         personal = {
           content = {
