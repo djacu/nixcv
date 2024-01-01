@@ -22,6 +22,10 @@
     - [x] MVP experience module done
     - [ ] Add a separator.
     - [ ] Make roles a submodule.
+  - [ ] Paragraphs
+    - [x] MVP paragraphs module done
+  - [ ] Namedlist
+    - [x] MVP namedlist module done
   - [ ] Publications & Talks
   - [ ] Refernces
     - [x] MVP reference module done
