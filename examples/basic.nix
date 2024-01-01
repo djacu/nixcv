@@ -130,6 +130,27 @@
             };
           };
         };
+        extra = {
+          header = "Extra";
+          headerFunc = lib.toUpper;
+          content = {
+            foss = {
+              type = "namedlist";
+              name = "FOSS";
+              items = [
+                "Contributor to nixpkgs."
+                "On the NixOS foundation board."
+              ];
+            };
+            personal = {
+              type = "namedlist";
+              name = "Personal";
+              items = [
+                "Run my own server."
+              ];
+            };
+          };
+        };
         skills = {
           header = "Skills";
           headerFunc = lib.toUpper;
