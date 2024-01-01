@@ -11,7 +11,7 @@ in {
     sections = lib.mkOption {
       description = "The sections of the CV.";
       type = types.nullOr (types.attrsOf (types.submoduleWith {
-        modules = [./sections/section.nix];
+        modules = [./section.nix];
       }));
       default = null;
       visible = "shallow";

@@ -5,21 +5,17 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  modulesLib = import ../../lib/modules.nix {inherit lib;};
+  modulesLib = import ../lib/modules.nix {inherit lib;};
   sectionTypes = lib.listToAttrs (
     builtins.map
     (
       file:
         lib.nameValuePair
         (lib.removeSuffix ".nix" file)
-        (types.submodule ./${file})
+        (types.submodule ./sections/${file})
     )
     (
-      builtins.attrNames (
-        builtins.removeAttrs
-        (builtins.readDir ./.)
-        ["section.nix"]
-      )
+      builtins.attrNames (builtins.readDir ./sections)
     )
   );
 in {
