@@ -9,8 +9,8 @@
 in {
   options = {
     type = lib.mkOption {
-      type = lib.types.enum ["references"];
-      default = "references";
+      type = lib.types.enum ["reference"];
+      default = "reference";
       internal = true;
       description = "Type";
     };
