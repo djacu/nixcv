@@ -1,0 +1,55 @@
+# TODO
+
+- [ ] Modules
+  - [ ] Major
+    - [ ] Top Level CV
+      - [x] MVP CV working
+      - [x] Add format for ordering.
+      - [x] Make it so you can config multiple CVs (maybe attrsOf?).
+    - [ ] Section
+      - [x] MVP section module done
+  - [ ] Sections
+    - [ ] Bibliography
+      - [ ] MVP bibliography module done
+    - [ ] Education
+      - [x] MVP education module done
+      - [ ] Add parsing for courses
+      - [ ] Add parsing for scores
+      - [x] ~~Add a separator~~
+    - [ ] Experience
+      - [x] MVP experience module done
+      - [ ] Add a separator.
+      - [ ] Make roles a submodule.
+    - [ ] Namedlist
+      - [x] MVP namedlist module done
+    - [ ] Paragraphs
+      - [x] MVP paragraphs module done
+    - [ ] References
+      - [x] MVP reference module done
+      - [x] MVP references module done
+      - [x] Look at removing references (listOf reference) module as section takes over.
+      - [x] ~~Add a separator~~
+    - [ ] Skills
+      - [x] MVP skill module done
+      - [x] MVP skills module done
+      - [x] Look at removing skills (listOf skill) module as section takes over.
+      - [x] Add more formatting options like a second separator between keywords.
+      - [x] Let the label be empty and don't add the label separator if it is.
+      - [ ] Add a format option for skills
+  - [ ] Components
+    - [ ] Address
+      - [x] MVP address module done
+      - [x] Add a `sep` option.
+      - [ ] Consider a format submodule that will handle address formatting.
+    - [ ] Date
+      - [x] MVP date module done
+      - [x] MVP dateRange module done
+      - [ ] Consider a format submodule that will handle date formatting.
+    - [ ] Socials
+      - [x] MVP socials module done
+- [ ] Docs
+  - [ ] Figure out how to build everything together without Nix complaining about duplicate options.
+  - [ ] Some of the defaults need a defaultText with a literalExpression to render correctly. Same for example.
+- [ ] Flavors
+- [x] Build plaintext doc
+- [ ] Build LaTeX doc
