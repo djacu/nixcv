@@ -127,6 +127,12 @@ in {
       visible = false;
       readOnly = true;
     };
+    _outBibEntry = lib.mkOption {
+      description = "This modules biblatex entry output.";
+      type = types.str;
+      visible = false;
+      readOnly = true;
+    };
   };
   config = {
     _outPlaintext =
@@ -208,5 +214,23 @@ in {
           })
         ]
       );
+    _outBibEntry = let
+      allFields = (
+        lib.filterAttrs
+        (name: value: ! builtins.isNull value)
+        (cfg.requiredFields // cfg.optionalFields)
+      );
+      mappedFields = (
+        lib.mapAttrsToList
+        (name: value: "${name} = {${value}}")
+        allFields
+      );
+    in
+      (
+        lib.concatStringsSep
+        ",\n  "
+        (["@online{${cfg.entryKey}"] ++ mappedFields)
+      )
+      + ",\n}";
   };
 }

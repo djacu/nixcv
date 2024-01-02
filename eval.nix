@@ -28,6 +28,19 @@ let
     .nixcv
     .test;
 
+  test-bibentry =
+    (
+      pkgs.lib.evalModules
+      {
+        modules = [
+          ./modules/test/bibentry
+        ];
+      }
+    )
+    .config
+    .nixcv
+    .test;
+
   examples = pkgs.lib.evalModules {
     modules = [
       ({config, ...}: {config._module.args = {inherit pkgs;};})
@@ -48,6 +61,17 @@ in {
         )
       )
       test-plaintext
+    );
+    bibentry = (
+      builtins.mapAttrs
+      (
+        moduleName: moduleValue: (
+          pkgs.lib.mapAttrs'
+          (testName: testValue: pkgs.lib.nameValuePair testName (testValue._outBibEntry))
+          moduleValue
+        )
+      )
+      test-bibentry
     );
   };
   inherit examples;
