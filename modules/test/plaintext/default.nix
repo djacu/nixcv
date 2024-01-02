@@ -11,6 +11,7 @@
     ./personal.nix
     ./references.nix
     ./section.nix
+    ./skill.nix
     ./skills.nix
     ./socials.nix
   ];

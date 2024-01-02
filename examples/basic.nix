@@ -164,22 +164,23 @@
         skills = {
           header = "Skills";
           headerFunc = lib.toUpper;
-          sep = "\n";
           content = {
-            web-dev = {
-              type = "skill";
-              label = "Web Development";
-              keywords = ["HTML" "CSS" "JavaScript"];
-            };
-            nix-dev = {
-              type = "skill";
-              label = "Nix Development";
-              keywords = ["Nixpkgs" "NixOS" "Modules"];
-            };
-            random = {
-              type = "skill";
-              keywords = ["Random" "Things" "I" "Like"];
-              keywordsSep = ".";
+            skills = {
+              type = "skills";
+              skills = {
+                web-dev = {
+                  label = "Web Development";
+                  keywords = ["HTML" "CSS" "JavaScript"];
+                };
+                nix-dev = {
+                  label = "Nix Development";
+                  keywords = ["Nixpkgs" "NixOS" "Modules"];
+                };
+                random = {
+                  keywords = ["Random" "Things" "I" "Like"];
+                  keywordsSep = ".";
+                };
+              };
             };
           };
         };
