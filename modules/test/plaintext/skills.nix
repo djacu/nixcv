@@ -11,6 +11,7 @@ in {
               lib.genAttrs
               [
                 "basic"
+                "ordered"
               ]
               (
                 name:
@@ -29,7 +30,7 @@ in {
   config = {
     nixcv = {
       test = {
-        skills = {
+        skills = rec {
           basic = {
             skills = {
               web-dev = {
@@ -47,6 +48,11 @@ in {
               };
             };
           };
+          ordered =
+            basic
+            // {
+              order = ["nix-dev" "web-dev" "random"];
+            };
         };
       };
     };

@@ -32,6 +32,11 @@ in {
       default = "\n";
       example = "\n";
     };
+    order = lib.mkOption {
+      description = "The order the skills are written.";
+      type = types.nullOr (types.listOf types.str);
+      default = null;
+    };
 
     _outPlaintext = lib.mkOption {
       description = "This modules plaintext output.";
@@ -46,7 +51,17 @@ in {
       readOnly = true;
     };
   };
-  config = {
+  config = let
+    skillsOrdered =
+      if builtins.isNull cfg.order
+      then builtins.attrValues cfg.skills
+      else
+        (
+          builtins.map
+          (elem: cfg.skills.${elem})
+          cfg.order
+        );
+  in {
     _outPlaintext =
       utils.concatStringsSepFiltered
       cfg.sep
@@ -54,7 +69,7 @@ in {
       (
         builtins.map
         (skill: skill._outPlaintext)
-        (builtins.attrValues cfg.skills)
+        skillsOrdered
       );
     _outLatex =
       (
@@ -82,21 +97,25 @@ in {
                   ];
                 in (
                   if (lib.mod idx 2) == 0
-                  then [
-                    ""
-                    "\\begin{skillsEnv}"
-                    skillEntry
-                  ]
-                  else [
-                    ""
-                    "  \\columnbreak"
-                    ""
-                    skillEntry
-                    "\\end{skillsEnv}"
-                  ]
+                  then
+                    # Odd entry; begin skills env.
+                    [
+                      ""
+                      "\\begin{skillsEnv}"
+                      skillEntry
+                    ]
+                  else
+                    # Even entry; end skills env.
+                    [
+                      ""
+                      "  \\columnbreak"
+                      ""
+                      skillEntry
+                      "\\end{skillsEnv}"
+                    ]
                 )
               )
-              (builtins.attrValues cfg.skills)
+              skillsOrdered
             )
           )
         )
@@ -104,7 +123,7 @@ in {
       + (
         # If there is an odd number of skills, we need to close the skillsEnv.
         lib.optionalString
-        (lib.mod (builtins.length (builtins.attrValues cfg.skills)) 2 == 1)
+        (lib.mod (builtins.length skillsOrdered) 2 == 1)
         "\n\\end{skillsEnv}"
       );
   };
