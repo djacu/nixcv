@@ -72,6 +72,11 @@
               url = "https://www.southhemetit.edu/";
               discipline = "Software Development";
               credential = "Bachelor of Science";
+              location = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
               dates = {
                 start = {
                   year = 1977;
@@ -94,6 +99,11 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Master of Science";
+              location = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
               dates = {
                 start = {
                   year = 1978;

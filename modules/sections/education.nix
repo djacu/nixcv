@@ -20,6 +20,15 @@ in {
       default = null;
       example = "South Hemet Institute of Technology";
     };
+    location = lib.mkOption {
+      description = "The organization location or place where you studied.";
+      type = types.nullOr (types.submoduleWith {
+        modules = [
+          ../components/address.nix
+        ];
+      });
+      default = null;
+    };
     url = lib.mkOption {
       description = "The organization website.";
       type = types.nullOr types.str;
@@ -78,6 +87,7 @@ in {
       visible = false;
       readOnly = true;
     };
+
     _outPlaintext = lib.mkOption {
       description = "This modules plaintext output.";
       type = types.str;
@@ -91,9 +101,10 @@ in {
       null
       [
         cfg.organization
-        cfg.url
         cfg._title
+        (cfg.location._outPlaintext or null)
         (cfg.dates._outPlaintext or null)
+        cfg.url
         # FIXME: add scores and courses
       ];
   };
