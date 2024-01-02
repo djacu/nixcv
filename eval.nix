@@ -15,12 +15,19 @@ let
       ./myInfo.nix
     ];
   };
-  test = pkgs.lib.evalModules {
-    modules = [
-      ./modules/test
-    ];
-  };
-  testConfig = test.config.nixcv.test;
+  test-plaintext =
+    (
+      pkgs.lib.evalModules
+      {
+        modules = [
+          ./modules/test/plaintext
+        ];
+      }
+    )
+    .config
+    .nixcv
+    .test;
+
   examples = pkgs.lib.evalModules {
     modules = [
       ({config, ...}: {config._module.args = {inherit pkgs;};})
@@ -30,16 +37,18 @@ let
   };
 in {
   old = old.config.plaintext;
-  test = (
-    builtins.mapAttrs
-    (
-      moduleName: moduleValue: (
-        pkgs.lib.mapAttrs'
-        (testName: testValue: pkgs.lib.nameValuePair testName (testValue._outPlaintext))
-        moduleValue
+  test = {
+    plaintext = (
+      builtins.mapAttrs
+      (
+        moduleName: moduleValue: (
+          pkgs.lib.mapAttrs'
+          (testName: testValue: pkgs.lib.nameValuePair testName (testValue._outPlaintext))
+          moduleValue
+        )
       )
-    )
-    testConfig
-  );
+      test-plaintext
+    );
+  };
   inherit examples;
 }

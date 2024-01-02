@@ -22,7 +22,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../components/date.nix];
+                      modules = [../../components/date.nix];
                     };
                   }
               )
@@ -43,7 +43,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../components/dateRange.nix];
+                      modules = [../../components/dateRange.nix];
                     };
                   }
               )

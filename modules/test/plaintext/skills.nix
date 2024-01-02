@@ -4,18 +4,20 @@ in {
   options = {
     nixcv = {
       test = {
-        bib-online = lib.mkOption {
+        skill = lib.mkOption {
+          description = "A skill entry.";
           type = types.submodule {
             options = (
               lib.genAttrs
               [
                 "basic"
+                "sep"
               ]
               (
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../biblatex/online.nix];
+                      modules = [../../sections/skill.nix];
                     };
                   }
               )
@@ -28,20 +30,15 @@ in {
   config = {
     nixcv = {
       test = {
-        bib-online = {
+        skill = {
           basic = {
-            entryKey = "example";
-            requiredFields = {
-              author = "John Doe";
-              title = "How to use Nix";
-              date = "2022-04";
-            };
-            optionalFields = {
-              language = "English";
-              organization = "NixCon";
-              url = "https://nixcon.org/talks/how-to-use-nix";
-              keywords = "talk,nix";
-            };
+            label = "Web Development";
+            keywords = ["HTML" "CSS" "JavaScript"];
+          };
+          sep = {
+            label = "Web Development";
+            keywords = ["HTML" "CSS" "JavaScript"];
+            sep = " - ";
           };
         };
       };

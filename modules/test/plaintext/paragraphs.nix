@@ -17,7 +17,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../sections/paragraphs.nix];
+                      modules = [../../sections/paragraphs.nix];
                     };
                   }
               )

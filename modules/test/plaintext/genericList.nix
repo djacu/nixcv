@@ -3,7 +3,7 @@
   listInfo = {
     optionName = "profiles";
     description = "A list of social media profiles.";
-    subType = [../components/socials.nix];
+    subType = [../../components/socials.nix];
   };
 in {
   options = {
@@ -22,7 +22,7 @@ in {
                   lib.mkOption {
                     type = types.submoduleWith {
                       modules = [
-                        (import ../components/genericList.nix listInfo)
+                        (import ../../components/genericList.nix listInfo)
                       ];
                     };
                   }
