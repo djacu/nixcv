@@ -1,6 +1,7 @@
 {
   imports = [
     ./address.nix
+    ./bib-online.nix
     ./date.nix
     ./education.nix
     ./experience.nix

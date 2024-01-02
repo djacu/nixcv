@@ -4,20 +4,19 @@ in {
   options = {
     nixcv = {
       test = {
-        skill = lib.mkOption {
-          description = "A skill entry.";
+        reference = lib.mkOption {
+          description = "A reference entry.";
           type = types.submodule {
             options = (
               lib.genAttrs
               [
                 "basic"
-                "sep"
               ]
               (
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../sections/skill.nix];
+                      modules = [../../sections/reference.nix];
                     };
                   }
               )
@@ -30,15 +29,12 @@ in {
   config = {
     nixcv = {
       test = {
-        skill = {
+        reference = {
           basic = {
-            label = "Web Development";
-            keywords = ["HTML" "CSS" "JavaScript"];
-          };
-          sep = {
-            label = "Web Development";
-            keywords = ["HTML" "CSS" "JavaScript"];
-            sep = " - ";
+            name = "John Doe";
+            organization = "The NixOS Foundation";
+            phone = "123.456.7890";
+            email = "jdoe@nixos.org";
           };
         };
       };

@@ -19,7 +19,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../sections/namedlist.nix];
+                      modules = [../../sections/namedlist.nix];
                     };
                   }
               )

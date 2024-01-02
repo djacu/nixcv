@@ -4,8 +4,7 @@ in {
   options = {
     nixcv = {
       test = {
-        reference = lib.mkOption {
-          description = "A reference entry.";
+        bib-online = lib.mkOption {
           type = types.submodule {
             options = (
               lib.genAttrs
@@ -16,7 +15,7 @@ in {
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../sections/reference.nix];
+                      modules = [../../biblatex/online.nix];
                     };
                   }
               )
@@ -29,12 +28,20 @@ in {
   config = {
     nixcv = {
       test = {
-        reference = {
+        bib-online = {
           basic = {
-            name = "John Doe";
-            organization = "The NixOS Foundation";
-            phone = "123.456.7890";
-            email = "jdoe@nixos.org";
+            entryKey = "example";
+            requiredFields = {
+              author = "John Doe";
+              title = "How to use Nix";
+              date = "2022-04";
+            };
+            optionalFields = {
+              language = "English";
+              organization = "NixCon";
+              url = "https://nixcon.org/talks/how-to-use-nix";
+              keywords = "talk,nix";
+            };
           };
         };
       };
