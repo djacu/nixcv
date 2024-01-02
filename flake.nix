@@ -20,7 +20,6 @@
           latexmk
           biblatex
           biblatex-ieee
-          detex
           enumitem
           fontaxes
           hyperref
@@ -100,16 +99,6 @@
           };
         }
         // examples;
-
-      devShells = {
-        default = pkgs.mkShell {
-          buildInputs = [
-            tex
-            pkgs.biber
-            pkgs.pandoc
-          ];
-        };
-      };
 
       checks =
         {}
