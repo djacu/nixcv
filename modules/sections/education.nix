@@ -67,6 +67,14 @@ in {
     _title = lib.mkOption {
       description = "The credential and discipline.";
       type = types.nullOr types.str;
+      default =
+        if (builtins.isNull cfg.credential)
+        then cfg.discipline
+        else if (builtins.isNull cfg.discipline)
+        then cfg.credential
+        else if (builtins.isNull cfg.credential && builtins.isNull cfg.discipline)
+        then null
+        else cfg.credential + " in " + cfg.discipline;
       visible = false;
       readOnly = true;
     };
@@ -78,14 +86,6 @@ in {
     };
   };
   config = {
-    _title =
-      if (builtins.isNull cfg.credential)
-      then cfg.discipline
-      else if (builtins.isNull cfg.discipline)
-      then cfg.credential
-      else if (builtins.isNull cfg.credential && builtins.isNull cfg.discipline)
-      then null
-      else cfg.credential + " in " + cfg.discipline;
     _outPlaintext =
       utils.concatNewlineFiltered
       null
