@@ -36,6 +36,12 @@ in {
       visible = false;
       readOnly = true;
     };
+    _outLatex = lib.mkOption {
+      description = "This modules plaintext output.";
+      type = types.str;
+      visible = false;
+      readOnly = true;
+    };
   };
   config = {
     _outPlaintext = (
@@ -44,5 +50,17 @@ in {
       null
       (builtins.attrValues cfg.paragraphs)
     );
+    _outLatex =
+      utils.concatStringsSepFiltered
+      "\n"
+      ""
+      (
+        lib.flatten
+        [
+          "\\begin{blockquote}"
+          cfg._outPlaintext
+          "\\end{blockquote}"
+        ]
+      );
   };
 }
