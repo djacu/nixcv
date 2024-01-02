@@ -69,14 +69,23 @@ defernumbers=true,
 }
 
 %% education list
-\newlist{education}{itemize}{1}
-\setlist[education]{label={}, listparindent=1em}
-\newcommand{\educationInfo}[4]{
-    \item
-        \textbf{\large{#1}} \\
-        \textbf{#2} \\
-        #3 \\
-        \textit{#4}
+\newlist{education}{itemize}{2}
+\setlist[education, 1]{label={}, parsep=0em, itemsep=0.8em}
+\setlist[education, 2]{label={}, leftmargin=1em, nosep}
+\newcommand{\educationOrg}[1]{
+    \item \textbf{\large{#1}}
+}
+\newcommand{\educationCredentials}[1]{
+    \item \textbf{#1}
+}
+\newcommand{\educationLocation}[1]{
+    \item #1
+}
+\newcommand{\educationDates}[1]{
+    \item \textit{#1}
+}
+\newcommand{\educationMisc}[1]{
+    \item #1
 }
 
 %% experience list
