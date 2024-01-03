@@ -64,7 +64,7 @@ in {
     roles = lib.mkOption {
       description = "A collection of your roles and responsibilities.";
       type = types.nullOr (
-        types.listOf (
+        types.attrsOf (
           types.submoduleWith {
             modules = [
               ../components/role.nix
@@ -142,6 +142,13 @@ in {
                 (
                   builtins.map
                   (listelem: listelem._outPlaintext)
+                  elem
+                )
+              else if (builtins.typeOf elem == "set") && (! builtins.hasAttr "_outPlaintext" elem)
+              then
+                (
+                  lib.mapAttrsToList
+                  (name: value: value._outPlaintext)
                   elem
                 )
               else elem._outPlaintext

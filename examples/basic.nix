@@ -108,15 +108,15 @@
               location.userStr = "Remote";
               summary = "A did Nix stuff.";
               highlights = "Stabilized flakes.";
-              roles = [
-                {
+              roles = {
+                nix-dev = {
                   role = "Nix Dev";
                   responsibilities = [
                     "Make new nix things."
                     "Fix old nix things."
                   ];
-                }
-              ];
+                };
+              };
             };
           };
         };

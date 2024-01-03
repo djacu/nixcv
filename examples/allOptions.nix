@@ -136,22 +136,22 @@
               };
               summary = "A did Nix stuff.";
               highlights = "Stabilized flakes.";
-              roles = [
-                {
+              roles = {
+                nix-dev = {
                   role = "Nix Dev";
                   responsibilities = [
                     "Make new nix things."
                     "Fix old nix things."
                   ];
-                }
-                {
+                };
+                marketing = {
                   role = "Marketing";
                   responsibilities = [
                     "Look at me."
                     "I make the tweets now."
                   ];
-                }
-              ];
+                };
+              };
             };
             "1980-guix-foundation" = {
               type = "experience";
@@ -166,15 +166,15 @@
                 };
               };
               summary = "A did Guix stuff.";
-              roles = [
-                {
+              roles = {
+                guix-dev = {
                   role = "Guix Dev";
                   responsibilities = [
                     "Make new guix things."
                     "Fix old guix things."
                   ];
-                }
-              ];
+                };
+              };
             };
           };
         };
