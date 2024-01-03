@@ -63,18 +63,15 @@ in {
     };
     roles = lib.mkOption {
       description = "A collection of your roles and responsibilities.";
-      type = types.nullOr (types.listOf (types.submodule {
-        options = {
-          role = lib.mkOption {
-            description = "Your role.";
-            type = types.str;
-          };
-          responsibilities = lib.mkOption {
-            description = "Your responsibilities for this role.";
-            type = types.listOf types.str;
-          };
-        };
-      }));
+      type = types.nullOr (
+        types.listOf (
+          types.submoduleWith {
+            modules = [
+              ../components/role.nix
+            ];
+          }
+        )
+      );
       default = null;
     };
     order = lib.mkOption {
@@ -88,15 +85,8 @@ in {
         "dates"
         "summary"
         "highlights"
-        "_roles"
+        "roles"
       ];
-    };
-
-    _roles = lib.mkOption {
-      description = "The location.";
-      type = types.nullOr types.str;
-      visible = false;
-      readOnly = true;
     };
 
     _outPlaintext = lib.mkOption {
@@ -116,51 +106,48 @@ in {
         "_outPlaintext"
         "order"
         "type"
-        "role" # FIXME: remove after making a roles module
       ];
     plaintextOrdered =
       if builtins.isNull cfg.order
-      then builtins.attrValues cfgItems
+      then lib.attrsToList cfgItems
       else
         (
           builtins.map
-          (elem: cfgItems.${elem})
+          (elem: {
+            name = elem;
+            value = cfgItems.${elem};
+          })
           cfg.order
         );
+    plaintextFiltered = (
+      # remove the nulls
+      builtins.filter
+      (x: ! builtins.isNull x.value)
+      plaintextOrdered
+    );
   in {
-    _roles =
-      if (builtins.isNull cfg.roles)
-      then null
-      else
-        (
-          lib.concatMapStringsSep
-          "\n"
-          (
-            role:
-              utils.concatNewlineFiltered
-              null
-              [
-                ("Role in " + role.role + ".")
-                (
-                  utils.concatNewlineFiltered
-                  null
-                  role.responsibilities
-                )
-              ]
-          )
-          cfg.roles
-        );
-
     _outPlaintext = (
       lib.concatStringsSep
       "\n"
-      ( # get plaintext if its a submodule otherwise get the value
-        (builtins.map)
-        (x: x._outPlaintext or x)
-        ( # remove the nulls
-          builtins.filter
-          (x: ! builtins.isNull x)
-          plaintextOrdered
+      (
+        lib.flatten
+        (
+          builtins.map
+          (
+            elem: (
+              if builtins.typeOf elem == "string"
+              then elem
+              else if builtins.typeOf elem == "list"
+              then
+                (
+                  builtins.map
+                  (listelem: listelem._outPlaintext)
+                  elem
+                )
+              else elem._outPlaintext
+            )
+          )
+          (builtins.map (x: x.value) plaintextFiltered)
         )
       )
     );
