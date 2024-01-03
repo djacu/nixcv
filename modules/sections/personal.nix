@@ -37,12 +37,6 @@ in {
       default = null;
       example = "(123) 456-7890";
     };
-    url = lib.mkOption {
-      description = "Your website.";
-      type = types.nullOr types.str;
-      default = null;
-      example = "https://john.doe.com";
-    };
     location = lib.mkOption {
       description = "Your location information.";
       type = types.nullOr (types.submoduleWith {
@@ -68,10 +62,9 @@ in {
       default = [
         "name"
         "label"
-        "email"
-        "phone"
-        "url"
         "location"
+        "phone"
+        "email"
         "profiles"
       ];
     };

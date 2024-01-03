@@ -34,7 +34,6 @@ in {
             label = "Programmer";
             email = "john@doe.com";
             phone = "(123) 456-7890";
-            url = "https://john.doe.com";
             location = {
               street = "123 Nunya Drive Unit 42";
               city = "Clinton";
