@@ -26,7 +26,7 @@ in {
       example = "\n";
     };
     order = lib.mkOption {
-      description = "The order the skills are written.";
+      description = "The order the profiles are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
     };
@@ -37,10 +37,16 @@ in {
       visible = false;
       readOnly = true;
     };
+    _outLatex = lib.mkOption {
+      description = "This modules plaintext output.";
+      type = types.str;
+      visible = false;
+      readOnly = true;
+    };
   };
 
   config = let
-    profilesOrdered =
+    profilesOrdered = (
       if builtins.isNull cfg.order
       then builtins.attrValues cfg.profiles
       else
@@ -48,7 +54,8 @@ in {
           builtins.map
           (elem: cfg.profiles.${elem})
           cfg.order
-        );
+        )
+    );
   in {
     _outPlaintext = (
       utils.concatStringsSepFiltered
@@ -59,6 +66,12 @@ in {
         (x: x._outPlaintext)
         profilesOrdered
       )
+    );
+    _outLatex = (
+      lib.concatMapStringsSep
+      "\n"
+      (x: x._outLatex)
+      profilesOrdered
     );
   };
 }

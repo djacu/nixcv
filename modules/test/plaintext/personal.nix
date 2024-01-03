@@ -10,6 +10,7 @@ in {
               lib.genAttrs
               [
                 "basic"
+                "profiles-ordered"
               ]
               (
                 name:
@@ -28,7 +29,7 @@ in {
   config = {
     nixcv = {
       test = {
-        personal = {
+        personal = rec {
           basic = {
             name = "John Doe";
             label = "Programmer";
@@ -44,14 +45,38 @@ in {
             profiles = {
               profiles = {
                 github = {
+                  network = "github";
                   url = "https://github.com/jdoe";
                 };
+                linkedin = {
+                  network = "linkedin";
+                  url = "https://linkedin.com/in/jdoe";
+                };
                 mastodon = {
+                  network = "mastodon";
                   url = "https://mastodon.com/@jdoe";
+                };
+                personal = {
+                  network = "user";
+                  url = "https://jdoe.dev";
+                };
+                other = {
+                  url = "https://some.site/jdoe";
                 };
               };
             };
           };
+          profiles-ordered =
+            lib.recursiveUpdate
+            basic
+            {
+              profiles.order = [
+                "linkedin"
+                "github"
+                "personal"
+                "other"
+              ];
+            };
         };
       };
     };

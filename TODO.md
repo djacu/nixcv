@@ -31,7 +31,7 @@
       - [x] Add latex output
     - [ ] Personal
       - [x] MVP personal module done
-      - [ ] Add latex output
+      - [x] Add latex output
     - [ ] Reference
       - [x] MVP reference module done
       - [x] Add latex output
