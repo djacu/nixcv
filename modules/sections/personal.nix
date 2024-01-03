@@ -5,11 +5,6 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  listInfo = {
-    optionName = "socials";
-    description = "A list of social media profiles.";
-    subType = [../components/socials.nix];
-  };
 in {
   options = {
     type = lib.mkOption {
@@ -61,7 +56,7 @@ in {
       description = "Your social media profiles.";
       type = types.nullOr (types.submoduleWith {
         modules = [
-          (import ../components/genericList.nix listInfo)
+          ../components/profiles.nix
         ];
       });
       default = null;

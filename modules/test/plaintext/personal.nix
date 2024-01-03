@@ -43,14 +43,14 @@ in {
               postalCode = "64735";
             };
             profiles = {
-              socials = [
-                {
+              profiles = {
+                github = {
                   url = "https://github.com/jdoe";
-                }
-                {
+                };
+                mastodon = {
                   url = "https://mastodon.com/@jdoe";
-                }
-              ];
+                };
+              };
             };
           };
         };
