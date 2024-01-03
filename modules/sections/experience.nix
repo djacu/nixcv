@@ -77,24 +77,28 @@ in {
       }));
       default = null;
     };
-    _dates = lib.mkOption {
-      description = "The date range.";
-      type = types.nullOr types.str;
-      visible = false;
-      readOnly = true;
+    order = lib.mkOption {
+      description = "The order of the experience items.";
+      type = types.listOf types.str;
+      default = [
+        "organization"
+        "position"
+        "location"
+        "url"
+        "dates"
+        "summary"
+        "highlights"
+        "_roles"
+      ];
     };
-    _location = lib.mkOption {
-      description = "The location.";
-      type = types.nullOr types.str;
-      visible = false;
-      readOnly = true;
-    };
+
     _roles = lib.mkOption {
       description = "The location.";
       type = types.nullOr types.str;
       visible = false;
       readOnly = true;
     };
+
     _outPlaintext = lib.mkOption {
       description = "This modules plaintext output.";
       type = types.str;
@@ -102,15 +106,28 @@ in {
       readOnly = true;
     };
   };
-  config = {
-    _dates =
-      if (! builtins.isNull cfg.dates)
-      then cfg.dates._outPlaintext
-      else null;
-    _location =
-      if (! builtins.isNull cfg.location)
-      then cfg.location._outPlaintext
-      else null;
+  config = let
+    cfgItems =
+      builtins.removeAttrs
+      cfg
+      [
+        "_module"
+        "_outLatex"
+        "_outPlaintext"
+        "order"
+        "type"
+        "role" # FIXME: remove after making a roles module
+      ];
+    plaintextOrdered =
+      if builtins.isNull cfg.order
+      then builtins.attrValues cfgItems
+      else
+        (
+          builtins.map
+          (elem: cfgItems.${elem})
+          cfg.order
+        );
+  in {
     _roles =
       if (builtins.isNull cfg.roles)
       then null
@@ -134,18 +151,18 @@ in {
           cfg.roles
         );
 
-    _outPlaintext =
-      utils.concatNewlineFiltered
-      null
-      [
-        cfg.organization
-        cfg.position
-        cfg._location
-        cfg.url
-        cfg._dates
-        cfg.summary
-        cfg.highlights
-        cfg._roles
-      ];
+    _outPlaintext = (
+      lib.concatStringsSep
+      "\n"
+      ( # get plaintext if its a submodule otherwise get the value
+        (builtins.map)
+        (x: x._outPlaintext or x)
+        ( # remove the nulls
+          builtins.filter
+          (x: ! builtins.isNull x)
+          plaintextOrdered
+        )
+      )
+    );
   };
 }
