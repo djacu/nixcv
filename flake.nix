@@ -104,6 +104,8 @@
         {}
         // examples;
 
+      test = import ./test/plaintext {inherit lib;};
+
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
           builtins.removeAttrs
