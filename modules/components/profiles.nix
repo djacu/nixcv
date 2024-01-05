@@ -25,7 +25,7 @@ in {
       default = "\n";
       example = "\n";
     };
-    order = lib.mkOption {
+    profileOrder = lib.mkOption {
       description = "The order the profiles are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
@@ -49,13 +49,13 @@ in {
 
   config = let
     profilesOrdered = (
-      if builtins.isNull cfg.order
+      if builtins.isNull cfg.profileOrder
       then builtins.attrValues cfg.profiles
       else
         (
           builtins.map
           (elem: cfg.profiles.${elem})
-          cfg.order
+          cfg.profileOrder
         )
     );
   in {
