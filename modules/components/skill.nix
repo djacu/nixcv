@@ -26,7 +26,7 @@ in {
       default = null;
       example = "Master";
     };
-    sep = lib.mkOption {
+    labelSep = lib.mkOption {
       description = "The separator between the `label` and `keywords`.";
       type = types.str;
       default = ": ";
@@ -49,25 +49,29 @@ in {
         ]
       '';
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.skill = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext =
-      (
-        if (builtins.isNull cfg.label)
-        then ""
-        else (cfg.label + cfg.sep)
-      )
-      + (
-        utils.concatStringsSepFiltered
-        cfg.keywordsSep
-        null
-        cfg.keywords
-      );
+    _out.skill = {
+      plaintext =
+        (
+          if (builtins.isNull cfg.label)
+          then ""
+          else (cfg.label + cfg.labelSep)
+        )
+        + (
+          utils.concatStringsSepFiltered
+          cfg.keywordsSep
+          null
+          cfg.keywords
+        );
+    };
   };
 }

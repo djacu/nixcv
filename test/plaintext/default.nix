@@ -26,6 +26,7 @@
           ./date.nix
           ./dateRange.nix
           ./roles.nix
+          ./skill.nix
           ./social.nix
         ];
       })
