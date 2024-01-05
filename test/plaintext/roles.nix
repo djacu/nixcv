@@ -50,7 +50,7 @@ in {
           component
           // {
             sep = "\n\n";
-            order = [
+            roleOrder = [
               "nix-dev"
               "web-dev"
               "data-sci"

@@ -44,7 +44,7 @@ in {
         order =
           basic
           // {
-            order = [
+            profileOrder = [
               "github"
               "linkedin"
               "personal"
