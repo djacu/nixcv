@@ -73,7 +73,7 @@ in {
       latex = (
         lib.concatMapStringsSep
         "\n"
-        (x: x._out.social.patex)
+        (x: x._out.social.latex)
         profilesOrdered
       );
     };
