@@ -21,8 +21,8 @@ in {
       default = null;
       example = "South Hemet Institute of Technology";
     };
-    location = lib.mkOption {
-      description = "The organization location or place where you studied.";
+    address = lib.mkOption {
+      description = "The organization address or place where you studied.";
       type = types.nullOr (types.submoduleWith {
         modules = [
           ../components/address.nix
@@ -121,17 +121,19 @@ in {
       readOnly = true;
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
-    _outLatex = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.education = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = let
@@ -140,33 +142,35 @@ in {
       cfg
       (cfg._latexIgnoredFields ++ cfg._latexDedicatedFields);
   in {
-    _outPlaintext =
-      utils.concatNewlineFiltered
-      null
-      [
-        cfg.organization
-        cfg._title
-        (cfg.location._outPlaintext or null)
-        (cfg.dates._outPlaintext or null)
-        cfg.url
-        # FIXME: add scores and courses
-      ];
+    _out.education = {
+      plaintext =
+        utils.concatNewlineFiltered
+        null
+        [
+          cfg.organization
+          cfg._title
+          (cfg.address._out.address.plaintext or null)
+          (cfg.dates._out.dateRange.plaintext or null)
+          cfg.url
+          # FIXME: add scores and courses
+        ];
 
-    _outLatex = (
-      utils.concatStringsSepFiltered
-      "\n"
-      ""
-      [
-        "\\begin{education}"
-        (lib.optionalString (! builtins.isNull cfg.organization) "\\educationOrg{${cfg.organization}}")
-        "\\begin{education}"
-        (lib.optionalString (! builtins.isNull cfg._title) "\\educationTitle{${cfg._title}}")
-        (lib.optionalString (! builtins.isNull cfg.location) "\\educationLocation{${cfg.location._outPlaintext}}")
-        (lib.optionalString (! builtins.isNull cfg.dates) "\\educationDates{${cfg.dates._outPlaintext}}")
-        "\\end{education}"
-        "\\end{education}"
-      ]
-    );
-    # FIXME: loop over the miscFields (url, scores, and courses). need to figure out how to parse courses
+      latex = (
+        utils.concatStringsSepFiltered
+        "\n"
+        ""
+        [
+          "\\begin{education}"
+          (lib.optionalString (! builtins.isNull cfg.organization) "\\educationOrg{${cfg.organization}}")
+          "\\begin{education}"
+          (lib.optionalString (! builtins.isNull cfg._title) "\\educationTitle{${cfg._title}}")
+          (lib.optionalString (! builtins.isNull cfg.address) "\\educationLocation{${cfg.address._out.address.plaintext}}")
+          (lib.optionalString (! builtins.isNull cfg.dates) "\\educationDates{${cfg.dates._out.dateRange.plaintext}}")
+          "\\end{education}"
+          "\\end{education}"
+        ]
+      );
+      # FIXME: loop over the miscFields (url, scores, and courses). need to figure out how to parse courses
+    };
   };
 }
