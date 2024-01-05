@@ -26,6 +26,7 @@
           ./date.nix
           ./dateRange.nix
           ./roles.nix
+          ./social.nix
         ];
       })
       .config

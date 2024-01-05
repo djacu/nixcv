@@ -54,38 +54,42 @@ in {
       );
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules output.";
-      type = types.str;
-      readOnly = true;
-    };
-    _outLatex = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.social = {
+      plaintext = lib.mkOption {
+        description = "This modules output.";
+        type = types.str;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext = cfg.url;
-    _outLatex = let
-      icon =
-        if builtins.isNull cfg.network
-        then ""
-        else cfg.faicons.${cfg.network} or "";
-      text =
-        if (! builtins.isNull cfg.url) && (! builtins.isNull cfg.urlShort)
-        then "\\href{${cfg.url}}{${cfg.urlShort}}"
-        else if (! builtins.isNull cfg.url)
-        then cfg.url
-        else if (! builtins.isNull cfg.urlShort)
-        then cfg.urlShort
-        else if (! builtins.isNull cfg.username)
-        then cfg.username
-        else let
-          parents = utils.getSubmoduleParents options;
-        in
-          throw ''${parents} not defined corrently. One of "username", "url", or "urlShort" must be set.'';
-    in "  \\profileItem{${icon}}{${text}}";
+    _out.social = {
+      plaintext = cfg.url;
+      latex = let
+        icon =
+          if builtins.isNull cfg.network
+          then ""
+          else cfg.faicons.${cfg.network} or "";
+        text =
+          if (! builtins.isNull cfg.url) && (! builtins.isNull cfg.urlShort)
+          then "\\href{${cfg.url}}{${cfg.urlShort}}"
+          else if (! builtins.isNull cfg.url)
+          then cfg.url
+          else if (! builtins.isNull cfg.urlShort)
+          then cfg.urlShort
+          else if (! builtins.isNull cfg.username)
+          then cfg.username
+          else let
+            parents = utils.getSubmoduleParents options;
+          in
+            throw ''${parents} not defined corrently. One of "username", "url", or "urlShort" must be set.'';
+      in "  \\profileItem{${icon}}{${text}}";
+    };
   };
 }
