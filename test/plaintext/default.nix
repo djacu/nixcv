@@ -24,6 +24,7 @@
         modules = [
           ./address.nix
           ./date.nix
+          ./dateRange.nix
           ./roles.nix
         ];
       })
