@@ -28,6 +28,7 @@
           ./profiles.nix
           ./roles.nix
           ./skill.nix
+          ./skills.nix
           ./social.nix
         ];
       })
