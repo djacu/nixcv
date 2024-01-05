@@ -23,6 +23,7 @@
       (lib.evalModules {
         modules = [
           ./roles.nix
+          ./address.nix
         ];
       })
       .config
