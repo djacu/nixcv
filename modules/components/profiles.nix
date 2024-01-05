@@ -13,7 +13,7 @@ in {
       type = types.nullOr (
         types.attrsOf (types.submoduleWith {
           modules = [
-            ./socials.nix
+            ./social.nix
           ];
         })
       );
@@ -31,17 +31,19 @@ in {
       default = null;
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
-    _outLatex = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.profiles = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
 
@@ -57,21 +59,23 @@ in {
         )
     );
   in {
-    _outPlaintext = (
-      utils.concatStringsSepFiltered
-      cfg.sep
-      null
-      (
-        builtins.map
-        (x: x._outPlaintext)
+    _out.profiles = {
+      plaintext = (
+        utils.concatStringsSepFiltered
+        cfg.sep
+        null
+        (
+          builtins.map
+          (x: x._out.social.plaintext)
+          profilesOrdered
+        )
+      );
+      latex = (
+        lib.concatMapStringsSep
+        "\n"
+        (x: x._out.social.patex)
         profilesOrdered
-      )
-    );
-    _outLatex = (
-      lib.concatMapStringsSep
-      "\n"
-      (x: x._outLatex)
-      profilesOrdered
-    );
+      );
+    };
   };
 }

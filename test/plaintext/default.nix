@@ -25,6 +25,7 @@
           ./address.nix
           ./date.nix
           ./dateRange.nix
+          ./profiles.nix
           ./roles.nix
           ./skill.nix
           ./social.nix
