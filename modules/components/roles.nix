@@ -25,7 +25,7 @@ in {
       default = "\n";
       example = "\n";
     };
-    order = lib.mkOption {
+    roleOrder = lib.mkOption {
       description = "The order the roles are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
@@ -42,13 +42,13 @@ in {
   };
   config = let
     itemsOrdered = (
-      if builtins.isNull cfg.order
+      if builtins.isNull cfg.roleOrder
       then builtins.attrValues cfg.roles
       else
         (
           builtins.map
           (elem: cfg.roles.${elem})
-          cfg.order
+          cfg.roleOrder
         )
     );
   in {

@@ -26,6 +26,7 @@
           ./date.nix
           ./dateRange.nix
           ./education.nix
+          ./experience.nix
           ./personal.nix
           ./profiles.nix
           ./roles.nix
