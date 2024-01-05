@@ -22,8 +22,9 @@
     (
       (lib.evalModules {
         modules = [
-          ./roles.nix
           ./address.nix
+          ./date.nix
+          ./roles.nix
         ];
       })
       .config
