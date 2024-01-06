@@ -41,7 +41,7 @@ in {
     };
 
     _latexDedicatedFields = lib.mkOption {
-      description = "LaTeX fields with dedication commands.";
+      description = "Options with dedicated LaTeX commands.";
       type = types.listOf types.str;
       default = [
         "name"
@@ -51,7 +51,7 @@ in {
       internal = true;
     };
     _latexIgnoredFields = lib.mkOption {
-      description = "LaTeX fields with dedication commands.";
+      description = "Options that are internal and not needed for LaTeX.";
       type = types.listOf types.str;
       default =
         [
@@ -68,17 +68,19 @@ in {
       internal = true;
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
-    _outLatex = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.reference = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = let
@@ -87,34 +89,36 @@ in {
       cfg
       (cfg._latexIgnoredFields ++ cfg._latexDedicatedFields);
   in {
-    _outPlaintext =
-      utils.concatNewlineFiltered
-      null
-      [
-        cfg.name
-        cfg.organization
-        cfg.phone
-        cfg.email
-      ];
-    _outLatex =
-      utils.concatStringsSepFiltered
-      "\n"
-      ""
-      (
-        lib.flatten
+    _out.reference = {
+      plaintext =
+        utils.concatNewlineFiltered
+        null
         [
-          "\\begin{references}"
-          (lib.optionalString (! builtins.isNull cfg.name) "\\referenceName{${cfg.name}}")
-          "\\begin{references}"
-          (lib.optionalString (! builtins.isNull cfg.name) "\\referenceOrg{${cfg.organization}}")
-          (
-            builtins.map
-            (x: (lib.optionalString (! builtins.isNull cfg.${x}) "\\referenceContact{${cfg.${x}}}"))
-            (builtins.attrNames miscFields)
-          )
-          "\\end{references}"
-          "\\end{references}"
-        ]
-      );
+          cfg.name
+          cfg.organization
+          cfg.phone
+          cfg.email
+        ];
+      latex =
+        utils.concatStringsSepFiltered
+        "\n"
+        ""
+        (
+          lib.flatten
+          [
+            "\\begin{references}"
+            (lib.optionalString (! builtins.isNull cfg.name) "\\referenceName{${cfg.name}}")
+            "\\begin{references}"
+            (lib.optionalString (! builtins.isNull cfg.name) "\\referenceOrg{${cfg.organization}}")
+            (
+              builtins.map
+              (x: (lib.optionalString (! builtins.isNull cfg.${x}) "\\referenceContact{${cfg.${x}}}"))
+              (builtins.attrNames miscFields)
+            )
+            "\\end{references}"
+            "\\end{references}"
+          ]
+        );
+    };
   };
 }

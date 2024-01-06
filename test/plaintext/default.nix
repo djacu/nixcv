@@ -29,6 +29,7 @@
           ./experience.nix
           ./personal.nix
           ./profiles.nix
+          ./reference.nix
           ./roles.nix
           ./skill.nix
           ./skills.nix
