@@ -64,19 +64,7 @@ in {
       type = types.nullOr types.str;
       default = null;
     };
-    #roles = lib.mkOption {
-    #  description = "A collection of your roles and responsibilities.";
-    #  type = types.nullOr (
-    #    types.attrsOf (
-    #      types.submoduleWith {
-    #        modules = [
-    #          ../components/role.nix
-    #        ];
-    #      }
-    #    )
-    #  );
-    #  default = null;
-    #};
+
     order = lib.mkOption {
       description = "The order of the experience items.";
       type = types.listOf types.str;
@@ -144,7 +132,7 @@ in {
                 if builtins.typeOf opt.value == "string"
                 then opt.value
                 else if
-                  # the attrsOf submodule case like roles
+                  # the attrsOf submodule case
                   (
                     (builtins.typeOf opt.value == "set")
                     && (! builtins.hasAttr "_out" opt.value)
