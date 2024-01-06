@@ -44,7 +44,7 @@ in {
       default = null;
       example = "https://nixos.org/";
     };
-    dates = lib.mkOption {
+    dateRange = lib.mkOption {
       description = "The dates at this organization.";
       type = types.nullOr (types.submoduleWith {
         modules = [
@@ -85,7 +85,7 @@ in {
         "position"
         "address"
         "url"
-        "dates"
+        "dateRange"
         "summary"
         "highlights"
         "roles"

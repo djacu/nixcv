@@ -20,7 +20,7 @@
               label = "Programmer";
               email = "john@doe.com";
               phone = "(123) 456-7890";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -28,13 +28,11 @@
                 postalCode = "64735";
               };
               profiles = {
-                profiles = {
-                  github = {
-                    url = "https://github.com/jdoe";
-                  };
-                  mastodon = {
-                    url = "https://mastodon.com/@jdoe";
-                  };
+                github = {
+                  url = "https://github.com/jdoe";
+                };
+                mastodon = {
+                  url = "https://mastodon.com/@jdoe";
                 };
               };
             };
@@ -71,12 +69,12 @@
               url = "https://www.southhemetit.edu/";
               discipline = "Software Development";
               credential = "Bachelor of Science";
-              location = {
+              address = {
                 city = "Hemet";
                 state = "CA";
                 country = "USA";
               };
-              dates = {
+              dateRange = {
                 start = {
                   year = 1977;
                   month = 7;
@@ -98,12 +96,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Master of Science";
-              location = {
+              address = {
                 city = "Hemet";
                 state = "CA";
                 country = "USA";
               };
-              dates = {
+              dateRange = {
                 start = {
                   year = 1978;
                   month = 7;
@@ -123,9 +121,9 @@
               type = "experience";
               organization = "The NixOS Foundation";
               position = "Software Engineer";
-              location.userStr = "Remote";
+              address.userStr = "Remote";
               url = "https://nixos.org/";
-              dates = {
+              dateRange = {
                 start = {
                   year = 1982;
                 };
@@ -157,7 +155,7 @@
               type = "experience";
               organization = "The Guix Foundation";
               position = "Software Engineer";
-              dates = {
+              dateRange = {
                 start = {
                   year = 1980;
                 };
@@ -186,7 +184,7 @@
               type = "experience";
               organization = "The Cat Lounge";
               position = "Volunteer";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -226,19 +224,16 @@
               type = "skills";
               skills = {
                 web-dev = {
-                  type = "skill";
                   label = "Web Development";
-                  sep = " - ";
+                  labelSep = " - ";
                   keywords = ["HTML" "CSS" "JavaScript"];
                 };
                 nix-dev = {
-                  type = "skill";
                   label = "Nix Development";
                   level = "Master";
                   keywords = ["Nixpkgs" "NixOS" "Modules"];
                 };
                 random = {
-                  type = "skill";
                   keywords = ["Random" "Things" "I" "Like"];
                   keywordsSep = ".";
                 };

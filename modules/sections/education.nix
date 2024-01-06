@@ -48,7 +48,7 @@ in {
       default = null;
       example = "Bachelor";
     };
-    dates = lib.mkOption {
+    dateRange = lib.mkOption {
       description = "The dates at this organization.";
       type = types.nullOr (types.submoduleWith {
         modules = [
@@ -150,7 +150,7 @@ in {
           cfg.organization
           cfg._title
           (cfg.address._out.address.plaintext or null)
-          (cfg.dates._out.dateRange.plaintext or null)
+          (cfg.dateRange._out.dateRange.plaintext or null)
           cfg.url
           # FIXME: add scores and courses
         ];
@@ -165,7 +165,7 @@ in {
           "\\begin{education}"
           (lib.optionalString (! builtins.isNull cfg._title) "\\educationTitle{${cfg._title}}")
           (lib.optionalString (! builtins.isNull cfg.address) "\\educationLocation{${cfg.address._out.address.plaintext}}")
-          (lib.optionalString (! builtins.isNull cfg.dates) "\\educationDates{${cfg.dates._out.dateRange.plaintext}}")
+          (lib.optionalString (! builtins.isNull cfg.dateRange) "\\educationDates{${cfg.dates._out.dateRange.plaintext}}")
           "\\end{education}"
           "\\end{education}"
         ]

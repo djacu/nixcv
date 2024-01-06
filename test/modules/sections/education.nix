@@ -27,7 +27,7 @@ in {
             state = "CA";
             country = "USA";
           };
-          dates = {
+          dateRange = {
             start = {
               year = 1977;
               month = 7;
@@ -39,7 +39,7 @@ in {
           lib.recursiveUpdate
           enddate
           {
-            dates.end = {
+            dateRange.end = {
               year = 1978;
               month = 8;
               day = 18;

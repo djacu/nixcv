@@ -50,14 +50,15 @@
             (pkgs.lib.evalModules {
               modules = [
                 ({config, ...}: {config._module.args = {inherit pkgs;};})
-                ./modules/nixcv.nix
+                ./modules/toplevel/nixcv.nix
                 ./examples/${file}
               ];
             })
             .config
             .nixcv
             ."${lib.removeSuffix ".nix" file}"
-            ._outPlaintextFile
+            ._out
+            .plaintextFile
         )
         (builtins.attrNames (builtins.readDir ./examples))
       );

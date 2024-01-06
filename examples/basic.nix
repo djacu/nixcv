@@ -10,7 +10,7 @@
               label = "Programmer";
               email = "john@doe.com";
               phone = "(123) 456-7890";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -18,13 +18,11 @@
                 postalCode = "64735";
               };
               profiles = {
-                profiles = {
-                  github = {
-                    url = "https://github.com/jdoe";
-                  };
-                  mastodon = {
-                    url = "https://mastodon.com/@jdoe";
-                  };
+                github = {
+                  url = "https://github.com/jdoe";
+                };
+                mastodon = {
+                  url = "https://mastodon.com/@jdoe";
                 };
               };
             };
@@ -59,12 +57,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Bachelor of Science";
-              location = {
+              address = {
                 city = "Hemet";
                 state = "CA";
                 country = "USA";
               };
-              dates = {
+              dateRange = {
                 start = {
                   year = 1977;
                   month = 7;
@@ -82,12 +80,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Master of Science";
-              location = {
+              address = {
                 city = "Hemet";
                 state = "CA";
                 country = "USA";
               };
-              dates = {
+              dateRange = {
                 start = {
                   year = 1978;
                   month = 7;
@@ -105,7 +103,7 @@
               type = "experience";
               organization = "The NixOS Foundation";
               position = "Software Engineer";
-              location.userStr = "Remote";
+              address.userStr = "Remote";
               summary = "A did Nix stuff.";
               highlights = "Stabilized flakes.";
               roles = {
@@ -128,7 +126,7 @@
               type = "experience";
               organization = "The Cat Lounge";
               position = "Volunteer";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";

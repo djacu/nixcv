@@ -5,17 +5,17 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  modulesLib = import ../lib/modules.nix {inherit lib;};
+  modulesLib = import ../../lib/modules.nix {inherit lib;};
   sectionTypes = lib.listToAttrs (
     builtins.map
     (
       file:
         lib.nameValuePair
         (lib.removeSuffix ".nix" file)
-        (types.submodule ./sections/${file})
+        (types.submodule ../sections/${file})
     )
     (
-      builtins.attrNames (builtins.readDir ./sections)
+      builtins.attrNames (builtins.readDir ../sections)
     )
   );
 in {
@@ -53,28 +53,32 @@ in {
       default = "\n\n";
       example = "\n";
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext =
-      (
-        if (builtins.isNull cfg.header)
-        then ""
-        else (cfg.headerFunc cfg.header) + cfg.headerSep
-      )
-      + (
-        lib.concatStringsSep
-        cfg.sep
+    _out = {
+      plaintext =
         (
-          builtins.map
-          (x: x._outPlaintext)
-          (builtins.attrValues cfg.content)
+          if (builtins.isNull cfg.header)
+          then ""
+          else (cfg.headerFunc cfg.header) + cfg.headerSep
         )
-      );
+        + (
+          lib.concatStringsSep
+          cfg.sep
+          (
+            builtins.map
+            (x: x._out.${x.type}.plaintext)
+            (builtins.attrValues cfg.content)
+          )
+        );
+    };
   };
 }

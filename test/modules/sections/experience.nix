@@ -24,6 +24,15 @@ in {
           url = "https://nixos.org/";
           summary = "A did Nix stuff.";
           highlights = "Stabilized flakes.";
+          dateRange = {
+            start = {
+              year = 1982;
+            };
+            end = {
+              userStr = "Present";
+            };
+            sep = " to ";
+          };
           roles = {
             nix-dev = {
               role = "Nix Dev";
