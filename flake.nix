@@ -104,7 +104,7 @@
         {}
         // examples;
 
-      test = import ./test/plaintext {inherit lib;};
+      test = import ./test/plaintext.nix {inherit lib;};
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
