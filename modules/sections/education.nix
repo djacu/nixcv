@@ -165,7 +165,7 @@ in {
           "\\begin{education}"
           (lib.optionalString (! builtins.isNull cfg._title) "\\educationTitle{${cfg._title}}")
           (lib.optionalString (! builtins.isNull cfg.address) "\\educationLocation{${cfg.address._out.address.plaintext}}")
-          (lib.optionalString (! builtins.isNull cfg.dateRange) "\\educationDates{${cfg.dates._out.dateRange.plaintext}}")
+          (lib.optionalString (! builtins.isNull cfg.dateRange) "\\educationDates{${cfg.dateRange._out.dateRange.plaintext}}")
           "\\end{education}"
           "\\end{education}"
         ]

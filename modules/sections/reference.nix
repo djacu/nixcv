@@ -56,6 +56,7 @@ in {
       default =
         [
           "_module"
+          "_out"
         ]
         ++ (
           lib.attrNames (

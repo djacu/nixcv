@@ -61,7 +61,7 @@ in {
           lib.flatten
           [
             "\\begin{blockquote}"
-            cfg._outPlaintext
+            cfg._out.paragraphs.plaintext
             "\\end{blockquote}"
           ]
         );

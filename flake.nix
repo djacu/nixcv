@@ -105,7 +105,23 @@
         {}
         // examples;
 
-      test = import ./test/plaintext.nix {inherit lib;};
+      #test = import ./test/plaintext.nix {inherit lib;};
+      test = lib.listToAttrs (
+        builtins.map
+        (
+          file:
+            lib.nameValuePair
+            (lib.removeSuffix ".nix" file)
+            (import ./test/${file} {inherit lib;})
+        )
+        (
+          builtins.attrNames (
+            lib.filterAttrs
+            (name: value: value == "regular")
+            (builtins.readDir ./test)
+          )
+        )
+      );
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (
