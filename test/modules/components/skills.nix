@@ -1,12 +1,12 @@
 {lib, ...}: let
-  testUtils = import ../../lib/test.nix {inherit lib;};
+  testUtils = import ../../../lib/test.nix {inherit lib;};
 in {
   options = {
     test = {
       skills = lib.mkOption {
         type = (
           testUtils.createTestType
-          ../../modules/sections/skills.nix
+          ../../../modules/sections/skills.nix
           [
             "basic"
             "order"

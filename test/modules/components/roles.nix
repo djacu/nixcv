@@ -1,12 +1,12 @@
 {lib, ...}: let
-  testUtils = import ../../lib/test.nix {inherit lib;};
+  testUtils = import ../../../lib/test.nix {inherit lib;};
 in {
   options = {
     test = {
       roles = lib.mkOption {
         type = (
           testUtils.createTestType
-          ../../modules/components/roles.nix
+          ../../../modules/components/roles.nix
           [
             "component"
             "parent"

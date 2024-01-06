@@ -1,12 +1,12 @@
 {lib, ...}: let
-  testUtils = import ../../lib/test.nix {inherit lib;};
+  testUtils = import ../../../lib/test.nix {inherit lib;};
 in {
   options = {
     test = {
       dateRange = lib.mkOption {
         type = (
           testUtils.createTestType
-          ../../modules/components/dateRange.nix
+          ../../../modules/components/dateRange.nix
           [
             "basic"
             "separator"
