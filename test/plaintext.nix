@@ -27,7 +27,6 @@
         ./modules/components/profiles.nix
         ./modules/components/roles.nix
         ./modules/components/skill.nix
-        ./modules/components/skills.nix
         ./modules/components/social.nix
 
         ./modules/sections/education.nix
@@ -36,6 +35,7 @@
         ./modules/sections/paragraphs.nix
         ./modules/sections/personal.nix
         ./modules/sections/reference.nix
+        ./modules/sections/skills.nix
       ];
     })
     .config
