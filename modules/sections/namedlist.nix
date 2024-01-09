@@ -57,6 +57,12 @@ in {
         visible = false;
         readOnly = true;
       };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
@@ -99,6 +105,48 @@ in {
           [cfg.name concatItems];
       in
         concatNames;
+      latex = (
+        lib.concatStringsSep
+        "\n"
+        (
+          [
+            "\\begin{extra}"
+            "  \\extraName{${cfg.name}}"
+          ]
+          ++ (
+            if builtins.typeOf cfg.items == "set"
+            then
+              [
+                "  \\begin{extra}"
+              ]
+              ++ (
+                builtins.map
+                (item: "    \\extraItem{${item}}")
+                (builtins.attrValues cfg.items)
+              )
+              ++ [
+                "  \\end{extra}"
+              ]
+            else if builtins.typeOf cfg.items == "list"
+            then
+              [
+                "  \\begin{extra}"
+              ]
+              ++ (
+                builtins.map
+                (item: "    \\extraItem{${item}}")
+                cfg.items
+              )
+              ++ [
+                "  \\end{extra}"
+              ]
+            else []
+          )
+          ++ [
+            "\\end{extra}"
+          ]
+        )
+      );
     };
   };
 }
