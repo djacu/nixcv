@@ -37,17 +37,19 @@ in {
       default = null;
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
-    _outLatex = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.skills = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = let
@@ -61,69 +63,71 @@ in {
           cfg.order
         );
   in {
-    _outPlaintext =
-      utils.concatStringsSepFiltered
-      cfg.sep
-      ""
-      (
-        builtins.map
-        (skill: skill._outPlaintext)
-        skillsOrdered
-      );
-    _outLatex =
-      (
-        lib.concatStringsSep
-        "\n"
+    _out.skills = {
+      plaintext =
+        utils.concatStringsSepFiltered
+        cfg.sep
+        ""
         (
-          # cut off the first newline
-          lib.tail
+          builtins.map
+          (skill: skill._out.skill.plaintext)
+          skillsOrdered
+        );
+      latex =
+        (
+          lib.concatStringsSep
+          "\n"
           (
-            lib.flatten
+            # cut off the first newline
+            lib.tail
             (
-              lib.imap0
+              lib.flatten
               (
-                idx: skill: let
-                  keywordsList = (
-                    builtins.map
-                    (keyword: "    \\skillsKeyword{${keyword}}")
-                    skill.keywords
-                  );
-                  skillEntry = [
-                    "  \\begin{skills}"
-                    "    \\skillsName{${skill.label}}"
-                    keywordsList
-                    "  \\end{skills}"
-                  ];
-                in (
-                  if (lib.mod idx 2) == 0
-                  then
-                    # Odd entry; begin skills env.
-                    [
-                      ""
-                      "\\begin{skillsEnv}"
-                      skillEntry
-                    ]
-                  else
-                    # Even entry; end skills env.
-                    [
-                      ""
-                      "  \\columnbreak"
-                      ""
-                      skillEntry
-                      "\\end{skillsEnv}"
-                    ]
+                lib.imap0
+                (
+                  idx: skill: let
+                    keywordsList = (
+                      builtins.map
+                      (keyword: "    \\skillsKeyword{${keyword}}")
+                      skill.keywords
+                    );
+                    skillEntry = [
+                      "  \\begin{skills}"
+                      "    \\skillsName{${skill.label}}"
+                      keywordsList
+                      "  \\end{skills}"
+                    ];
+                  in (
+                    if (lib.mod idx 2) == 0
+                    then
+                      # Odd entry; begin skills env.
+                      [
+                        ""
+                        "\\begin{skillsEnv}"
+                        skillEntry
+                      ]
+                    else
+                      # Even entry; end skills env.
+                      [
+                        ""
+                        "  \\columnbreak"
+                        ""
+                        skillEntry
+                        "\\end{skillsEnv}"
+                      ]
+                  )
                 )
+                skillsOrdered
               )
-              skillsOrdered
             )
           )
         )
-      )
-      + (
-        # If there is an odd number of skills, we need to close the skillsEnv.
-        lib.optionalString
-        (lib.mod (builtins.length skillsOrdered) 2 == 1)
-        "\n\\end{skillsEnv}"
-      );
+        + (
+          # If there is an odd number of skills, we need to close the skillsEnv.
+          lib.optionalString
+          (lib.mod (builtins.length skillsOrdered) 2 == 1)
+          "\n\\end{skillsEnv}"
+        );
+    };
   };
 }

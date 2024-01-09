@@ -39,29 +39,35 @@ in {
       example = "\n";
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.role = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext =
-      lib.concatStringsSep
-      cfg.roleSep
-      [
-        (
-          (lib.optionalString (! builtins.isNull cfg.rolePrefix) (cfg.rolePrefix))
-          + cfg.role
-          + (lib.optionalString (! builtins.isNull cfg.roleSuffix) (cfg.roleSuffix))
-        )
-        (
-          utils.concatStringsSepFiltered
-          cfg.respSep
-          ""
-          cfg.responsibilities
-        )
-      ];
+    _out = {
+      role = {
+        plaintext =
+          lib.concatStringsSep
+          cfg.roleSep
+          [
+            (
+              (lib.optionalString (! builtins.isNull cfg.rolePrefix) (cfg.rolePrefix))
+              + cfg.role
+              + (lib.optionalString (! builtins.isNull cfg.roleSuffix) (cfg.roleSuffix))
+            )
+            (
+              utils.concatStringsSepFiltered
+              cfg.respSep
+              ""
+              cfg.responsibilities
+            )
+          ];
+      };
+    };
   };
 }

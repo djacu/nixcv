@@ -88,26 +88,30 @@ in {
       default = null;
       example = "Remote, USA";
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules output.";
-      type = types.str;
-      readOnly = true;
+    _out.address = {
+      plaintext = lib.mkOption {
+        description = "This modules output.";
+        type = types.str;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext =
-      if ! builtins.isNull cfg.userStr
-      then cfg.userStr
-      else
-        (
-          utils.concatStringsSepFiltered
-          cfg.sep
-          null
+    _out.address = {
+      plaintext =
+        if ! builtins.isNull cfg.userStr
+        then cfg.userStr
+        else
           (
-            builtins.map
-            (x: cfg.${x})
-            cfg.format
-          )
-        );
+            utils.concatStringsSepFiltered
+            cfg.sep
+            null
+            (
+              builtins.map
+              (x: cfg.${x})
+              cfg.format
+            )
+          );
+    };
   };
 }

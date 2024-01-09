@@ -8,37 +8,31 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   options = {
-    profiles = lib.mkOption {
-      description = "Your online profiles.";
+    roles = lib.mkOption {
+      description = "Your skills.";
       type = types.nullOr (
         types.attrsOf (types.submoduleWith {
           modules = [
-            ./social.nix
+            ./role.nix
           ];
         })
       );
       default = null;
     };
     sep = lib.mkOption {
-      description = "The separator list elements.";
+      description = "The separator between roles.";
       type = types.str;
       default = "\n";
       example = "\n";
     };
-    profileOrder = lib.mkOption {
-      description = "The order the profiles are written.";
+    roleOrder = lib.mkOption {
+      description = "The order the roles are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
     };
 
-    _out.profiles = {
+    _out.roles = {
       plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-      latex = lib.mkOption {
         description = "This modules plaintext output.";
         type = types.str;
         visible = false;
@@ -46,35 +40,28 @@ in {
       };
     };
   };
-
   config = let
-    profilesOrdered = (
-      if builtins.isNull cfg.profileOrder
-      then builtins.attrValues cfg.profiles
+    itemsOrdered = (
+      if builtins.isNull cfg.roleOrder
+      then builtins.attrValues cfg.roles
       else
         (
           builtins.map
-          (elem: cfg.profiles.${elem})
-          cfg.profileOrder
+          (elem: cfg.roles.${elem})
+          cfg.roleOrder
         )
     );
   in {
-    _out.profiles = {
+    _out.roles = {
       plaintext = (
         utils.concatStringsSepFiltered
         cfg.sep
-        null
+        ""
         (
           builtins.map
-          (x: x._out.social.plaintext)
-          profilesOrdered
+          (elem: elem._out.role.plaintext)
+          itemsOrdered
         )
-      );
-      latex = (
-        lib.concatMapStringsSep
-        "\n"
-        (x: x._out.social.latex)
-        profilesOrdered
       );
     };
   };

@@ -50,14 +50,15 @@
             (pkgs.lib.evalModules {
               modules = [
                 ({config, ...}: {config._module.args = {inherit pkgs;};})
-                ./modules/nixcv.nix
+                ./modules/toplevel/nixcv.nix
                 ./examples/${file}
               ];
             })
             .config
             .nixcv
             ."${lib.removeSuffix ".nix" file}"
-            ._outPlaintextFile
+            ._out
+            .plaintextFile
         )
         (builtins.attrNames (builtins.readDir ./examples))
       );
@@ -103,6 +104,24 @@
       checks =
         {}
         // examples;
+
+      #test = import ./test/plaintext.nix {inherit lib;};
+      test = lib.listToAttrs (
+        builtins.map
+        (
+          file:
+            lib.nameValuePair
+            (lib.removeSuffix ".nix" file)
+            (import ./test/${file} {inherit lib;})
+        )
+        (
+          builtins.attrNames (
+            lib.filterAttrs
+            (name: value: value == "regular")
+            (builtins.readDir ./test)
+          )
+        )
+      );
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (

@@ -121,11 +121,13 @@ in {
         };
       });
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.date = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
@@ -221,58 +223,60 @@ in {
         };
       };
     };
-    _outPlaintext =
-      if ! builtins.isNull cfg.userStr
-      then cfg.userStr
-      else if cfg.monthFormat == "int"
-      then let
-        lookup = {
-          d = cfg.day;
-          m = cfg.month;
-          y = cfg.year;
-        };
-      in
-        lib.concatStringsSep
-        cfg.sep
-        (
-          builtins.map
-          builtins.toString
+    _out.date = {
+      plaintext =
+        if ! builtins.isNull cfg.userStr
+        then cfg.userStr
+        else if cfg.monthFormat == "int"
+        then let
+          lookup = {
+            d = cfg.day;
+            m = cfg.month;
+            y = cfg.year;
+          };
+        in
+          lib.concatStringsSep
+          cfg.sep
+          (
+            builtins.map
+            builtins.toString
+            (
+              builtins.filter
+              (x: ! builtins.isNull x)
+              (
+                builtins.map
+                (x: lookup.${x})
+                (lib.stringToCharacters cfg.order)
+              )
+            )
+          )
+        else if (builtins.isNull cfg.month)
+        then let
+          parents = utils.getSubmoduleParents options;
+        in
+          throw ''
+            Value of ${parents}.month is not defined but ${parents}.monthFormat is set to "${cfg.monthFormat}".
+            Change monthFormat to "int" or set a value for month.''
+        else
+          lib.concatStringsSep
+          " "
           (
             builtins.filter
             (x: ! builtins.isNull x)
-            (
-              builtins.map
-              (x: lookup.${x})
-              (lib.stringToCharacters cfg.order)
-            )
-          )
-        )
-      else if (builtins.isNull cfg.month)
-      then let
-        parents = utils.getSubmoduleParents options;
-      in
-        throw ''
-          Value of ${parents}.month is not defined but ${parents}.monthFormat is set to "${cfg.monthFormat}".
-          Change monthFormat to "int" or set a value for month.''
-      else
-        lib.concatStringsSep
-        " "
-        (
-          builtins.filter
-          (x: ! builtins.isNull x)
-          [
-            (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
-            (
-              if (! builtins.isNull cfg.day)
-              then builtins.toString cfg.day + ","
-              else null
-            )
-            (
-              if (! builtins.isNull cfg.year)
-              then builtins.toString cfg.year
-              else null
-            )
-          ]
-        );
+            [
+              (cfg._months.${cfg.monthLanguage}.${cfg.monthFormat}.${builtins.toString cfg.month})
+              (
+                if (! builtins.isNull cfg.day)
+                then builtins.toString cfg.day + ","
+                else null
+              )
+              (
+                if (! builtins.isNull cfg.year)
+                then builtins.toString cfg.year
+                else null
+              )
+            ]
+          );
+    };
   };
 }

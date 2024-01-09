@@ -7,6 +7,9 @@
   cfg = config;
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
+  imports = [
+    ../components/roles.nix
+  ];
   options = {
     type = lib.mkOption {
       type = lib.types.enum ["experience"];
@@ -26,8 +29,8 @@ in {
       default = null;
       example = "Software Engineer";
     };
-    location = lib.mkOption {
-      description = "The organization location or place where you worked.";
+    address = lib.mkOption {
+      description = "The organization address or place where you worked.";
       type = types.nullOr (types.submoduleWith {
         modules = [
           ../components/address.nix
@@ -41,7 +44,7 @@ in {
       default = null;
       example = "https://nixos.org/";
     };
-    dates = lib.mkOption {
+    dateRange = lib.mkOption {
       description = "The dates at this organization.";
       type = types.nullOr (types.submoduleWith {
         modules = [
@@ -61,39 +64,29 @@ in {
       type = types.nullOr types.str;
       default = null;
     };
-    roles = lib.mkOption {
-      description = "A collection of your roles and responsibilities.";
-      type = types.nullOr (
-        types.attrsOf (
-          types.submoduleWith {
-            modules = [
-              ../components/role.nix
-            ];
-          }
-        )
-      );
-      default = null;
-    };
+
     order = lib.mkOption {
       description = "The order of the experience items.";
       type = types.listOf types.str;
       default = [
         "organization"
         "position"
-        "location"
+        "address"
         "url"
-        "dates"
+        "dateRange"
         "summary"
         "highlights"
         "roles"
       ];
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.experience = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = let
@@ -126,37 +119,40 @@ in {
       plaintextOrdered
     );
   in {
-    _outPlaintext = (
-      lib.concatStringsSep
-      "\n"
-      (
-        lib.flatten
+    _out.experience = {
+      plaintext = (
+        lib.concatStringsSep
+        "\n"
         (
-          builtins.map
+          lib.flatten
           (
-            elem: (
-              if builtins.typeOf elem == "string"
-              then elem
-              else if builtins.typeOf elem == "list"
-              then
-                (
-                  builtins.map
-                  (listelem: listelem._outPlaintext)
-                  elem
-                )
-              else if (builtins.typeOf elem == "set") && (! builtins.hasAttr "_outPlaintext" elem)
-              then
-                (
-                  lib.mapAttrsToList
-                  (name: value: value._outPlaintext)
-                  elem
-                )
-              else elem._outPlaintext
+            builtins.map
+            (
+              opt: (
+                if builtins.typeOf opt.value == "string"
+                then opt.value
+                else if
+                  # the attrsOf submodule case
+                  (
+                    (builtins.typeOf opt.value == "set")
+                    && (! builtins.hasAttr "_out" opt.value)
+                  )
+                then
+                  # for imported modules, access _out via cfg
+                  (
+                    lib.mapAttrsToList
+                    (name: value: cfg._out.${opt.name}.plaintext)
+                    opt.value
+                  )
+                else
+                  # a local submodule like address
+                  opt.value._out.${opt.name}.plaintext
+              )
             )
+            plaintextFiltered
           )
-          (builtins.map (x: x.value) plaintextFiltered)
         )
-      )
-    );
+      );
+    };
   };
 }
