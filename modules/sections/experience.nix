@@ -87,6 +87,12 @@ in {
         visible = false;
         readOnly = true;
       };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = let
@@ -152,6 +158,59 @@ in {
             plaintextFiltered
           )
         )
+      );
+      latex = builtins.trace cfg.roles (
+        utils.concatStringsSepFiltered
+        "\n"
+        ""
+        [
+          "\\begin{experience}"
+          (lib.optionalString (! builtins.isNull cfg.organization) "  \\experienceOrg{${cfg.organization}}")
+          "  \\begin{experience}"
+          (lib.optionalString (! builtins.isNull cfg.position) "    \\experiencePostion{${cfg.position}}")
+          (lib.optionalString (! builtins.isNull cfg.address) "    \\experienceLocation{${cfg.address._out.address.plaintext}}")
+          (lib.optionalString (! builtins.isNull cfg.dateRange) "    \\experienceDates{${cfg.dateRange._out.dateRange.plaintext}}")
+          (
+            lib.concatStringsSep
+            "\n"
+            (
+              lib.mapAttrsToList
+              (
+                name: value:
+                  lib.concatStringsSep
+                  "\n"
+                  (
+                    [
+                      "    \\begin{experience}"
+                      "      \\experienceRole{${value.role}}"
+                    ]
+                    ++ (
+                      if builtins.isNull value.responsibilities
+                      then []
+                      else
+                        (
+                          ["      \\begin{experience}"]
+                          ++ (
+                            builtins.map
+                            (
+                              resp: "        \\experienceTask{${resp}}"
+                            )
+                            value.responsibilities
+                          )
+                          ++ ["      \\end{experience}"]
+                        )
+                    )
+                    ++ [
+                      "    \\end{experience}"
+                    ]
+                  )
+              )
+              cfg.roles
+            )
+          )
+          "  \\end{experience}"
+          "\\end{experience}"
+        ]
       );
     };
   };

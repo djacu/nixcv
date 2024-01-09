@@ -31,7 +31,7 @@
         #./modules/components/social.nix
 
         ./modules/sections/education.nix
-        #./modules/sections/experience.nix
+        ./modules/sections/experience.nix
         #./modules/sections/namedlist.nix
         ./modules/sections/paragraphs.nix
         ./modules/sections/personal.nix
