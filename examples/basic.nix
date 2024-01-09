@@ -19,9 +19,11 @@
               };
               profiles = {
                 github = {
+                  network = "github";
                   url = "https://github.com/jdoe";
                 };
                 mastodon = {
+                  network = "mastodon";
                   url = "https://mastodon.com/@jdoe";
                 };
               };

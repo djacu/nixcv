@@ -34,7 +34,7 @@
         #./modules/sections/experience.nix
         #./modules/sections/namedlist.nix
         ./modules/sections/paragraphs.nix
-        #./modules/sections/personal.nix
+        ./modules/sections/personal.nix
         ./modules/sections/reference.nix
       ];
     })

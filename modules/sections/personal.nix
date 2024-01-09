@@ -85,6 +85,8 @@ in {
         "_module"
         "_out"
         "order"
+        "profileOrder"
+        "sep"
         "type"
       ];
     plaintextOrdered =
@@ -148,7 +150,7 @@ in {
         profileItems = (
           lib.mapAttrsToList
           (
-            opt: value:
+            opt: value: (
               if opt == "address"
               then "  \\profileItem{\\faIcon{map-marker-alt}}{${value._out.address.plaintext}}"
               else if opt == "phone"
@@ -156,8 +158,21 @@ in {
               else if opt == "email"
               then "  \\profileItem{\\faIcon{inbox}}{${value}}"
               else if opt == "profiles"
-              then value._out.profiles.latex
-              else throw "Something is wrong in the personal module. I probably got a bad order."
+              then
+                lib.concatStringsSep
+                "\n"
+                (
+                  lib.mapAttrsToList
+                  (name: value: value._out.social.latex)
+                  value
+                )
+              else
+                throw ''
+                  Something is wrong in the personal module.
+                  I probably got a bad order or there is an option not being filtered.
+                  I got an opt: ${opt} and value: ${lib.strings.escapeNixString value}.
+                ''
+            )
           )
           (
             # these are handled separately
