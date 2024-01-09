@@ -41,6 +41,18 @@ in {
         visible = false;
         readOnly = true;
       };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latexFile = lib.mkOption {
+        description = "The _out.latex as a file.";
+        type = types.package;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
@@ -64,6 +76,25 @@ in {
           )
         );
       plaintextFile = pkgs.writeText "my-resume" cfg._out.plaintext;
+      latex =
+        lib.concatStringsSep
+        cfg.sep
+        (
+          builtins.filter
+          (x: x != "")
+          (
+            if (! builtins.isNull cfg.order)
+            then
+              (builtins.map)
+              (y: cfg.sections."${y}"._out.latex or "")
+              (cfg.order)
+            else
+              (builtins.map)
+              (y: y._out.latex)
+              (builtins.attrValues cfg.sections or "")
+          )
+        );
+      latexFile = pkgs.writeText "my-resume" cfg._out.latex;
     };
   };
 }

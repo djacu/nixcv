@@ -93,7 +93,11 @@ in {
                     );
                     skillEntry = [
                       "  \\begin{skills}"
-                      "    \\skillsName{${skill.label}}"
+                      (
+                        lib.optionalString
+                        (! builtins.isNull skill.label)
+                        "    \\skillsName{${skill.label}}"
+                      )
                       keywordsList
                       "  \\end{skills}"
                     ];

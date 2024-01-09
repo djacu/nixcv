@@ -159,7 +159,7 @@ in {
           )
         )
       );
-      latex = builtins.trace cfg.roles (
+      latex = (
         utils.concatStringsSepFiltered
         "\n"
         ""
@@ -174,38 +174,41 @@ in {
             lib.concatStringsSep
             "\n"
             (
-              lib.mapAttrsToList
-              (
-                name: value:
-                  lib.concatStringsSep
-                  "\n"
-                  (
-                    [
-                      "    \\begin{experience}"
-                      "      \\experienceRole{${value.role}}"
-                    ]
-                    ++ (
-                      if builtins.isNull value.responsibilities
-                      then []
-                      else
-                        (
-                          ["      \\begin{experience}"]
-                          ++ (
-                            builtins.map
-                            (
-                              resp: "        \\experienceTask{${resp}}"
+              if (builtins.isNull cfg.roles)
+              then []
+              else
+                lib.mapAttrsToList
+                (
+                  name: value:
+                    lib.concatStringsSep
+                    "\n"
+                    (
+                      [
+                        "    \\begin{experience}"
+                        "      \\experienceRole{${value.role}}"
+                      ]
+                      ++ (
+                        if builtins.isNull value.responsibilities
+                        then []
+                        else
+                          (
+                            ["      \\begin{experience}"]
+                            ++ (
+                              builtins.map
+                              (
+                                resp: "        \\experienceTask{${resp}}"
+                              )
+                              value.responsibilities
                             )
-                            value.responsibilities
+                            ++ ["      \\end{experience}"]
                           )
-                          ++ ["      \\end{experience}"]
-                        )
+                      )
+                      ++ [
+                        "    \\end{experience}"
+                      ]
                     )
-                    ++ [
-                      "    \\end{experience}"
-                    ]
-                  )
-              )
-              cfg.roles
+                )
+                cfg.roles
             )
           )
           "  \\end{experience}"

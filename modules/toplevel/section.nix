@@ -60,6 +60,12 @@ in {
         visible = false;
         readOnly = true;
       };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
@@ -76,6 +82,21 @@ in {
           (
             builtins.map
             (x: x._out.${x.type}.plaintext)
+            (builtins.attrValues cfg.content)
+          )
+        );
+      latex =
+        (
+          if (builtins.isNull cfg.header)
+          then ""
+          else "\\section{${cfg.headerFunc cfg.header}}"
+        )
+        + (
+          lib.concatStringsSep
+          "\n"
+          (
+            builtins.map
+            (x: x._out.${x.type}.latex)
             (builtins.attrValues cfg.content)
           )
         );
