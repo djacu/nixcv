@@ -144,8 +144,8 @@ in {
       );
       latex = let
         nameAndLabel = [
-          (lib.optionalString (! builtins.isNull cfgItems.name) "\\textbf{\\Huge ${cfg.name}}")
-          (lib.optionalString (! builtins.isNull cfgItems.label) "\\textbf{\\Large\\vspace{0.7em}\\hspace{0.3em} ${cfg.label}}")
+          (lib.optionalString (! builtins.isNull cfgItems.name) "\\textbf{\\Huge ${cfg.name}}\n")
+          (lib.optionalString (! builtins.isNull cfgItems.label) "{\\Large\\vspace{0.7em}\\hspace{0.3em} ${cfg.label}}\n")
         ];
         profileItems = (
           lib.mapAttrsToList
