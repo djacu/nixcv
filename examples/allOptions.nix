@@ -42,6 +42,10 @@
           header = "Objective";
           headerFunc = lib.toUpper;
           headerSep = "\n--------\n";
+          order = [
+            "002"
+            "001"
+          ];
           content = {
             "001" = {
               type = "paragraphs";

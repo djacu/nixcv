@@ -53,6 +53,12 @@ in {
       default = "\n\n";
       example = "\n";
     };
+    order = lib.mkOption {
+      description = "The order the section contents are written.";
+      type = types.nullOr (types.listOf types.str);
+      default = null;
+    };
+
     _out = {
       plaintext = lib.mkOption {
         description = "This modules plaintext output.";
@@ -68,7 +74,17 @@ in {
       };
     };
   };
-  config = {
+  config = let
+    contentsOrdered =
+      if builtins.isNull cfg.order
+      then builtins.attrValues cfg.content
+      else
+        (
+          builtins.map
+          (elem: cfg.content.${elem})
+          cfg.order
+        );
+  in {
     _out = {
       plaintext =
         (
@@ -82,7 +98,7 @@ in {
           (
             builtins.map
             (x: x._out.${x.type}.plaintext)
-            (builtins.attrValues cfg.content)
+            contentsOrdered
           )
         );
       latex =
@@ -97,7 +113,7 @@ in {
           (
             builtins.map
             (x: x._out.${x.type}.latex)
-            (builtins.attrValues cfg.content)
+            contentsOrdered
           )
         );
     };
