@@ -80,19 +80,27 @@ in {
         lib.concatStringsSep
         cfg.sep
         (
-          builtins.filter
-          (x: x != "")
-          (
-            if (! builtins.isNull cfg.order)
-            then
-              (builtins.map)
-              (y: cfg.sections."${y}"._out.latex or "")
-              (cfg.order)
-            else
-              (builtins.map)
-              (y: y._out.latex)
-              (builtins.attrValues cfg.sections or "")
-          )
+          lib.flatten
+          [
+            "\\input{cv}"
+            "\\begin{document}"
+            (
+              builtins.filter
+              (x: x != "")
+              (
+                if (! builtins.isNull cfg.order)
+                then
+                  (builtins.map)
+                  (y: cfg.sections."${y}"._out.latex or "")
+                  (cfg.order)
+                else
+                  (builtins.map)
+                  (y: y._out.latex)
+                  (builtins.attrValues cfg.sections or "")
+              )
+            )
+            "\\end{document}"
+          ]
         );
       latexFile = pkgs.writeText "my-resume" cfg._out.latex;
     };
