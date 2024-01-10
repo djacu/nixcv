@@ -167,7 +167,7 @@ in {
           "\\begin{experience}"
           (lib.optionalString (! builtins.isNull cfg.organization) "  \\experienceOrg{${cfg.organization}}")
           "  \\begin{experience}"
-          (lib.optionalString (! builtins.isNull cfg.position) "    \\experiencePostion{${cfg.position}}")
+          (lib.optionalString (! builtins.isNull cfg.position) "    \\experiencePosition{${cfg.position}}")
           (lib.optionalString (! builtins.isNull cfg.address) "    \\experienceLocation{${cfg.address._out.address.plaintext}}")
           (lib.optionalString (! builtins.isNull cfg.dateRange) "    \\experienceDates{${cfg.dateRange._out.dateRange.plaintext}}")
           (
