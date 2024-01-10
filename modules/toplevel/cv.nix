@@ -75,7 +75,11 @@ in {
               (builtins.attrValues cfg.sections or "")
           )
         );
-      plaintextFile = pkgs.writeText "my-resume" cfg._out.plaintext;
+      plaintextFile = pkgs.writeTextFile {
+        name = "nixcv-plaintext-doc";
+        text = cfg._out.plaintext;
+        destination = "/document.txt";
+      };
       latex =
         lib.concatStringsSep
         cfg.sep
@@ -102,7 +106,11 @@ in {
             "\\end{document}"
           ]
         );
-      latexFile = pkgs.writeText "my-resume" cfg._out.latex;
+      latexFile = pkgs.writeTextFile {
+        name = "nixcv-latex-doc";
+        text = cfg._out.latex;
+        destination = "/document.tex";
+      };
     };
   };
 }
