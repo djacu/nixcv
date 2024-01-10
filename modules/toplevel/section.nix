@@ -89,7 +89,7 @@ in {
         (
           if (builtins.isNull cfg.header)
           then ""
-          else "\\section{${cfg.headerFunc cfg.header}}"
+          else "\\section{${cfg.headerFunc cfg.header}}\n\n"
         )
         + (
           lib.concatStringsSep
