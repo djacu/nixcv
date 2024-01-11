@@ -24,12 +24,6 @@ in {
       default = null;
     };
 
-    order = lib.mkOption {
-      description = "The order in which the contents are written.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
-    };
-
     _out = {
       plaintext = lib.mkOption {
         description = "This modules plaintext output.";
