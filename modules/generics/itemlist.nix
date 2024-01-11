@@ -21,6 +21,7 @@ in {
           types = {
             itemlist = types.submodule ./itemlist.nix;
             item = types.submodule ./item.nix;
+            items = types.submodule ./items.nix;
           };
         }
       ));

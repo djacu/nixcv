@@ -36,8 +36,12 @@
               type = "itemlist";
               content = {
                 responsibilities = {
-                  type = "item";
-                  content = "I make the Nix.";
+                  type = "items";
+                  content = [
+                    "I make the Nix."
+                    "I make the flakes."
+                    "I make users cry."
+                  ];
                 };
               };
             };
