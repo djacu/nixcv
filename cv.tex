@@ -69,27 +69,45 @@ defernumbers=true,
 }
 
 %% education list
-\newlist{education}{itemize}{1}
-\setlist[education]{label={}, listparindent=1em}
-\newcommand{\educationInfo}[4]{
-    \item
-        \textbf{\large{#1}} \\
-        \textbf{#2} \\
-        #3 \\
-        \textit{#4}
+\newlist{education}{itemize}{2}
+\setlist[education, 1]{label={}, parsep=0em, itemsep=0.8em}
+\setlist[education, 2]{label={}, leftmargin=1em, nosep}
+\newcommand{\educationOrg}[1]{
+    \item \textbf{\large{#1}}
+}
+\newcommand{\educationTitle}[1]{
+    \item \textbf{#1}
+}
+\newcommand{\educationLocation}[1]{
+    \item #1
+}
+\newcommand{\educationDates}[1]{
+    \item \textit{#1}
+}
+\newcommand{\educationMisc}[1]{
+    \item #1
 }
 
 %% experience list
-\newlist{experience}{itemize}{3}
-\setlist[experience, 1]{label={}, listparindent=1em}
-\setlist[experience, 2]{label=$\bullet$, listparindent=1em}
-\setlist[experience, 3]{label=\textbullet, leftmargin=3em, itemindent=-1em}
-\newcommand{\experienceInfo}[4]{
-    \item
-        \textbf{\large{#1}} \\
-        \textbf{#2} \\
-        #3 \\
-        \textit{#4}
+\newlist{experience}{itemize}{4}
+\setlist[experience, 1]{label={}, nosep}
+\setlist[experience, 2]{label={}, leftmargin=1em, nosep}
+\setlist[experience, 3]{label=$\bullet$, leftmargin=1.2em, topsep=0.9em}
+\setlist[experience, 4]{label=\textbullet, leftmargin=3em, topsep=0.4em, itemindent=-1em, rightmargin=2em}
+\newcommand{\experienceOrg}[1]{
+    \item \textbf{\large{#1}}
+}
+\newcommand{\experiencePosition}[1]{
+    \item \textbf{#1}
+}
+\newcommand{\experienceLocation}[1]{
+    \item #1
+}
+\newcommand{\experienceDates}[1]{
+    \item \textit{#1}
+}
+\newcommand{\experienceMisc}[1]{
+    \item #1
 }
 \newcommand{\experienceRole}[1]{
     \item #1
@@ -126,7 +144,7 @@ defernumbers=true,
 %% extra list
 \newlist{extra}{itemize}{2}
 \setlist[extra, 1]{label={}}
-\setlist[extra, 2]{label={$\bullet$}}
+\setlist[extra, 2]{label={$\bullet$}, rightmargin=2em}
 \newcommand{\extraName}[1]{
     \item\textbf{\large{#1}}
 }

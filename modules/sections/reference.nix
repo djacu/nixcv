@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  options,
   ...
 }: let
   inherit (lib) types;
@@ -38,22 +39,87 @@ in {
       default = null;
       example = "jdoe@nixos.org";
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
+
+    _latexDedicatedFields = lib.mkOption {
+      description = "Options with dedicated LaTeX commands.";
+      type = types.listOf types.str;
+      default = [
+        "name"
+        "organization"
+      ];
       visible = false;
-      readOnly = true;
+      internal = true;
+    };
+    _latexIgnoredFields = lib.mkOption {
+      description = "Options that are internal and not needed for LaTeX.";
+      type = types.listOf types.str;
+      default =
+        [
+          "_module"
+          "_out"
+        ]
+        ++ (
+          lib.attrNames (
+            lib.filterAttrs
+            (name: value: ! (value.visible or true) || (value.internal or false))
+            options
+          )
+        );
+      visible = false;
+      internal = true;
+    };
+
+    _out.reference = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
-  config = {
-    _outPlaintext =
-      utils.concatNewlineFiltered
-      null
-      [
-        cfg.name
-        cfg.organization
-        cfg.phone
-        cfg.email
-      ];
+  config = let
+    miscFields =
+      builtins.removeAttrs
+      cfg
+      (cfg._latexIgnoredFields ++ cfg._latexDedicatedFields);
+  in {
+    _out.reference = {
+      plaintext =
+        utils.concatNewlineFiltered
+        null
+        [
+          cfg.name
+          cfg.organization
+          cfg.phone
+          cfg.email
+        ];
+      latex =
+        utils.concatStringsSepFiltered
+        "\n"
+        ""
+        (
+          lib.flatten
+          [
+            "\\begin{references}"
+            (lib.optionalString (! builtins.isNull cfg.name) "\\referenceName{${cfg.name}}")
+            "\\begin{references}"
+            (lib.optionalString (! builtins.isNull cfg.name) "\\referenceOrg{${cfg.organization}}")
+            (
+              builtins.map
+              (x: (lib.optionalString (! builtins.isNull cfg.${x}) "\\referenceContact{${cfg.${x}}}"))
+              (builtins.attrNames miscFields)
+            )
+            "\\end{references}"
+            "\\end{references}"
+          ]
+        );
+    };
   };
 }

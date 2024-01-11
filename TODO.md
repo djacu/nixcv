@@ -11,27 +11,35 @@
   - [ ] Sections
     - [ ] Bibliography
       - [ ] MVP bibliography module done
+      - [ ] Add latex output
     - [ ] Education
       - [x] MVP education module done
+      - [x] Add latex output
       - [ ] Add parsing for courses
       - [ ] Add parsing for scores
       - [x] ~~Add a separator~~
     - [ ] Experience
       - [x] MVP experience module done
+      - [ ] Add latex output
       - [ ] Add a separator.
       - [ ] Make roles a submodule.
     - [ ] Namedlist
       - [x] MVP namedlist module done
+      - [ ] Add latex output
     - [ ] Paragraphs
       - [x] MVP paragraphs module done
-    - [ ] References
+      - [x] Add latex output
+    - [ ] Personal
+      - [x] MVP personal module done
+      - [x] Add latex output
+    - [ ] Reference
       - [x] MVP reference module done
-      - [x] MVP references module done
+      - [x] Add latex output
       - [x] Look at removing references (listOf reference) module as section takes over.
       - [x] ~~Add a separator~~
     - [ ] Skills
-      - [x] MVP skill module done
       - [x] MVP skills module done
+      - [x] Add latex output
       - [x] Look at removing skills (listOf skill) module as section takes over.
       - [x] Add more formatting options like a second separator between keywords.
       - [x] Let the label be empty and don't add the label separator if it is.
@@ -45,6 +53,8 @@
       - [x] MVP date module done
       - [x] MVP dateRange module done
       - [ ] Consider a format submodule that will handle date formatting.
+    - [ ] Skill
+      - [x] MVP skill module done
     - [ ] Socials
       - [x] MVP socials module done
 - [ ] Docs

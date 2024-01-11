@@ -20,8 +20,7 @@
               label = "Programmer";
               email = "john@doe.com";
               phone = "(123) 456-7890";
-              url = "https://john.doe.com";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -29,14 +28,12 @@
                 postalCode = "64735";
               };
               profiles = {
-                socials = [
-                  {
-                    url = "https://github.com/jdoe";
-                  }
-                  {
-                    url = "https://mastodon.com/@jdoe";
-                  }
-                ];
+                github = {
+                  url = "https://github.com/jdoe";
+                };
+                mastodon = {
+                  url = "https://mastodon.com/@jdoe";
+                };
               };
             };
           };
@@ -45,6 +42,10 @@
           header = "Objective";
           headerFunc = lib.toUpper;
           headerSep = "\n--------\n";
+          order = [
+            "002"
+            "001"
+          ];
           content = {
             "001" = {
               type = "paragraphs";
@@ -72,7 +73,12 @@
               url = "https://www.southhemetit.edu/";
               discipline = "Software Development";
               credential = "Bachelor of Science";
-              dates = {
+              address = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
+              dateRange = {
                 start = {
                   year = 1977;
                   month = 7;
@@ -94,7 +100,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Master of Science";
-              dates = {
+              address = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
+              dateRange = {
                 start = {
                   year = 1978;
                   month = 7;
@@ -114,9 +125,9 @@
               type = "experience";
               organization = "The NixOS Foundation";
               position = "Software Engineer";
-              location.userStr = "Remote";
+              address.userStr = "Remote";
               url = "https://nixos.org/";
-              dates = {
+              dateRange = {
                 start = {
                   year = 1982;
                 };
@@ -127,28 +138,28 @@
               };
               summary = "A did Nix stuff.";
               highlights = "Stabilized flakes.";
-              roles = [
-                {
+              roles = {
+                nix-dev = {
                   role = "Nix Dev";
                   responsibilities = [
                     "Make new nix things."
                     "Fix old nix things."
                   ];
-                }
-                {
+                };
+                marketing = {
                   role = "Marketing";
                   responsibilities = [
                     "Look at me."
                     "I make the tweets now."
                   ];
-                }
-              ];
+                };
+              };
             };
             "1980-guix-foundation" = {
               type = "experience";
               organization = "The Guix Foundation";
               position = "Software Engineer";
-              dates = {
+              dateRange = {
                 start = {
                   year = 1980;
                 };
@@ -157,15 +168,15 @@
                 };
               };
               summary = "A did Guix stuff.";
-              roles = [
-                {
+              roles = {
+                guix-dev = {
                   role = "Guix Dev";
                   responsibilities = [
                     "Make new guix things."
                     "Fix old guix things."
                   ];
-                }
-              ];
+                };
+              };
             };
           };
         };
@@ -177,7 +188,7 @@
               type = "experience";
               organization = "The Cat Lounge";
               position = "Volunteer";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -212,24 +223,25 @@
         skills = {
           header = "Skills";
           headerFunc = lib.toUpper;
-          sep = "\n";
           content = {
-            web-dev = {
-              type = "skill";
-              label = "Web Development";
-              sep = " - ";
-              keywords = ["HTML" "CSS" "JavaScript"];
-            };
-            nix-dev = {
-              type = "skill";
-              label = "Nix Development";
-              level = "Master";
-              keywords = ["Nixpkgs" "NixOS" "Modules"];
-            };
-            random = {
-              type = "skill";
-              keywords = ["Random" "Things" "I" "Like"];
-              keywordsSep = ".";
+            skills = {
+              type = "skills";
+              skills = {
+                web-dev = {
+                  label = "Web Development";
+                  labelSep = " - ";
+                  keywords = ["HTML" "CSS" "JavaScript"];
+                };
+                nix-dev = {
+                  label = "Nix Development";
+                  level = "Master";
+                  keywords = ["Nixpkgs" "NixOS" "Modules"];
+                };
+                random = {
+                  keywords = ["Random" "Things" "I" "Like"];
+                  keywordsSep = ".";
+                };
+              };
             };
           };
         };

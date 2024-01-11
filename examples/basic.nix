@@ -10,8 +10,7 @@
               label = "Programmer";
               email = "john@doe.com";
               phone = "(123) 456-7890";
-              url = "https://john.doe.com";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -19,14 +18,14 @@
                 postalCode = "64735";
               };
               profiles = {
-                socials = [
-                  {
-                    url = "https://github.com/jdoe";
-                  }
-                  {
-                    url = "https://mastodon.com/@jdoe";
-                  }
-                ];
+                github = {
+                  network = "github";
+                  url = "https://github.com/jdoe";
+                };
+                mastodon = {
+                  network = "mastodon";
+                  url = "https://mastodon.com/@jdoe";
+                };
               };
             };
           };
@@ -60,7 +59,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Bachelor of Science";
-              dates = {
+              address = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
+              dateRange = {
                 start = {
                   year = 1977;
                   month = 7;
@@ -78,7 +82,12 @@
               organization = "South Hemet Institute of Technology";
               discipline = "Software Development";
               credential = "Master of Science";
-              dates = {
+              address = {
+                city = "Hemet";
+                state = "CA";
+                country = "USA";
+              };
+              dateRange = {
                 start = {
                   year = 1978;
                   month = 7;
@@ -96,18 +105,18 @@
               type = "experience";
               organization = "The NixOS Foundation";
               position = "Software Engineer";
-              location.userStr = "Remote";
+              address.userStr = "Remote";
               summary = "A did Nix stuff.";
               highlights = "Stabilized flakes.";
-              roles = [
-                {
+              roles = {
+                nix-dev = {
                   role = "Nix Dev";
                   responsibilities = [
                     "Make new nix things."
                     "Fix old nix things."
                   ];
-                }
-              ];
+                };
+              };
             };
           };
         };
@@ -119,7 +128,7 @@
               type = "experience";
               organization = "The Cat Lounge";
               position = "Volunteer";
-              location = {
+              address = {
                 street = "123 Nunya Drive Unit 42";
                 city = "Clinton";
                 state = "MI";
@@ -154,22 +163,23 @@
         skills = {
           header = "Skills";
           headerFunc = lib.toUpper;
-          sep = "\n";
           content = {
-            web-dev = {
-              type = "skill";
-              label = "Web Development";
-              keywords = ["HTML" "CSS" "JavaScript"];
-            };
-            nix-dev = {
-              type = "skill";
-              label = "Nix Development";
-              keywords = ["Nixpkgs" "NixOS" "Modules"];
-            };
-            random = {
-              type = "skill";
-              keywords = ["Random" "Things" "I" "Like"];
-              keywordsSep = ".";
+            skills = {
+              type = "skills";
+              skills = {
+                web-dev = {
+                  label = "Web Development";
+                  keywords = ["HTML" "CSS" "JavaScript"];
+                };
+                nix-dev = {
+                  label = "Nix Development";
+                  keywords = ["Nixpkgs" "NixOS" "Modules"];
+                };
+                random = {
+                  keywords = ["Random" "Things" "I" "Like"];
+                  keywordsSep = ".";
+                };
+              };
             };
           };
         };

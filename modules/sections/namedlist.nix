@@ -50,51 +50,103 @@ in {
       default = "\n";
       example = "\n";
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.namedlist = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext = let
-      parsedItems = (
-        if (builtins.typeOf cfg.items == "set")
-        then builtins.attrValues cfg.items
-        else if (builtins.typeOf cfg.items == "list")
-        then cfg.items
-        else null
-      );
-      concatLabels =
-        if (! builtins.isNull cfg.label)
-        then
-          (
-            builtins.map
+    _out.namedlist = {
+      plaintext = let
+        parsedItems = (
+          if (builtins.typeOf cfg.items == "set")
+          then builtins.attrValues cfg.items
+          else if (builtins.typeOf cfg.items == "list")
+          then cfg.items
+          else null
+        );
+        concatLabels =
+          if (! builtins.isNull cfg.label)
+          then
             (
-              x:
-                utils.concatStringsSepFiltered
-                cfg.labelSep
-                null
-                [
-                  cfg.label
-                  x
-                ]
+              builtins.map
+              (
+                x:
+                  utils.concatStringsSepFiltered
+                  cfg.labelSep
+                  null
+                  [
+                    cfg.label
+                    x
+                  ]
+              )
+              parsedItems
             )
-            parsedItems
+          else parsedItems;
+        concatItems =
+          utils.concatStringsSepFiltered
+          cfg.itemsSep
+          null
+          concatLabels;
+        concatNames =
+          utils.concatStringsSepFiltered
+          cfg.nameSep
+          null
+          [cfg.name concatItems];
+      in
+        concatNames;
+      latex = (
+        lib.concatStringsSep
+        "\n"
+        (
+          [
+            "\\begin{extra}"
+            "  \\extraName{${cfg.name}}"
+          ]
+          ++ (
+            if builtins.typeOf cfg.items == "set"
+            then
+              [
+                "  \\begin{extra}"
+              ]
+              ++ (
+                builtins.map
+                (item: "    \\extraItem{${item}}")
+                (builtins.attrValues cfg.items)
+              )
+              ++ [
+                "  \\end{extra}"
+              ]
+            else if builtins.typeOf cfg.items == "list"
+            then
+              [
+                "  \\begin{extra}"
+              ]
+              ++ (
+                builtins.map
+                (item: "    \\extraItem{${item}}")
+                cfg.items
+              )
+              ++ [
+                "  \\end{extra}"
+              ]
+            else []
           )
-        else parsedItems;
-      concatItems =
-        utils.concatStringsSepFiltered
-        cfg.itemsSep
-        null
-        concatLabels;
-      concatNames =
-        utils.concatStringsSepFiltered
-        cfg.nameSep
-        null
-        [cfg.name concatItems];
-    in
-      concatNames;
+          ++ [
+            "\\end{extra}"
+          ]
+        )
+      );
+    };
   };
 }

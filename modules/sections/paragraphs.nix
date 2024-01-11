@@ -30,19 +30,41 @@ in {
       default = "\n\n";
     };
 
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.paragraphs = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
+      latex = lib.mkOption {
+        description = "This modules latex output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext = (
-      utils.concatStringsSepFiltered
-      cfg.sep
-      null
-      (builtins.attrValues cfg.paragraphs)
-    );
+    _out.paragraphs = {
+      plaintext = (
+        utils.concatStringsSepFiltered
+        cfg.sep
+        null
+        (builtins.attrValues cfg.paragraphs)
+      );
+      latex =
+        utils.concatStringsSepFiltered
+        "\n"
+        ""
+        (
+          lib.flatten
+          [
+            "\\begin{blockquote}"
+            cfg._out.paragraphs.plaintext
+            "\\end{blockquote}"
+          ]
+        );
+    };
   };
 }

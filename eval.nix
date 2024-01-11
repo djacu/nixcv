@@ -62,6 +62,17 @@ in {
       )
       test-plaintext
     );
+    latex = (
+      builtins.mapAttrs
+      (
+        moduleName: moduleValue: (
+          pkgs.lib.mapAttrs'
+          (testName: testValue: pkgs.lib.nameValuePair testName (testValue._outLatex))
+          moduleValue
+        )
+      )
+      test-plaintext
+    );
     bibentry = (
       builtins.mapAttrs
       (

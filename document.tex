@@ -4,6 +4,8 @@
 
 % Heading
 \textbf{\Huge Daniel Baker}
+
+{\Large\vspace{0.7em}\hspace{0.3em} Software Engineer}
 \begin{profile}
     \profileItem{\faMapMarker*}{Signal Hill, CA, USA}
     \profileItem{\faPhone*}{\href{tel:14074745339}{\texttt{+}1 407 474 5339}}
@@ -29,21 +31,28 @@
 \section{Education}
 
 \begin{education}
-    \educationInfo
-        {University of Southern California}
-        {Master of Science in Electrical Engineering}
-        {Los Angeles, California, USA}
-        {August 2016 -- May 2018}
-    \educationInfo
-        {Rose-Hulman Institute of Technology}
-        {Bachelor of Science in Electrical Engineering}
-        {Terre Haute, Indiana, USA}
-        {August 2004 -- May 2008}
-    \educationInfo
-        {Rose-Hulman Institute of Technology}
-        {Bachelor of Science in Applied Mathematics}
-        {Terre Haute, Indiana, USA}
-        {August 2004 -- May 2008}
+
+    \educationOrg {University of Southern California}
+    \begin{education}
+        \educationTitle {Master of Science in Electrical Engineering}
+        \educationLocation {Los Angeles, California, USA}
+        \educationDates {August 2016 -- May 2018}
+    \end{education}
+
+    \educationOrg {Rose-Hulman Institute of Technology}
+    \begin{education}
+        \educationTitle {Bachelor of Science in Electrical Engineering}
+        \educationLocation {Terre Haute, Indiana, USA}
+        \educationDates {August 2004 -- May 2008}
+    \end{education}
+
+    \educationOrg {Rose-Hulman Institute of Technology}
+    \begin{education}
+        \educationTitle {Bachelor of Science in Applied Mathematics}
+        \educationLocation {Terre Haute, Indiana, USA}
+        \educationDates {August 2004 -- May 2008}
+    \end{education}
+
 \end{education}
 
 % Experience
@@ -52,164 +61,168 @@
 \begin{experience}
 
     % Tweag
-    \experienceInfo
-        {Tweag}
-        {Software Engineer}
-        {Remote, USA}
-        {February 2022 -- April 2023}
-
+    \experienceOrg{Tweag}
     \begin{experience}
-        \experienceRole{jupyenv}
+        \experiencePosition{Software Engineer}
+        \experienceLocation{Remote, USA}
+        \experienceDates{February 2022 -- April 2023}
+
         \begin{experience}
-            \experienceTask{Maintainer for an open source project, jupyenv, which provides a Nix-based framework for the definition of declarative and reproducible Jupyter environments.}
-            \experienceTask{Rewrote the API to provide a better user experience and added several new kernels.}
-            \experienceTask{Interacted with end users on GitHub and Matrix to resolve their issues and answer questions.}
-            \experienceTask{Drastically improved the quantity and quality of documentation with the addition of how-to's, tutorials, reference documentation, and Nix options.}
-            \experienceTask{Created a website, \href{https://jupyenv.io/}{jupyenv.io}, to host the newly created documentation and a project blog.}
+            \experienceRole{jupyenv}
+            \begin{experience}
+                \experienceTask{Maintainer for an open source project, jupyenv, which provides a Nix-based framework for the definition of declarative and reproducible Jupyter environments.}
+                \experienceTask{Rewrote the API to provide a better user experience and added several new kernels.}
+                \experienceTask{Interacted with end users on GitHub and Matrix to resolve their issues and answer questions.}
+                \experienceTask{Drastically improved the quantity and quality of documentation with the addition of how-to's, tutorials, reference documentation, and Nix options.}
+                \experienceTask{Created a website, \href{https://jupyenv.io/}{jupyenv.io}, to host the newly created documentation and a project blog.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{Nix Technical Group}
         \begin{experience}
-            \experienceTask{Member of the Tweag's Nix technical group.}
-            \experienceTask{Wrote posts for the Tweag blog demonstrating the capabilities of Nix.}
-            \experienceTask{Assisted other Tweag employees with Nix questions and technical problems.}
-            \experienceTask{Created and maintained packages for nixpkgs, the Nix package collection.}
+            \experienceRole{Nix Technical Group}
+            \begin{experience}
+                \experienceTask{Member of the Tweag's Nix technical group.}
+                \experienceTask{Wrote posts for the Tweag blog demonstrating the capabilities of Nix.}
+                \experienceTask{Assisted other Tweag employees with Nix questions and technical problems.}
+                \experienceTask{Created and maintained packages for nixpkgs, the Nix package collection.}
+            \end{experience}
         \end{experience}
     \end{experience}
 
     % The Aerospace Corporation
-    \experienceInfo
-        {The Aerospace Corporation}
-        {Senior Member of Technical Staff}
-        {El Segundo, CA, USA}
-        {July 2020 -- February 2022}
-
+    \experienceOrg {The Aerospace Corporation}
     \begin{experience}
-        \experienceRole{AMIGOS}
+        \experiencePosition{Senior Member of Technical Staff}
+        \experienceLocation{El Segundo, CA, USA}
+        \experienceDates{July 2020 -- February 2022}
+
         \begin{experience}
-            \experienceTask{Member of a software team developing a distributed federated satellite communications simulation tool in Java.}
-            \experienceTask{Worked with laser physics subject matter experts and scientists to convert their pseudocode into production ready software.}
-            \experienceTask{Created a rigorous set of regression tests to verify that the newly created software matched the original code to within floating point precision.}
-            \experienceTask{Created a simple, light-weight, units library to help with units conversions and minimize the chance for errors.}
+            \experienceRole{AMIGOS}
+            \begin{experience}
+                \experienceTask{Member of a software team developing a distributed federated satellite communications simulation tool in Java.}
+                \experienceTask{Worked with laser physics subject matter experts and scientists to convert their pseudocode into production ready software.}
+                \experienceTask{Created a rigorous set of regression tests to verify that the newly created software matched the original code to within floating point precision.}
+                \experienceTask{Created a simple, light-weight, units library to help with units conversions and minimize the chance for errors.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{Synthetic Aperture Radar}
         \begin{experience}
-            \experienceTask{Developed radar signal processing analysis and processing tools.}
-            \experienceTask{Responsible for code quality and accuracy reviews for multiple programs.}
-            \experienceTask{Accelerated the use of the latest Python tools and other open source software tools.}
-            \experienceTask{Mentored and guided new developers in good software practices.}
+            \experienceRole{Synthetic Aperture Radar}
+            \begin{experience}
+                \experienceTask{Developed radar signal processing analysis and processing tools.}
+                \experienceTask{Responsible for code quality and accuracy reviews for multiple programs.}
+                \experienceTask{Accelerated the use of the latest Python tools and other open source software tools.}
+                \experienceTask{Mentored and guided new developers in good software practices.}
+            \end{experience}
         \end{experience}
     \end{experience}
 
     % Raytheon
-    \experienceInfo
-        {Raytheon}
-        {Senior Systems Engineer}
-        {El Segundo, CA, USA}
-        {November 2014 -- July 2020}
-
+    \experienceOrg{Raytheon}
     \begin{experience}
-        \experienceRole{SOLDIER}
+        \experiencePosition {Senior Systems Engineer}
+        \experienceLocation {El Segundo, CA, USA}
+        \experienceDates {November 2014 -- July 2020}
+
         \begin{experience}
-            \experienceTask{Lead developer on a year long research and development effort implementing a radar signal processing algorithm.}
-            \experienceTask{Leveraged the distributed computing capabilities of PySpark in an AWS EMR environment.}
-            \experienceTask{Effort concluded with the customer being completely satisfied and a robust algorithm ready for deployment as part of a larger radar signal processing pipeline.}
+            \experienceRole{SOLDIER}
+            \begin{experience}
+                \experienceTask{Lead developer on a year long research and development effort implementing a radar signal processing algorithm.}
+                \experienceTask{Leveraged the distributed computing capabilities of PySpark in an AWS EMR environment.}
+                \experienceTask{Effort concluded with the customer being completely satisfied and a robust algorithm ready for deployment as part of a larger radar signal processing pipeline.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{BELLAGIO}
         \begin{experience}
-            \experienceTask{Key developer and systems engineering for an agile, behavior-driven, multi-contractor, radar signal processing development effort on AWS.}
-            \experienceTask{Made significant contributions to requirement flow down and mapping, feature development, software architecture, coding, and testing.}
-            \experienceTask{Worked with radar signal processing subject matter experts to convert pseudocode into production ready software.}
-            \experienceTask{Worked on several specialized radar signal processing algorithms.}
+            \experienceRole{BELLAGIO}
+            \begin{experience}
+                \experienceTask{Key developer and systems engineering for an agile, behavior-driven, multi-contractor, radar signal processing development effort on AWS.}
+                \experienceTask{Made significant contributions to requirement flow down and mapping, feature development, software architecture, coding, and testing.}
+                \experienceTask{Worked with radar signal processing subject matter experts to convert pseudocode into production ready software.}
+                \experienceTask{Worked on several specialized radar signal processing algorithms.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{DRACO}
         \begin{experience}
-            \experienceTask{Responsible for the integrating, testing, and characterizing a gimbal stabilized platform for a space payload.}
-            \experienceTask{Created specialized tests to capture nanoradian angular movements in order to develop a high fidelity friction model.}
-            \experienceTask{Planned and built a test system and prepared test procedures for future production units.}
+            \experienceRole{DRACO}
+            \begin{experience}
+                \experienceTask{Responsible for the integrating, testing, and characterizing a gimbal stabilized platform for a space payload.}
+                \experienceTask{Created specialized tests to capture nanoradian angular movements in order to develop a high fidelity friction model.}
+                \experienceTask{Planned and built a test system and prepared test procedures for future production units.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{MFEOIR}
         \begin{experience}
-            \experienceTask{Modeled a high-friction, low-inertia fluid rotary unit (FRU) with high fidelity gearing and friction.}
-            \experienceTask{Designed a non-linear control algorithm to command the FRU to follow a decoupled gimbal.}
-            \experienceTask{Used Matlab to auto-generate the controls algorithm code for the embedded system.}
+            \experienceRole{MFEOIR}
+            \begin{experience}
+                \experienceTask{Modeled a high-friction, low-inertia fluid rotary unit (FRU) with high fidelity gearing and friction.}
+                \experienceTask{Designed a non-linear control algorithm to command the FRU to follow a decoupled gimbal.}
+                \experienceTask{Used Matlab to auto-generate the controls algorithm code for the embedded system.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{MFL}
         \begin{experience}
-            \experienceTask{Responsible for designing and modeling an infrared auto-alignment loop.}
-            \experienceTask{Created high fidelity models for fast steering mirros and an infrared sensor.}
+            \experienceRole{MFL}
+            \begin{experience}
+                \experienceTask{Responsible for designing and modeling an infrared auto-alignment loop.}
+                \experienceTask{Created high fidelity models for fast steering mirros and an infrared sensor.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{NGJ}
         \begin{experience}
-            \experienceTask{Modeled the rigid body dynamics, sensors and actuators for a door controlled ram air turbine.}
-            \experienceTask{Worked with mechanical designers to incorporate a flexible body model into the simulation.}
+            \experienceRole{NGJ}
+            \begin{experience}
+                \experienceTask{Modeled the rigid body dynamics, sensors and actuators for a door controlled ram air turbine.}
+                \experienceTask{Worked with mechanical designers to incorporate a flexible body model into the simulation.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{JTO}
         \begin{experience}
-            \experienceTask{Worked with multiple functional roles to architect, design, integrate, and test a power supply and a communications module.}
-            \experienceTask{Created thermal and electrical simulations and analyses to drive design decisions.}
-            \experienceTask{Mentored other junior engineers on good system and mechanical design.}
+            \experienceRole{JTO}
+            \begin{experience}
+                \experienceTask{Worked with multiple functional roles to architect, design, integrate, and test a power supply and a communications module.}
+                \experienceTask{Created thermal and electrical simulations and analyses to drive design decisions.}
+                \experienceTask{Mentored other junior engineers on good system and mechanical design.}
+            \end{experience}
         \end{experience}
     \end{experience}
 
     % DRS
-    \experienceInfo
-        {DRS Sensors \& Targeting Systems}
-        {Senior Systems Engineer}
-        {Cypress, CA, USA}
-        {June 2008 -- November 2014}
-
+    \experienceOrg {DRS Sensors \& Targeting Systems}
     \begin{experience}
-        \experienceRole{Full Lifecycle Engineering}
+        \experiencePosition {Senior Systems Engineer}
+        \experienceLocation {Cypress, CA, USA}
+        \experienceDates {June 2008 -- November 2014}
+
         \begin{experience}
-            \experienceTask{Responsible for designing, integrating, testing, fielding and supporting LRIP of multiple gimbal stabilized platforms.}
-            \experienceTask{Modeling, analysis and design of control algorithms for a gimbal and isolator stabilized EO/IR system using MATLAB/SIMULINK.}
-            \experienceTask{Responsible for integrating, calibrating and testing the sensor and actuator hardware for stabilized platforms.}
-            \experienceTask{Derive algorithms for target location and geo-pointing including the use of Euler angles and quaternion rotations.}
+            \experienceRole{Full Lifecycle Engineering}
+            \begin{experience}
+                \experienceTask{Responsible for designing, integrating, testing, fielding and supporting LRIP of multiple gimbal stabilized platforms.}
+                \experienceTask{Modeling, analysis and design of control algorithms for a gimbal and isolator stabilized EO/IR system using MATLAB/SIMULINK.}
+                \experienceTask{Responsible for integrating, calibrating and testing the sensor and actuator hardware for stabilized platforms.}
+                \experienceTask{Derive algorithms for target location and geo-pointing including the use of Euler angles and quaternion rotations.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{Systems Analysis}
         \begin{experience}
-            \experienceTask{Responsible for first principles based synthetic imagery generation, modeling and analysis.}
-            \experienceTask{Create complex urban scenery including using Blender.}
-            \experienceTask{Apply material properties and render synthetic imagery for visible, infrared, hyperspectral and LIDAR systems using DIRSIG and supporting tools.}
-            \experienceTask{Process raw imagery for analysis and exploitation algorithms using MATLAB and correlate results to real-world phenomenology.}
-            \experienceTask{Rigid body and multi-body simulation using Newtonian mechanics.}
+            \experienceRole{Systems Analysis}
+            \begin{experience}
+                \experienceTask{Responsible for first principles based synthetic imagery generation, modeling and analysis.}
+                \experienceTask{Create complex urban scenery including using Blender.}
+                \experienceTask{Apply material properties and render synthetic imagery for visible, infrared, hyperspectral and LIDAR systems using DIRSIG and supporting tools.}
+                \experienceTask{Process raw imagery for analysis and exploitation algorithms using MATLAB and correlate results to real-world phenomenology.}
+                \experienceTask{Rigid body and multi-body simulation using Newtonian mechanics.}
+            \end{experience}
         \end{experience}
-    \end{experience}
 
-    \begin{experience}
-        \experienceRole{Systems Engineering}
         \begin{experience}
-            \experienceTask{Well versed with the roles and duties of a System Engineer.}
-            \experienceTask{Performed requirements decomposition and allocation and developed specifications, processes and metrics.}
-            \experienceTask{Performed analysis, modeling and trade studies at all levels and of the total system product.}
-            \experienceTask{Prepared for and participated in program milestone events.}
+            \experienceRole{Systems Engineering}
+            \begin{experience}
+                \experienceTask{Well versed with the roles and duties of a System Engineer.}
+                \experienceTask{Performed requirements decomposition and allocation and developed specifications, processes and metrics.}
+                \experienceTask{Performed analysis, modeling and trade studies at all levels and of the total system product.}
+                \experienceTask{Prepared for and participated in program milestone events.}
+            \end{experience}
         \end{experience}
     \end{experience}
 
@@ -221,20 +234,21 @@
 \begin{experience}
 
     % LAC - DPH
-    \experienceInfo
-        {Los Angeles County - Department of Public Health}
-        {Software Engineer}
-        {Remote, USA}
-        {February 2021 -- November 2021}
-
+    \experienceOrg {Los Angeles County - Department of Public Health}
     \begin{experience}
-        \experienceRole{Front-End Developer}
+        \experiencePosition {Software Engineer}
+        \experienceLocation {Remote, USA}
+        \experienceDates {February 2021 -- November 2021}
+
         \begin{experience}
-            \experienceTask{As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries.}
-            \experienceTask{Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website.}
-            \experienceTask{Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features.}
-            \experienceTask{Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products.}
-            \experienceTask{Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development.}
+            \experienceRole{Front-End Developer}
+            \begin{experience}
+                \experienceTask{As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries.}
+                \experienceTask{Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website.}
+                \experienceTask{Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features.}
+                \experienceTask{Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products.}
+                \experienceTask{Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development.}
+            \end{experience}
         \end{experience}
     \end{experience}
 \end{experience}

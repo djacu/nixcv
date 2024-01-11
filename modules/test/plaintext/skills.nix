@@ -4,20 +4,20 @@ in {
   options = {
     nixcv = {
       test = {
-        skill = lib.mkOption {
+        skills = lib.mkOption {
           description = "A skill entry.";
           type = types.submodule {
             options = (
               lib.genAttrs
               [
                 "basic"
-                "sep"
+                "ordered"
               ]
               (
                 name:
                   lib.mkOption {
                     type = types.submoduleWith {
-                      modules = [../../sections/skill.nix];
+                      modules = [../../sections/skills.nix];
                     };
                   }
               )
@@ -30,16 +30,29 @@ in {
   config = {
     nixcv = {
       test = {
-        skill = {
+        skills = rec {
           basic = {
-            label = "Web Development";
-            keywords = ["HTML" "CSS" "JavaScript"];
+            skills = {
+              web-dev = {
+                label = "Web Development";
+                keywords = ["HTML" "CSS" "JavaScript"];
+              };
+              nix-dev = {
+                label = "Nix Development";
+                keywords = ["Nixpkgs" "NixOS" "Modules"];
+              };
+              random = {
+                label = "Random";
+                keywords = ["Random" "Things" "I" "Like"];
+                keywordsSep = ".";
+              };
+            };
           };
-          sep = {
-            label = "Web Development";
-            keywords = ["HTML" "CSS" "JavaScript"];
-            sep = " - ";
-          };
+          ordered =
+            basic
+            // {
+              order = ["nix-dev" "web-dev" "random"];
+            };
         };
       };
     };

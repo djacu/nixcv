@@ -44,22 +44,29 @@
       examples = lib.listToAttrs (
         builtins.map
         (
-          file:
+          example:
             lib.nameValuePair
-            ("example-" + (lib.removeSuffix ".nix" file))
+            "example-${example.fileType}-${lib.removeSuffix ".nix" example.fileName}"
             (pkgs.lib.evalModules {
               modules = [
                 ({config, ...}: {config._module.args = {inherit pkgs;};})
-                ./modules/nixcv.nix
-                ./examples/${file}
+                ./modules/toplevel/nixcv.nix
+                ./examples/${example.fileName}
               ];
             })
             .config
             .nixcv
-            ."${lib.removeSuffix ".nix" file}"
-            ._outPlaintextFile
+            ."${lib.removeSuffix ".nix" example.fileName}"
+            ._out
+            ."${example.fileType}File"
         )
-        (builtins.attrNames (builtins.readDir ./examples))
+        (
+          lib.cartesianProductOfSets
+          {
+            fileType = ["plaintext" "latex"];
+            fileName = builtins.attrNames (builtins.readDir ./examples);
+          }
+        )
       );
     in {
       packages =
@@ -103,6 +110,24 @@
       checks =
         {}
         // examples;
+
+      #test = import ./test/plaintext.nix {inherit lib;};
+      test = lib.listToAttrs (
+        builtins.map
+        (
+          file:
+            lib.nameValuePair
+            (lib.removeSuffix ".nix" file)
+            (import ./test/${file} {inherit lib;})
+        )
+        (
+          builtins.attrNames (
+            lib.filterAttrs
+            (name: value: value == "regular")
+            (builtins.readDir ./test)
+          )
+        )
+      );
 
       moduleOptions = pkgs.nixosOptionsDoc {
         options = (

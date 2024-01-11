@@ -4,7 +4,7 @@ in {
   options = {
     nixcv = {
       test = {
-        skillSection = lib.mkOption {
+        referenceSection = lib.mkOption {
           description = "A references entry.";
           type = types.submodule {
             options = (
@@ -31,58 +31,65 @@ in {
   config = {
     nixcv = {
       test = {
-        skillSection = {
+        referenceSection = {
           basic = {
-            header = "Skills";
+            header = "References";
             content = {
-              web-dev = {
-                type = "skill";
-                label = "Web Development";
-                keywords = ["HTML" "CSS" "JavaScript"];
+              john-doe = {
+                type = "reference";
+                name = "John Doe";
+                organization = "The NixOS Foundation";
+                phone = "123.456.7890";
+                email = "johndoe@nixos.org";
               };
-              nix-dev = {
-                type = "skill";
-                label = "Nix Development";
-                keywords = ["Nixpkgs" "NixOS" "Modules"];
+              jane-doe = {
+                name = "Jane Doe";
+                type = "reference";
+                organization = "The NixOS Foundation";
+                phone = "111.222.3333";
+                email = "janedoe@nixos.org";
               };
             };
-            _module.args = {modules = [../sections/skill.nix];};
           };
           sep = {
-            header = "Skills";
+            header = "References";
             content = {
-              web-dev = {
-                type = "skill";
-                label = "Web Development";
-                keywords = ["HTML" "CSS" "JavaScript"];
-                sep = " - ";
+              john-doe = {
+                type = "reference";
+                name = "John Doe";
+                organization = "The NixOS Foundation";
+                phone = "123.456.7890";
+                email = "johndoe@nixos.org";
               };
-              nix-dev = {
-                type = "skill";
-                label = "Nix Development";
-                keywords = ["Nixpkgs" "NixOS" "Modules"];
-                sep = " - ";
+              jane-doe = {
+                name = "Jane Doe";
+                type = "reference";
+                organization = "The NixOS Foundation";
+                phone = "111.222.3333";
+                email = "janedoe@nixos.org";
               };
             };
-            _module.args = {modules = [../sections/skill.nix];};
             sep = "; ";
           };
           headerFunc = {
-            header = "Skills";
+            header = "References";
             headerFunc = lib.toUpper;
             content = {
-              web-dev = {
-                type = "skill";
-                label = "Web Development";
-                keywords = ["HTML" "CSS" "JavaScript"];
+              john-doe = {
+                type = "reference";
+                name = "John Doe";
+                organization = "The NixOS Foundation";
+                phone = "123.456.7890";
+                email = "johndoe@nixos.org";
               };
-              nix-dev = {
-                type = "skill";
-                label = "Nix Development";
-                keywords = ["Nixpkgs" "NixOS" "Modules"];
+              jane-doe = {
+                name = "Jane Doe";
+                type = "reference";
+                organization = "The NixOS Foundation";
+                phone = "111.222.3333";
+                email = "janedoe@nixos.org";
               };
             };
-            _module.args = {modules = [../sections/skill.nix];};
           };
         };
       };

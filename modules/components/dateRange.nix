@@ -34,36 +34,40 @@ in {
       default = " - ";
       example = " to ";
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
+    _out.dateRange = {
+      plaintext = lib.mkOption {
+        description = "This modules plaintext output.";
+        type = types.str;
+        visible = false;
+        readOnly = true;
+      };
     };
   };
   config = {
-    _outPlaintext = let
-      start =
-        if (! builtins.isNull cfg.start)
-        then cfg.start._outPlaintext
-        else null;
-      end =
-        if (! builtins.isNull cfg.end)
-        then cfg.end._outPlaintext
-        else null;
-      sep =
-        if (builtins.isNull start || builtins.isNull end)
-        then null
-        else cfg.sep;
-    in (
-      utils.concatStringsSepFiltered
-      ""
-      null
-      [
-        start
-        sep
-        end
-      ]
-    );
+    _out.dateRange = {
+      plaintext = let
+        start =
+          if (! builtins.isNull cfg.start)
+          then cfg.start._out.date.plaintext
+          else null;
+        end =
+          if (! builtins.isNull cfg.end)
+          then cfg.end._out.date.plaintext
+          else null;
+        sep =
+          if (builtins.isNull start || builtins.isNull end)
+          then null
+          else cfg.sep;
+      in (
+        utils.concatStringsSepFiltered
+        ""
+        null
+        [
+          start
+          sep
+          end
+        ]
+      );
+    };
   };
 }
