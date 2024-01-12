@@ -6,6 +6,9 @@
   inherit (lib) types;
   cfg = config;
 in {
+  imports = [
+    ./format.nix
+  ];
   options = {
     type = lib.mkOption {
       type = lib.types.enum ["item"];
@@ -16,11 +19,6 @@ in {
     content = lib.mkOption {
       description = "A list item.";
       type = types.nullOr types.str;
-      default = null;
-    };
-    format = lib.mkOption {
-      description = "Formatting applied to the LaTeX output.";
-      type = types.nullOr (types.attrsOf (types.oneOf [types.str types.bool]));
       default = null;
     };
 
@@ -44,7 +42,7 @@ in {
   config = {
     _out = {
       plaintext = "";
-      latex = "\\item ${cfg.content}";
+      latex = "\\item {${cfg.applyFormat cfg.content}}";
     };
   };
 }

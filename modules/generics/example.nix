@@ -8,6 +8,7 @@
         "organization"
         "position"
         "nix-dev"
+        "web-dev"
       ];
       content = {
         organization = {
@@ -30,7 +31,32 @@
           content = {
             _role = {
               type = "item";
-              content = "Nix Software Developer";
+              content = "Nix Developer";
+            };
+            nix-dev = {
+              type = "itemlist";
+              content = {
+                responsibilities = {
+                  type = "items";
+                  format = {
+                    italic = true;
+                  };
+                  content = [
+                    "I make the Nix."
+                    "I make the flakes."
+                    "I make users cry."
+                  ];
+                };
+              };
+            };
+          };
+        };
+        web-dev = {
+          type = "itemlist";
+          content = {
+            _role = {
+              type = "item";
+              content = "Web Developer";
             };
             nix-dev = {
               type = "itemlist";
@@ -38,9 +64,8 @@
                 responsibilities = {
                   type = "items";
                   content = [
-                    "I make the Nix."
-                    "I make the flakes."
-                    "I make users cry."
+                    "I make the Nix site."
+                    "I use HTML and CSS only."
                   ];
                 };
               };
