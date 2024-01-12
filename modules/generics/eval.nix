@@ -4,6 +4,7 @@ let
     config = {};
     overlays = [];
   };
+
   section = pkgs.lib.evalModules {
     modules = [
       ./section.nix
@@ -17,9 +18,17 @@ let
       ./exampleNixcv.nix
     ];
   };
+
+  skill = pkgs.lib.evalModules {
+    modules = [
+      ./skill.nix
+      ./exampleSkill.nix
+    ];
+  };
 in {
   inherit
     nixcv
     section
+    skill
     ;
 }
