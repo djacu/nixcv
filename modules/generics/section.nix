@@ -26,6 +26,7 @@ in {
         modulesLib.taggedSubmodules {
           types = {
             itemlist = types.submodule ./itemlist.nix;
+            paragraphs = types.submodule ./paragraphs.nix;
           };
         }
       ));
