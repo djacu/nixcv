@@ -10,6 +10,16 @@ let
       ./exampleSection.nix
     ];
   };
+
+  nixcv = pkgs.lib.evalModules {
+    modules = [
+      ./nixcv.nix
+      ./exampleNixcv.nix
+    ];
+  };
 in {
-  inherit section;
+  inherit
+    nixcv
+    section
+    ;
 }
