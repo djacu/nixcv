@@ -25,10 +25,18 @@ let
       ./exampleSkill.nix
     ];
   };
+
+  skills = pkgs.lib.evalModules {
+    modules = [
+      ./skills.nix
+      ./exampleSkills.nix
+    ];
+  };
 in {
   inherit
     nixcv
     section
     skill
+    skills
     ;
 }
