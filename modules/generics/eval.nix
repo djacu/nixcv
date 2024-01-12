@@ -4,12 +4,12 @@ let
     config = {};
     overlays = [];
   };
-  itemlist = pkgs.lib.evalModules {
+  section = pkgs.lib.evalModules {
     modules = [
       ./section.nix
-      ./example.nix
+      ./exampleSection.nix
     ];
   };
 in {
-  inherit itemlist;
+  inherit section;
 }
