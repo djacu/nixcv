@@ -8,7 +8,7 @@
   modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
   options = {
-    sections = lib.mkOption {
+    content = lib.mkOption {
       description = "The sections of the CV.";
       type = types.attrsOf (
         modulesLib.taggedSubmodules {
@@ -44,11 +44,11 @@ in {
     _out = let
       sectionsOrdered =
         if builtins.isNull cfg.order
-        then builtins.attrValues cfg.sections
+        then builtins.attrValues cfg.content
         else
           (
             builtins.map
-            (elem: cfg.sections.${elem})
+            (elem: cfg.content.${elem})
             cfg.order
           );
 
