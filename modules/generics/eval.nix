@@ -33,9 +33,9 @@ let
     ];
   };
 
-  profileItem = pkgs.lib.evalModules {
+  profile = pkgs.lib.evalModules {
     modules = [
-      ./profileItem.nix
+      ./profile.nix
       ./exampleProfileItem.nix
     ];
   };
@@ -49,7 +49,7 @@ let
 in {
   inherit
     nixcv
-    profileItem
+    profile
     section
     skill
     skills
