@@ -1,0 +1,4 @@
+{
+  content = "@djacu";
+  icon = "mastodon";
+}
