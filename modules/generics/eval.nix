@@ -46,9 +46,17 @@ let
       ./exampleText.nix
     ];
   };
+
+  personal = pkgs.lib.evalModules {
+    modules = [
+      ./personal.nix
+      ./examplePersonal.nix
+    ];
+  };
 in {
   inherit
     nixcv
+    personal
     profile
     section
     skill

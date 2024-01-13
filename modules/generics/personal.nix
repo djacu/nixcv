@@ -9,24 +9,21 @@
 in {
   options = {
     type = lib.mkOption {
-      type = lib.types.enum ["itemlist"];
-      default = "itemlist";
+      type = lib.types.enum ["personal"];
+      default = "personal";
       description = "Type";
       internal = true;
     };
     content = lib.mkOption {
-      description = "The content of this itemlist.";
-      type = types.nullOr (types.attrsOf (
+      description = "The content of profile.";
+      type = types.attrsOf (
         modulesLib.taggedSubmodules {
           types = {
             itemlist = types.submodule ./itemlist.nix;
-            item = types.submodule ./item.nix;
-            items = types.submodule ./items.nix;
-            profile = types.submodule ./profile.nix;
+            text = types.submodule ./text.nix;
           };
         }
-      ));
-      default = null;
+      );
     };
 
     order = lib.mkOption {
@@ -70,21 +67,9 @@ in {
           (x: x._out.${out})
           contentsOrdered
         );
-      wrapLatex = input: (
-        lib.flatten
-        [
-          "\\begin{itemize}"
-          (
-            builtins.map
-            (x: "  " + x)
-            input
-          )
-          "\\end{itemize}"
-        ]
-      );
     in {
       plaintext = "";
-      latex = wrapLatex (outOrdered "latex");
+      latex = outOrdered "latex";
     };
   };
 }
