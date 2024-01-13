@@ -18,8 +18,7 @@ in {
     };
     content = lib.mkOption {
       description = "A profile item.";
-      type = types.nullOr types.str;
-      default = null;
+      type = types.str;
     };
 
     icon = lib.mkOption {
