@@ -39,6 +39,13 @@ let
       ./exampleProfileItem.nix
     ];
   };
+
+  text = pkgs.lib.evalModules {
+    modules = [
+      ./text.nix
+      ./exampleText.nix
+    ];
+  };
 in {
   inherit
     nixcv
@@ -46,5 +53,6 @@ in {
     section
     skill
     skills
+    text
     ;
 }
