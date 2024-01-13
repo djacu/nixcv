@@ -45,6 +45,8 @@ in {
           "inbox"
           "instagram"
           "linkedin"
+          "map-marker"
+          "map-marker-alt"
           "mastodon"
           "phone"
           "phone*"
