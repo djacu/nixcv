@@ -49,7 +49,7 @@ in {
           "map-marker-alt"
           "mastodon"
           "phone"
-          "phone*"
+          "phone-alt"
           "tiktok"
           "twitch"
           "twitter"

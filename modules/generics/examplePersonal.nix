@@ -38,7 +38,7 @@
         phone = {
           type = "profile";
           content = "123.456.7890";
-          icon = "phone*";
+          icon = "phone-alt";
         };
         github = {
           type = "profile";
