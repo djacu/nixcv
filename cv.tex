@@ -88,6 +88,13 @@ defernumbers=true,
     \item #1
 }
 
+%% nolabel list
+\newlist{nolabel}{itemize}{4}
+\setlist[nolabel, 1]{label={}, parsep=0em, itemsep=1em}
+\setlist[nolabel, 2]{label={}, leftmargin=1em, nosep}
+\setlist[nolabel, 3]{label={}, leftmargin=1.2em, topsep=0.9em}
+\setlist[nolabel, 4]{label={}, leftmargin=3em, topsep=0.4em, itemindent=-1em, rightmargin=2em}
+
 %% experience list
 \newlist{experience}{itemize}{4}
 \setlist[experience, 1]{label={}, nosep}
