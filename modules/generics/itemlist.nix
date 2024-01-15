@@ -9,10 +9,15 @@
 in {
   options = {
     type = lib.mkOption {
-      type = lib.types.enum ["itemlist"];
+      type = types.enum ["itemlist"];
       default = "itemlist";
       description = "Type";
       internal = true;
+    };
+    listname = lib.mkOption {
+      type = types.str;
+      default = "nolabel";
+      description = "The LaTeX list environment name.";
     };
     content = lib.mkOption {
       description = "The content of this itemlist.";
@@ -73,13 +78,13 @@ in {
       wrapLatex = input: (
         lib.flatten
         [
-          "\\begin{itemize}"
+          "\\begin{${cfg.listname}}"
           (
             builtins.map
             (x: "  " + x)
             input
           )
-          "\\end{itemize}"
+          "\\end{${cfg.listname}}"
         ]
       );
     in {
