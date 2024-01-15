@@ -81,6 +81,7 @@ in {
         (
           lib.flatten
           [
+            "" # white space helps with reading the latex output
             "\\section{${cfg.header}}"
             (
               builtins.map

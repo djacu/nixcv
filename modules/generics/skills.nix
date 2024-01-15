@@ -67,9 +67,14 @@ in {
           builtins.map
           (
             group:
-              ["\\begin{skillsEnv}"]
+              [
+                "" # the skills environment needs an empty newline between environments for the formatting to look correct
+                "\\begin{skillsEnv}"
+              ]
               ++ group
-              ++ ["\\end{skillsEnv}"]
+              ++ [
+                "\\end{skillsEnv}"
+              ]
           )
           (
             builtins.map
