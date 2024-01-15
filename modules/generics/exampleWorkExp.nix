@@ -6,9 +6,7 @@
       type = "itemlist";
       order = [
         "organization"
-        "position"
-        "nix-dev"
-        "web-dev"
+        "details"
       ];
       content = {
         organization = {
@@ -19,54 +17,77 @@
             bold = true;
           };
         };
-        position = {
-          type = "item";
-          content = "Software Engineer";
-          format = {
-            bold = true;
-          };
-        };
-        nix-dev = {
+        details = {
           type = "itemlist";
+          order = [
+            "position"
+            "location"
+            "dates"
+            "nix-dev"
+            "web-dev"
+          ];
           content = {
-            _role = {
+            position = {
               type = "item";
-              content = "Nix Developer";
+              content = "Software Engineer";
+              format = {
+                bold = true;
+              };
+            };
+            location = {
+              type = "item";
+              content = "Remote";
+            };
+            dates = {
+              type = "item";
+              content = "2020 - 2023";
+              format = {
+                italic = true;
+              };
             };
             nix-dev = {
               type = "itemlist";
               content = {
-                responsibilities = {
-                  type = "items";
-                  format = {
-                    italic = true;
+                _role = {
+                  type = "item";
+                  content = "Nix Developer";
+                };
+                nix-dev = {
+                  type = "itemlist";
+                  content = {
+                    responsibilities = {
+                      type = "items";
+                      format = {
+                        italic = true;
+                      };
+                      content = [
+                        "I make the Nix."
+                        "I make the flakes."
+                        "I make users cry."
+                      ];
+                    };
                   };
-                  content = [
-                    "I make the Nix."
-                    "I make the flakes."
-                    "I make users cry."
-                  ];
                 };
               };
             };
-          };
-        };
-        web-dev = {
-          type = "itemlist";
-          content = {
-            _role = {
-              type = "item";
-              content = "Web Developer";
-            };
-            nix-dev = {
+            web-dev = {
               type = "itemlist";
               content = {
-                responsibilities = {
-                  type = "items";
-                  content = [
-                    "I make the Nix site."
-                    "I use HTML and CSS only."
-                  ];
+                _role = {
+                  type = "item";
+                  content = "Web Developer";
+                };
+                nix-dev = {
+                  type = "itemlist";
+                  content = {
+                    responsibilities = {
+                      type = "items";
+                      content = [
+                        "I make the Nix site."
+                        "I use HTML and CSS only."
+                      ];
+                    };
+                  };
                 };
               };
             };
