@@ -1,6 +1,10 @@
 {
   type = "section";
   header = "Work Experience";
+  order = [
+    "nixos-foundation"
+    "guix-foundation"
+  ];
   content = {
     nixos-foundation = {
       type = "itemlist";
@@ -85,6 +89,76 @@
                       content = [
                         "I make the Nix site."
                         "I use HTML and CSS only."
+                      ];
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+    guix-foundation = {
+      type = "itemlist";
+      order = [
+        "organization"
+        "details"
+      ];
+      content = {
+        organization = {
+          type = "item";
+          content = "The Guix Foundation";
+          format = {
+            size = "large";
+            bold = true;
+          };
+        };
+        details = {
+          type = "itemlist";
+          order = [
+            "position"
+            "location"
+            "dates"
+            "nix-dev"
+          ];
+          content = {
+            position = {
+              type = "item";
+              content = "Software Engineer";
+              format = {
+                bold = true;
+              };
+            };
+            location = {
+              type = "item";
+              content = "Remote";
+            };
+            dates = {
+              type = "item";
+              content = "2018 - 2020";
+              format = {
+                italic = true;
+              };
+            };
+            nix-dev = {
+              type = "itemlist";
+              content = {
+                _role = {
+                  type = "item";
+                  content = "Nix Developer";
+                };
+                nix-dev = {
+                  type = "itemlist";
+                  content = {
+                    responsibilities = {
+                      type = "items";
+                      format = {
+                        italic = true;
+                      };
+                      content = [
+                        "Make new guix things."
+                        "Fix old guix things."
                       ];
                     };
                   };
