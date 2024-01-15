@@ -6,8 +6,7 @@
       type = "itemlist";
       order = [
         "name"
-        "organization"
-        "phone"
+        "details"
       ];
       content = {
         name = {
@@ -18,16 +17,26 @@
             bold = true;
           };
         };
-        organization = {
-          type = "item";
-          content = "Some Company";
-          format = {
-            bold = true;
+
+        details = {
+          type = "itemlist";
+          order = [
+            "organization"
+            "phone"
+          ];
+          content = {
+            organization = {
+              type = "item";
+              content = "Some Company";
+              format = {
+                bold = true;
+              };
+            };
+            phone = {
+              type = "item";
+              content = "123.456.7890";
+            };
           };
-        };
-        phone = {
-          type = "item";
-          content = "123.456.7890";
         };
       };
     };
@@ -35,8 +44,7 @@
       type = "itemlist";
       order = [
         "name"
-        "organization"
-        "phone"
+        "details"
       ];
       content = {
         name = {
@@ -47,16 +55,26 @@
             bold = true;
           };
         };
-        organization = {
-          type = "item";
-          content = "Another Company";
-          format = {
-            bold = true;
+
+        details = {
+          type = "itemlist";
+          order = [
+            "organization"
+            "phone"
+          ];
+          content = {
+            organization = {
+              type = "item";
+              content = "Another Company";
+              format = {
+                bold = true;
+              };
+            };
+            phone = {
+              type = "item";
+              content = "098.765.4321";
+            };
           };
-        };
-        phone = {
-          type = "item";
-          content = "098.765.4321";
         };
       };
     };
