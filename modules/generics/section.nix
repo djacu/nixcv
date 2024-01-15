@@ -27,6 +27,7 @@ in {
           types = {
             itemlist = types.submodule ./itemlist.nix;
             paragraphs = types.submodule ./paragraphs.nix;
+            skills = types.submodule ./skills.nix;
           };
         }
       ));
