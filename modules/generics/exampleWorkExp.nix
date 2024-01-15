@@ -1,4 +1,4 @@
-{...}: {
+{
   type = "section";
   header = "Work Experience";
   content = {
