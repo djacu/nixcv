@@ -7,7 +7,7 @@
   cfg = config;
 in {
   imports = [
-    ./format.nix
+    ../components/format.nix
   ];
   options = {
     type = lib.mkOption {

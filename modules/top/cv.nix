@@ -13,8 +13,8 @@ in {
       type = types.attrsOf (
         modulesLib.taggedSubmodules {
           types = {
-            personal = types.submodule ./personal.nix;
-            section = types.submodule ./section.nix;
+            personal = types.submodule ../sections/personal.nix;
+            section = types.submodule ../sections/section.nix;
           };
         }
       );

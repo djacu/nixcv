@@ -7,49 +7,49 @@ let
 
   section = pkgs.lib.evalModules {
     modules = [
-      ./section.nix
+      ../sections/section.nix
       ./exampleSection.nix
     ];
   };
 
   nixcv = pkgs.lib.evalModules {
     modules = [
-      ./nixcv.nix
+      ../top/nixcv.nix
       ./exampleNixcv.nix
     ];
   };
 
   skill = pkgs.lib.evalModules {
     modules = [
-      ./skill.nix
+      ../skills/skill.nix
       ./exampleSkill.nix
     ];
   };
 
   skills = pkgs.lib.evalModules {
     modules = [
-      ./skills.nix
+      ../skills/skills.nix
       ./exampleSkills.nix
     ];
   };
 
   profile = pkgs.lib.evalModules {
     modules = [
-      ./profile.nix
+      ../lists/profile.nix
       ./exampleProfileItem.nix
     ];
   };
 
   text = pkgs.lib.evalModules {
     modules = [
-      ./text.nix
+      ../text/text.nix
       ./exampleText.nix
     ];
   };
 
   personal = pkgs.lib.evalModules {
     modules = [
-      ./personal.nix
+      ../lists/personal.nix
       ./examplePersonal.nix
     ];
   };

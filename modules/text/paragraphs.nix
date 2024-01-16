@@ -8,7 +8,7 @@
   modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
   imports = [
-    ./format.nix
+    ../components/format.nix
   ];
   options = {
     type = lib.mkOption {

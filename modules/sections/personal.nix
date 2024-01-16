@@ -19,8 +19,8 @@ in {
       type = types.attrsOf (
         modulesLib.taggedSubmodules {
           types = {
-            itemlist = types.submodule ./itemlist.nix;
-            text = types.submodule ./text.nix;
+            itemlist = types.submodule ../lists/itemlist.nix;
+            text = types.submodule ../text/text.nix;
           };
         }
       );

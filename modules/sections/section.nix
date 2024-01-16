@@ -25,9 +25,9 @@ in {
       type = types.nullOr (types.attrsOf (
         modulesLib.taggedSubmodules {
           types = {
-            itemlist = types.submodule ./itemlist.nix;
-            paragraphs = types.submodule ./paragraphs.nix;
-            skills = types.submodule ./skills.nix;
+            itemlist = types.submodule ../lists/itemlist.nix;
+            paragraphs = types.submodule ../text/paragraphs.nix;
+            skills = types.submodule ../skills/skills.nix;
           };
         }
       ));
