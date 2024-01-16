@@ -5,31 +5,23 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
+  imports = [
+    (
+      import
+      ../components/orderedTaggedContent.nix
+      [
+        ../lists/itemlist.nix
+        ../text/text.nix
+      ]
+    )
+  ];
   options = {
     type = lib.mkOption {
       type = lib.types.enum ["personal"];
       default = "personal";
       description = "Type";
       internal = true;
-    };
-    content = lib.mkOption {
-      description = "The content of profile.";
-      type = types.attrsOf (
-        modulesLib.taggedSubmodules {
-          types = {
-            itemlist = types.submodule ../lists/itemlist.nix;
-            text = types.submodule ../text/text.nix;
-          };
-        }
-      );
-    };
-
-    order = lib.mkOption {
-      description = "The order in which the contents are written.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
     };
 
     _out = {
@@ -50,26 +42,9 @@ in {
     };
   };
   config = {
-    _out = let
-      contentsOrdered =
-        if builtins.isNull cfg.order
-        then builtins.attrValues cfg.content
-        else
-          (
-            builtins.map
-            (elem: cfg.content.${elem})
-            cfg.order
-          );
-
-      outOrdered = out:
-        lib.flatten (
-          builtins.map
-          (x: x._out.${out})
-          contentsOrdered
-        );
-    in {
+    _out = {
       plaintext = "";
-      latex = outOrdered "latex";
+      latex = cfg.outOrdered "latex";
     };
   };
 }

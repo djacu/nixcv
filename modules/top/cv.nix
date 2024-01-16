@@ -5,27 +5,18 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
+  imports = [
+    (
+      import
+      ../components/orderedTaggedContent.nix
+      [
+        ../sections/personal.nix
+        ../sections/section.nix
+      ]
+    )
+  ];
   options = {
-    content = lib.mkOption {
-      description = "The sections of the CV.";
-      type = types.attrsOf (
-        modulesLib.taggedSubmodules {
-          types = {
-            personal = types.submodule ../sections/personal.nix;
-            section = types.submodule ../sections/section.nix;
-          };
-        }
-      );
-      visible = "shallow";
-    };
-    order = lib.mkOption {
-      description = "The order the sections are written.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
-    };
-
     _out = {
       plaintext = lib.mkOption {
         description = "This modules plaintext output.";
@@ -43,22 +34,6 @@ in {
   };
   config = {
     _out = let
-      sectionsOrdered =
-        if builtins.isNull cfg.order
-        then builtins.attrValues cfg.content
-        else
-          (
-            builtins.map
-            (elem: cfg.content.${elem})
-            cfg.order
-          );
-
-      outOrdered = out:
-        lib.flatten (
-          builtins.map
-          (x: x._out.${out})
-          sectionsOrdered
-        );
       wrapLatex = input:
         lib.concatStringsSep
         "\n"
@@ -76,7 +51,7 @@ in {
         );
     in {
       plaintext = "";
-      latex = wrapLatex (outOrdered "latex");
+      latex = wrapLatex (cfg.outOrdered "latex");
     };
   };
 }
