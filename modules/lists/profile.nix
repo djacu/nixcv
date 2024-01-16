@@ -11,8 +11,8 @@ in {
   ];
   options = {
     type = lib.mkOption {
-      type = lib.types.enum ["profileItem"];
-      default = "profileItem";
+      type = lib.types.enum ["profile"];
+      default = "profile";
       description = "Type";
       internal = true;
     };
