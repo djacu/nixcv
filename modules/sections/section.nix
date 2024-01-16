@@ -8,6 +8,7 @@
 in {
   imports = [
     ../components/standardListStringOut.nix
+    ../components/latexWrapper.nix
     (
       import
       ../components/orderedTaggedContent.nix
@@ -33,22 +34,18 @@ in {
     };
   };
   config = {
-    _out = let
-      wrapLatex = input: (
-        lib.flatten
-        [
-          "" # white space helps with reading the latex output
-          "\\section{${cfg.header}}"
-          (
-            builtins.map
-            (x: "  " + x)
-            input
-          )
-        ]
-      );
-    in {
+    latexWrapper = {
+      prefix = [
+        "" # white space helps with reading the latex output
+        "\\section{${cfg.header}}"
+      ];
+      suffix = [];
+      content = cfg.outOrdered "latex";
+      predicate = x: "  " + x;
+    };
+    _out = {
       plaintext = "";
-      latex = wrapLatex (cfg.outOrdered "latex");
+      latex = cfg.latexWrapper.output;
     };
   };
 }

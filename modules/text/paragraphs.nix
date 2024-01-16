@@ -10,6 +10,7 @@ in {
     ../components/format.nix
     ../components/orderedContent.nix
     ../components/standardListStringOut.nix
+    ../components/latexWrapper.nix
     (
       import
       ../components/latexEnvironment.nix
@@ -24,23 +25,16 @@ in {
       internal = true;
     };
   };
-  config = let
-    wrapLatex = input: (
-      lib.flatten
-      [
-        "\\begin{${cfg.latexEnvironment}}"
-        (
-          builtins.map
-          (x: "  " + x)
-          input
-        )
-        "\\end{${cfg.latexEnvironment}}"
-      ]
-    );
-  in {
+  config = {
+    latexWrapper = {
+      prefix = ["\\begin{${cfg.latexEnvironment}}"];
+      suffix = ["\\end{${cfg.latexEnvironment}}"];
+      content = cfg.contentsOrdered;
+      predicate = x: "  " + x;
+    };
     _out = {
       plaintext = "";
-      latex = wrapLatex cfg.contentsOrdered;
+      latex = cfg.latexWrapper.output;
     };
   };
 }

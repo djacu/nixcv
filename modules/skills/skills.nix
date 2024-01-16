@@ -8,12 +8,13 @@
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
   imports = [
+    ../components/standardListStringOut.nix
+    ../components/latexWrapper.nix
     (
       import
       ../components/latexEnvironment.nix
       "skillsEnv"
     )
-    ../components/standardListStringOut.nix
   ];
   options = {
     type = lib.mkOption {
@@ -39,55 +40,53 @@ in {
       default = null;
     };
   };
-  config = {
-    _out = let
-      contentsOrdered =
-        if builtins.isNull cfg.order
-        then builtins.attrValues cfg.content
-        else
-          (
-            builtins.map
-            (elem: cfg.content.${elem})
-            cfg.order
-          );
-      outOrdered = out: (
-        builtins.map
-        (x: x._out.${out})
-        contentsOrdered
-      );
-      wrapLatex = input:
-        lib.flatten (
+  config = let
+    contentsOrdered =
+      if builtins.isNull cfg.order
+      then builtins.attrValues cfg.content
+      else
+        (
           builtins.map
-          (
-            group:
-              [
-                "" # the skills environment needs an empty newline between environments for the formatting to look correct
-                "\\begin{${cfg.latexEnvironment}}"
-              ]
-              ++ group
-              ++ [
-                "\\end{${cfg.latexEnvironment}}"
-              ]
-          )
-          (
+          (elem: cfg.content.${elem})
+          cfg.order
+        );
+    outOrdered = out: (
+      builtins.map
+      (x: x._out.${out})
+      contentsOrdered
+    );
+  in {
+    latexWrapper = {
+      prefix = [];
+      suffix = [];
+      content = (
+        builtins.map
+        (
+          group:
             builtins.map
             (
-              group:
+              inner:
                 builtins.map
-                (
-                  inner:
-                    builtins.map
-                    (elem: "  " + elem)
-                    inner
-                )
-                (lib.intersperse ["\\columnbreak"] group)
+                (elem: "  " + elem)
+                inner
             )
-            (utils.reshape 2 input)
-          )
-        );
-    in {
+            (lib.intersperse ["\\columnbreak"] group)
+        )
+        (utils.reshape 2 (outOrdered "latex"))
+      );
+      predicate = content:
+        [
+          "" # the skills environment needs an empty newline between environments for the formatting to look correct
+          "\\begin{${cfg.latexEnvironment}}"
+        ]
+        ++ content
+        ++ [
+          "\\end{${cfg.latexEnvironment}}"
+        ];
+    };
+    _out = {
       plaintext = "";
-      latex = wrapLatex (outOrdered "latex");
+      latex = cfg.latexWrapper.output;
     };
   };
 }

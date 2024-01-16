@@ -7,6 +7,8 @@
   cfg = config;
 in {
   imports = [
+    ../components/standardStringOut.nix
+    ../components/latexWrapper.nix
     (
       import
       ../components/orderedTaggedContent.nix
@@ -20,28 +22,20 @@ in {
       ../components/latexEnvironment.nix
       "document"
     )
-    ../components/standardStringOut.nix
   ];
   config = {
-    _out = let
-      wrapLatex = input:
+    latexWrapper = {
+      prefix = ["\\begin{${cfg.latexEnvironment}}"];
+      suffix = ["\\end{${cfg.latexEnvironment}}"];
+      content = cfg.outOrdered "latex";
+      predicate = x: "  " + x;
+    };
+    _out = {
+      plaintext = "";
+      latex =
         lib.concatStringsSep
         "\n"
-        (
-          lib.flatten
-          [
-            "\\begin{${cfg.latexEnvironment}}"
-            (
-              builtins.map
-              (x: "  " + x)
-              input
-            )
-            "\\end{${cfg.latexEnvironment}}"
-          ]
-        );
-    in {
-      plaintext = "";
-      latex = wrapLatex (cfg.outOrdered "latex");
+        cfg.latexWrapper.output;
     };
   };
 }

@@ -7,12 +7,13 @@
   cfg = config;
 in {
   imports = [
+    ../components/standardListStringOut.nix
+    ../components/latexWrapper.nix
     (
       import
       ../components/latexEnvironment.nix
       "skills"
     )
-    ../components/standardListStringOut.nix
   ];
   options = {
     type = lib.mkOption {
@@ -38,23 +39,11 @@ in {
       '';
     };
   };
-  config = let
-    wrapLatex = input: (
-      lib.flatten
-      [
-        "\\begin{${cfg.latexEnvironment}}"
-        (
-          builtins.map
-          (x: "  " + x)
-          input
-        )
-        "\\end{${cfg.latexEnvironment}}"
-      ]
-    );
-  in {
-    _out = {
-      plaintext = "";
-      latex = wrapLatex (
+  config = {
+    latexWrapper = {
+      prefix = ["\\begin{${cfg.latexEnvironment}}"];
+      suffix = ["\\end{${cfg.latexEnvironment}}"];
+      content = (
         ["\\skillsCategory{${cfg.category}}"]
         ++ (
           builtins.map
@@ -62,6 +51,11 @@ in {
           cfg.keywords
         )
       );
+      predicate = x: "  " + x;
+    };
+    _out = {
+      plaintext = "";
+      latex = cfg.latexWrapper.output;
     };
   };
 }
