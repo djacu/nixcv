@@ -15,6 +15,13 @@ in {
       ../components/latexEnvironment.nix
       "skillsEnv"
     )
+    (
+      import
+      ../components/orderedSubsWithContent.nix
+      [
+        ./skill.nix
+      ]
+    )
   ];
   options = {
     type = lib.mkOption {
@@ -23,40 +30,14 @@ in {
       internal = true;
       description = "Type";
     };
-    content = lib.mkOption {
-      description = "Your skills.";
-      type = (
-        types.attrsOf (types.submoduleWith {
-          modules = [
-            ./skill.nix
-          ];
-        })
-      );
-    };
-
-    order = lib.mkOption {
-      description = "The order the skills are written.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
-    };
   };
-  config = let
-    contentsOrdered =
-      if builtins.isNull cfg.order
-      then builtins.attrValues cfg.content
-      else
-        (
-          builtins.map
-          (elem: cfg.content.${elem})
-          cfg.order
-        );
-    outOrdered = out: (
-      builtins.map
-      (x: x._out.${out})
-      contentsOrdered
-    );
-  in {
+  config = {
     latexWrapper = {
+      /*
+      skills is unusual in that we need to wrap pairs of skill modules in the
+      environment to get the latex to render properly. So there is not a
+      prefix or suffix but they are part of the predicate.
+      */
       prefix = [];
       suffix = [];
       content = (
@@ -72,11 +53,15 @@ in {
             )
             (lib.intersperse ["\\columnbreak"] group)
         )
-        (utils.reshape 2 (outOrdered "latex"))
+        (utils.reshape 2 (cfg.outOrdered "latex"))
       );
       predicate = content:
         [
-          "" # the skills environment needs an empty newline between environments for the formatting to look correct
+          /*
+          The skills environment needs an empty newline between environments
+          for the formatting to look correct.
+          */
+          ""
           "\\begin{${cfg.latexEnvironment}}"
         ]
         ++ content
