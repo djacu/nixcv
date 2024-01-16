@@ -20,23 +20,8 @@ in {
       ../components/latexEnvironment.nix
       "document"
     )
+    ../components/standardStringOut.nix
   ];
-  options = {
-    _out = {
-      plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-      latex = lib.mkOption {
-        description = "This modules latex output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-    };
-  };
   config = {
     _out = let
       wrapLatex = input:

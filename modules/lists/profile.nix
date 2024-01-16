@@ -8,6 +8,7 @@
 in {
   imports = [
     ../components/format.nix
+    ../components/standardStringOut.nix
   ];
   options = {
     type = lib.mkOption {
@@ -58,23 +59,6 @@ in {
         ]
         (name: faWrap name)
       );
-    };
-
-    _out = {
-      plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        internal = true;
-        readOnly = true;
-      };
-      latex = lib.mkOption {
-        description = "This modules latex output.";
-        type = types.str;
-        visible = false;
-        internal = true;
-        readOnly = true;
-      };
     };
   };
   config = {
