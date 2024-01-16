@@ -50,7 +50,7 @@ in {
       };
       latex = lib.mkOption {
         description = "This modules latex output.";
-        type = types.str;
+        type = types.listOf types.str;
         visible = false;
         internal = true;
         readOnly = true;
@@ -75,21 +75,18 @@ in {
           (x: x._out.${out})
           contentsOrdered
         );
-      wrapLatex = input:
-        lib.concatStringsSep
-        "\n"
-        (
-          lib.flatten
-          [
-            "" # white space helps with reading the latex output
-            "\\section{${cfg.header}}"
-            (
-              builtins.map
-              (x: "  " + x)
-              input
-            )
-          ]
-        );
+      wrapLatex = input: (
+        lib.flatten
+        [
+          "" # white space helps with reading the latex output
+          "\\section{${cfg.header}}"
+          (
+            builtins.map
+            (x: "  " + x)
+            input
+          )
+        ]
+      );
     in {
       plaintext = "";
       latex = wrapLatex (outOrdered "latex");
