@@ -49,7 +49,7 @@ let
 
   personal = pkgs.lib.evalModules {
     modules = [
-      ../lists/personal.nix
+      ../sections/personal.nix
       ./examplePersonal.nix
     ];
   };
