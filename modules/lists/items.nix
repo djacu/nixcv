@@ -8,6 +8,7 @@
 in {
   imports = [
     ../components/format.nix
+    ../components/orderedContent.nix
   ];
   options = {
     type = lib.mkOption {
@@ -15,11 +16,6 @@ in {
       default = "items";
       description = "Type";
       internal = true;
-    };
-    content = lib.mkOption {
-      description = "A list of list items.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
     };
 
     _out = {
@@ -45,7 +41,7 @@ in {
       latex =
         builtins.map
         (x: "\\item {${cfg.applyFormat x}}")
-        cfg.content;
+        cfg.contentsOrdered;
     };
   };
 }

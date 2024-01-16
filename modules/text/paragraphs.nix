@@ -5,10 +5,10 @@
 }: let
   inherit (lib) types;
   cfg = config;
-  modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
   imports = [
     ../components/format.nix
+    ../components/orderedContent.nix
   ];
   options = {
     type = lib.mkOption {
@@ -16,16 +16,6 @@ in {
       default = "paragraphs";
       description = "Type";
       internal = true;
-    };
-    content = lib.mkOption {
-      description = "A label for the list items.";
-      type = types.either (types.listOf types.str) (types.attrsOf types.str);
-    };
-
-    order = lib.mkOption {
-      description = "The order in which the contents are written.";
-      type = types.nullOr (types.listOf types.str);
-      default = null;
     };
 
     _out = {
@@ -46,18 +36,6 @@ in {
     };
   };
   config = let
-    contentsOrdered =
-      if (builtins.typeOf cfg.content == "list")
-      then cfg.content
-      else if builtins.isNull cfg.order
-      then builtins.attrValues cfg.content
-      else
-        (
-          builtins.map
-          (elem: cfg.content.${elem})
-          cfg.order
-        );
-
     wrapLatex = input: (
       lib.flatten
       [
@@ -73,7 +51,7 @@ in {
   in {
     _out = {
       plaintext = "";
-      latex = wrapLatex contentsOrdered;
+      latex = wrapLatex cfg.contentsOrdered;
     };
   };
 }
