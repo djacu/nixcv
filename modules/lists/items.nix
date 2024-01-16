@@ -9,6 +9,7 @@ in {
   imports = [
     ../components/format.nix
     ../components/orderedContent.nix
+    ../components/standardListStringOut.nix
   ];
   options = {
     type = lib.mkOption {
@@ -16,23 +17,6 @@ in {
       default = "items";
       description = "Type";
       internal = true;
-    };
-
-    _out = {
-      plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        internal = true;
-        readOnly = true;
-      };
-      latex = lib.mkOption {
-        description = "This modules latex output.";
-        type = types.listOf types.str;
-        visible = false;
-        internal = true;
-        readOnly = true;
-      };
     };
   };
   config = {

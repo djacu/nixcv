@@ -13,6 +13,7 @@ in {
       ../components/latexEnvironment.nix
       "skillsEnv"
     )
+    ../components/standardListStringOut.nix
   ];
   options = {
     type = lib.mkOption {
@@ -36,21 +37,6 @@ in {
       description = "The order the skills are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
-    };
-
-    _out = {
-      plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-      latex = lib.mkOption {
-        description = "This modules latex output.";
-        type = types.listOf types.str;
-        visible = false;
-        readOnly = true;
-      };
     };
   };
   config = {
