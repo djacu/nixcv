@@ -40,7 +40,7 @@ in {
       };
       latex = lib.mkOption {
         description = "This modules latex output.";
-        type = types.raw;
+        type = types.listOf types.str;
         visible = false;
         readOnly = true;
       };
