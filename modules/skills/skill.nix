@@ -6,6 +6,13 @@
   inherit (lib) types;
   cfg = config;
 in {
+  imports = [
+    (
+      import
+      ../components/latexEnvironment.nix
+      "skills"
+    )
+  ];
   options = {
     type = lib.mkOption {
       type = lib.types.enum ["skill"];
@@ -51,13 +58,13 @@ in {
     wrapLatex = input: (
       lib.flatten
       [
-        "\\begin{skills}"
+        "\\begin{${cfg.latexEnvironment}}"
         (
           builtins.map
           (x: "  " + x)
           input
         )
-        "\\end{skills}"
+        "\\end{${cfg.latexEnvironment}}"
       ]
     );
   in {

@@ -7,6 +7,13 @@
   cfg = config;
   utils = import ../../lib/utils.nix {inherit lib;};
 in {
+  imports = [
+    (
+      import
+      ../components/latexEnvironment.nix
+      "skillsEnv"
+    )
+  ];
   options = {
     type = lib.mkOption {
       type = lib.types.enum ["skills"];
@@ -69,11 +76,11 @@ in {
             group:
               [
                 "" # the skills environment needs an empty newline between environments for the formatting to look correct
-                "\\begin{skillsEnv}"
+                "\\begin{${cfg.latexEnvironment}}"
               ]
               ++ group
               ++ [
-                "\\end{skillsEnv}"
+                "\\end{${cfg.latexEnvironment}}"
               ]
           )
           (

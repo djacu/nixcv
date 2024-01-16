@@ -15,6 +15,11 @@ in {
         ../sections/section.nix
       ]
     )
+    (
+      import
+      ../components/latexEnvironment.nix
+      "document"
+    )
   ];
   options = {
     _out = {
@@ -40,13 +45,13 @@ in {
         (
           lib.flatten
           [
-            "\\begin{document}"
+            "\\begin{${cfg.latexEnvironment}}"
             (
               builtins.map
               (x: "  " + x)
               input
             )
-            "\\end{document}"
+            "\\end{${cfg.latexEnvironment}}"
           ]
         );
     in {

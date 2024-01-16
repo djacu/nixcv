@@ -9,6 +9,11 @@ in {
   imports = [
     ../components/format.nix
     ../components/orderedContent.nix
+    (
+      import
+      ../components/latexEnvironment.nix
+      "blockquote"
+    )
   ];
   options = {
     type = lib.mkOption {
@@ -39,13 +44,13 @@ in {
     wrapLatex = input: (
       lib.flatten
       [
-        "\\begin{blockquote}"
+        "\\begin{${cfg.latexEnvironment}}"
         (
           builtins.map
           (x: "  " + x)
           input
         )
-        "\\end{blockquote}"
+        "\\end{${cfg.latexEnvironment}}"
       ]
     );
   in {

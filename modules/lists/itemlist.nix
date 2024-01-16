@@ -17,6 +17,11 @@ in {
         ./profile.nix
       ]
     )
+    (
+      import
+      ../components/latexEnvironment.nix
+      "nolabel"
+    )
   ];
   options = {
     type = lib.mkOption {
@@ -24,11 +29,6 @@ in {
       default = "itemlist";
       description = "Type";
       internal = true;
-    };
-    listname = lib.mkOption {
-      type = types.str;
-      default = "nolabel";
-      description = "The LaTeX list environment name.";
     };
 
     _out = {
@@ -53,13 +53,13 @@ in {
       wrapLatex = input: (
         lib.flatten
         [
-          "\\begin{${cfg.listname}}"
+          "\\begin{${cfg.latexEnvironment}}"
           (
             builtins.map
             (x: "  " + x)
             input
           )
-          "\\end{${cfg.listname}}"
+          "\\end{${cfg.latexEnvironment}}"
         ]
       );
     in {
