@@ -15,6 +15,7 @@
     (lib.evalModules {
       modules = [
         ./modules/text/paragraphs.nix
+        ./modules/text/text.nix
       ];
     })
     .config
