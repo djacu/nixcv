@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/format.nix
@@ -25,7 +27,7 @@ in {
   config = {
     _out = {
       plaintext = "";
-      latex = "{${cfg.applyFormat cfg.content}}";
+      latex = "{${cfg.applyFormat (stringsLib.escapeLatex cfg.content)}}";
     };
   };
 }

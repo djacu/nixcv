@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/format.nix
@@ -24,7 +26,7 @@ in {
       plaintext = "";
       latex =
         builtins.map
-        (x: "\\item {${cfg.applyFormat x}}")
+        (x: "\\item {${cfg.applyFormat (stringsLib.escapeLatex x)}}")
         cfg.contentsOrdered;
     };
   };

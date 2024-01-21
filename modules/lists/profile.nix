@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/format.nix
@@ -72,7 +74,7 @@ in {
           [
             "\\item"
             (lib.optional (! builtins.isNull cfg.icon) "[${cfg.faicons.${cfg.icon}}]")
-            "{${cfg.applyFormat cfg.content}}"
+            "{${cfg.applyFormat (stringsLib.escapeLatex cfg.content)}}"
           ]
         );
     };

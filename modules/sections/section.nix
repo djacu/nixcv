@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/standardListStringOut.nix
@@ -38,7 +40,7 @@ in {
     latexWrapper = {
       prefix = [
         "" # white space helps with reading the latex output
-        "\\section{${cfg.header}}"
+        "\\section{${stringsLib.escapeLatex cfg.header}}"
       ];
       suffix = [];
       content = cfg.outOrdered "latex";

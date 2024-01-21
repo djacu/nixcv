@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/standardListStringOut.nix
@@ -44,10 +46,10 @@ in {
       prefix = ["\\begin{${cfg.latexEnvironment}}"];
       suffix = ["\\end{${cfg.latexEnvironment}}"];
       content = (
-        ["\\skillsCategory{${cfg.category}}"]
+        ["\\skillsCategory{${stringsLib.escapeLatex cfg.category}}"]
         ++ (
           builtins.map
-          (x: "\\skillsKeyword{${x}}")
+          (x: "\\skillsKeyword{${stringsLib.escapeLatex x}}")
           cfg.keywords
         )
       );

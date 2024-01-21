@@ -5,6 +5,8 @@
 }: let
   inherit (lib) types;
   cfg = config;
+
+  stringsLib = import ../../lib/strings.nix {inherit lib;};
 in {
   imports = [
     ../components/format.nix
@@ -30,7 +32,7 @@ in {
       prefix = ["\\begin{${cfg.latexEnvironment}}"];
       suffix = ["\\end{${cfg.latexEnvironment}}"];
       content = cfg.contentsOrdered;
-      predicate = x: "  " + x;
+      predicate = x: "  " + (stringsLib.escapeLatex x);
     };
     _out = {
       plaintext = "";
