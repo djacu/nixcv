@@ -15,6 +15,7 @@
     (lib.evalModules {
       modules = [
         ./modules/biblatex/online.nix
+        ./modules/biblatex/bibliography.nix
       ];
     })
     .config

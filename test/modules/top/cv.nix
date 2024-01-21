@@ -23,6 +23,7 @@ in {
             "objective"
             "work-exp"
             "skillsSection"
+            "bibliographySection"
             "referencesSection"
           ];
           content = {
@@ -304,6 +305,28 @@ in {
                 };
               };
             }; # skillsSection
+            bibliographySection = {
+              type = "section";
+              header = "Publications & Talks";
+              order = [
+                "bibTalks"
+                "bibBlogs"
+              ];
+              content = {
+                bibTalks = {
+                  type = "bibliography";
+                  heading = "subbibliography";
+                  title = "Talks";
+                  keyword = "talk";
+                };
+                bibBlogs = {
+                  type = "bibliography";
+                  heading = "subbibliography";
+                  title = "Blogs";
+                  keyword = "blog";
+                };
+              };
+            };
             referencesSection = {
               type = "section";
               header = "References";

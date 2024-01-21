@@ -16,6 +16,7 @@ in {
         ../lists/itemlist.nix
         ../text/paragraphs.nix
         ../skills/skills.nix
+        ../biblatex/bibliography.nix
       ]
     )
   ];
