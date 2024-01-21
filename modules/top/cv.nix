@@ -9,6 +9,7 @@ in {
   imports = [
     ../components/standardStringOut.nix
     ../components/latexWrapper.nix
+    ../biblatex/bibresources.nix
     (
       import
       ../components/orderedTaggedContent.nix

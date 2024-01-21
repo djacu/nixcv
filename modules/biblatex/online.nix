@@ -28,8 +28,16 @@
 in {
   imports = [
     ./common.nix
+    ../components/standardStringOut.nix
+    ../components/bibresourceStringOut.nix
   ];
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["online"];
+      default = "online";
+      description = "Type";
+      internal = true;
+    };
     requiredFields = {
       author = lib.mkOption {
         type = types.str;
@@ -121,23 +129,10 @@ in {
         default = null;
       };
     };
-    _out = {
-      plaintext = lib.mkOption {
-        description = "This modules plaintext output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-      bibEntry = lib.mkOption {
-        description = "This modules biblatex entry output.";
-        type = types.str;
-        visible = false;
-        readOnly = true;
-      };
-    };
   };
   config = {
     _out = {
+      latex = "";
       plaintext =
         lib.concatStringsSep
         " "
@@ -217,7 +212,7 @@ in {
             })
           ]
         );
-      bibEntry = let
+      bibliography = let
         allFields = (
           lib.filterAttrs
           (name: value: ! builtins.isNull value)

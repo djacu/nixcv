@@ -9,6 +9,7 @@ in {
           ../../../modules/top/cv.nix
           [
             "basic"
+            "bibliography"
           ]
         );
       };
@@ -16,7 +17,7 @@ in {
   };
   config = {
     test = {
-      cv = {
+      cv = rec {
         basic = {
           order = [
             "personal"
@@ -410,7 +411,44 @@ in {
               };
             }; # referencesSection
           };
-        };
+        }; # basic
+
+        bibliography =
+          basic
+          // {
+            bibresources = {
+              someEntry = {
+                type = "online";
+                entryKey = "use-nix";
+                requiredFields = {
+                  author = "John Doe";
+                  title = "How to use Nix";
+                  date = "2022-04";
+                };
+                optionalFields = {
+                  language = "english";
+                  organization = "NixCon";
+                  url = "https://nixcon.org/talks/how-to-use-nix";
+                  keywords = "talk,nix";
+                };
+              };
+              someOtherEntry = {
+                type = "online";
+                entryKey = "use-modules";
+                requiredFields = {
+                  author = "John Doe";
+                  title = "How to use modules";
+                  date = "2022-04";
+                };
+                optionalFields = {
+                  language = "english";
+                  organization = "NixCon";
+                  url = "https://nixcon.org/talks/how-to-use-modules";
+                  keywords = "talk,nix,modules";
+                };
+              };
+            };
+          };
       };
     };
   };
