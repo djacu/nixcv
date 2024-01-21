@@ -53,6 +53,13 @@ let
       ./examplePersonal.nix
     ];
   };
+
+  real = pkgs.lib.evalModules {
+    modules = [
+      ../top/nixcv.nix
+      ../../examples/generic.nix
+    ];
+  };
 in {
   inherit
     nixcv
@@ -62,5 +69,6 @@ in {
     skill
     skills
     text
+    real
     ;
 }
