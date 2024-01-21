@@ -26,7 +26,11 @@ in {
   ];
   config = {
     latexWrapper = {
-      prefix = ["\\begin{${cfg.latexEnvironment}}"];
+      prefix = [
+        "\\input{cv}"
+        ""
+        "\\begin{${cfg.latexEnvironment}}"
+      ];
       suffix = ["\\end{${cfg.latexEnvironment}}"];
       content = cfg.outOrdered "latex";
       predicate = x: "  " + x;
