@@ -1286,7 +1286,73 @@
             }; # hollenbeck
           }; # content
         }; # referencesSection
-      };
-    };
+      }; # content
+
+      bibresources = {
+        nixcon2022 = {
+          type = "online";
+          entryKey = "nixcon2022";
+          requiredFields = {
+            author = "Daniel Baker";
+            title = "jupyterWith: Making Jupyter Reproducible";
+            date = "2022-10";
+          };
+          optionalFields = {
+            url = "https://www.youtube.com/watch?v=hx4fQOjgg3U";
+            language = "english";
+            organization = "NixCon";
+            keywords = "talk,conference,nixcon,nix,jupyter,jupyenv";
+          };
+        }; # nixcon2022
+
+        jupyenv010 = {
+          type = "online";
+          entryKey = "jupyenv010";
+          requiredFields = {
+            author = "Daniel Baker";
+            title = "Announcing jupyenv 0.1.0";
+            date = "2023-02";
+          };
+          optionalFields = {
+            url = "https://www.tweag.io/blog/2023-02-02-jupyenv-0-1-0/";
+            language = "english";
+            organization = "Tweag";
+            keywords = "blog,tweag,nix,jupyter,jupyenv";
+          };
+        }; # jupyenv010
+
+        jupyterwithNext = {
+          type = "online";
+          entryKey = "jupyterwithNext";
+          requiredFields = {
+            author = "Daniel Baker";
+            title = "blog,tweag,nix,jupyter,jupyenv";
+            date = "2022-11";
+          };
+          optionalFields = {
+            url = "https://www.tweag.io/blog/2022-11-17-jupyter-with-next/";
+            language = "english";
+            organization = "Tweag";
+            keywords = "blog,tweag,nix,jupyter";
+          };
+        }; # jupyterwithNext
+
+        unittestnix = {
+          type = "online";
+          entryKey = "unittestnix";
+          requiredFields = {
+            author = "Daniel Baker";
+            title = "Unit Test Your Nix Code";
+            date = "2022-09";
+          };
+          optionalFields = {
+            url = "https://www.tweag.io/blog/2022-09-01-unit-test-your-nix-code/";
+            language = "english";
+            organization = "Tweag";
+            keywords = "blog,tweag,nix";
+          };
+        }; # unittestnix
+      }; # bibresources
+    }; # generic
   };
 }
