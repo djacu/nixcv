@@ -31,6 +31,11 @@
           ;
       };
 
+      packagingLib = import ./lib/packaging.nix {
+        inherit pkgs tex;
+        directory = ./.;
+      };
+
       nixcvEvalModules = pkgs.lib.evalModules {
         # FIXME: Try using special args like `specialArgs = {modules = [ ... ]};
         # Might be able to get section to build properly.
@@ -41,74 +46,48 @@
           # {_module.check = false;}
         ];
       };
-      #examples = lib.listToAttrs (
-      #  builtins.map
-      #  (
-      #    example:
-      #      lib.nameValuePair
-      #      "example-${example.fileType}-${lib.removeSuffix ".nix" example.fileName}"
-      #      (pkgs.lib.evalModules {
-      #        modules = [
-      #          ({config, ...}: {config._module.args = {inherit pkgs;};})
-      #          ./modules/toplevel/nixcv.nix
-      #          ./examples/${example.fileName}
-      #        ];
-      #      })
-      #      .config
-      #      .nixcv
-      #      ."${lib.removeSuffix ".nix" example.fileName}"
-      #      ._out
-      #      ."${example.fileType}File"
-      #  )
-      #  (
-      #    lib.cartesianProductOfSets
-      #    {
-      #      fileType = ["plaintext" "latex"];
-      #      fileName = builtins.attrNames (builtins.readDir ./examples);
-      #    }
-      #  )
-      #);
     in {
-      packages = {
-        document = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "latex-demo-document";
-          src = self;
-          propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
-          phases = ["unpackPhase" "buildPhase" "installPhase"];
-          SCRIPT = ''
-            #!/bin/bash
-            prefix=${builtins.placeholder "out"}
-            export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
-            DIR=$(mktemp -d)
-            RES=$(pwd)/document.pdf
-            cd $prefix/share
-            mkdir -p "$DIR/.texcache/texmf-var"
-            env TEXMFHOME="$DIR/.cache" \
-                TEXMFVAR="$DIR/.cache/texmf-var" \
-              latexmk -interaction=nonstopmode -pdf -pdflatex \
-              -output-directory="$DIR" \
-              document.tex
-            mv "$DIR/document.pdf" $RES
-            rm -rf "$DIR"
-          '';
-          buildPhase = ''
-            printenv SCRIPT >latex-demo-document
-          '';
-          installPhase = ''
-            mkdir -p $out/{bin,share}
-            cp document.tex $out/share/document.tex
-            cp ./latex/cv.tex $out/share/cv.tex
-            cp self.bib $out/share/self.bib
-            cp latex-demo-document $out/bin/latex-demo-document
-            chmod u+x $out/bin/latex-demo-document
-          '';
-        };
-      };
-      #  // examples;
+      packages =
+        {
+          document = pkgs.stdenvNoCC.mkDerivation rec {
+            name = "latex-demo-document";
+            src = self;
+            propagatedBuildInputs = [pkgs.coreutils pkgs.biber tex];
+            phases = ["unpackPhase" "buildPhase" "installPhase"];
+            SCRIPT = ''
+              #!/bin/bash
+              prefix=${builtins.placeholder "out"}
+              export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
+              DIR=$(mktemp -d)
+              RES=$(pwd)/document.pdf
+              cd $prefix/share
+              mkdir -p "$DIR/.texcache/texmf-var"
+              env TEXMFHOME="$DIR/.cache" \
+                  TEXMFVAR="$DIR/.cache/texmf-var" \
+                latexmk -interaction=nonstopmode -pdf -pdflatex \
+                -output-directory="$DIR" \
+                document.tex
+              mv "$DIR/document.pdf" $RES
+              rm -rf "$DIR"
+            '';
+            buildPhase = ''
+              printenv SCRIPT >latex-demo-document
+            '';
+            installPhase = ''
+              mkdir -p $out/{bin,share}
+              cp document.tex $out/share/document.tex
+              cp ./latex/cv.tex $out/share/cv.tex
+              cp self.bib $out/share/self.bib
+              cp latex-demo-document $out/bin/latex-demo-document
+              chmod u+x $out/bin/latex-demo-document
+            '';
+          };
+        }
+        // packagingLib.examples;
 
-      #checks =
-      #  {}
-      #  // examples;
+      checks =
+        {}
+        // packagingLib.examples;
 
       test = lib.listToAttrs (
         builtins.map
