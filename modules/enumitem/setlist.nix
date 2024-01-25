@@ -8,6 +8,7 @@
 in {
   imports = [
     ../components/standardStringOut.nix
+    ./setlistOptions.nix
   ];
   options = {
     type = lib.mkOption {
@@ -49,7 +50,18 @@ in {
           (lib.concatMapStringsSep "," builtins.toString cfg.levels)
           "]"
           "{"
-          "label={${cfg.label}}"
+          (
+            lib.concatStringsSep
+            ", "
+            (
+              lib.remove
+              ""
+              [
+                "label={${cfg.label}}"
+                "${cfg.format._out.latex}"
+              ]
+            )
+          )
           "}"
         ];
     };
