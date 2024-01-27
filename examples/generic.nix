@@ -872,6 +872,7 @@
           content = {
             foss = {
               type = "itemlist";
+              latexEnvironment = "extra";
               order = [
                 "header"
                 "details"
@@ -887,6 +888,7 @@
                 };
                 details = {
                   type = "itemlist";
+                  latexEnvironment = "extra";
                   content = {
                     details = {
                       type = "items";
@@ -905,6 +907,7 @@
 
             personal = {
               type = "itemlist";
+              latexEnvironment = "extra";
               order = [
                 "header"
                 "details"
@@ -920,6 +923,7 @@
                 };
                 details = {
                   type = "itemlist";
+                  latexEnvironment = "extra";
                   content = {
                     details = {
                       type = "items";
