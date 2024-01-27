@@ -34,6 +34,8 @@ in {
             output = lib.mkOption {
               description = "The latex content wrapped.";
               type = types.listOf types.str;
+              visible = false;
+              internal = true;
               default = (
                 lib.flatten
                 [
