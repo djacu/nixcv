@@ -1,2 +1,7 @@
 *.pdf
+
+### Nix ###
 result
+
+### Site ###
+site/.cache

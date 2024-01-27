@@ -3,16 +3,25 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    poetry2nix.url = "github:nix-community/poetry2nix";
+    poetry2nix.inputs.flake-utils.follows = "flake-utils";
+    poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
     flake-utils,
+    poetry2nix,
   }:
     flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       lib = pkgs.lib;
+      inherit
+        (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;})
+        mkPoetryEnv
+        ;
+
       tex = pkgs.texlive.combine {
         inherit
           (pkgs.texlive)
@@ -46,7 +55,45 @@
           # {_module.check = false;}
         ];
       };
+
+      site-env = mkPoetryEnv {
+        projectDir = self + /site;
+        python = pkgs.python311;
+      };
+      #
+      #mkdocs = pkgs.python311.withPackages (ps: [
+      #  ps.mkdocs
+      #  ps.mkdocs-material
+      #]);
+      #
+      #site = pkgs.stdenvNoCC.mkDerivation {
+      #  name = "nixcv-site";
+      #  src = self + "/site";
+      #  nativeBuildInputs = [mkdocs];
+      #
+      #  buildPhase = ''
+      #    mkdocs build --site-dir dist
+      #  '';
+      #  installPhase = ''
+      #    mkdir $out
+      #    cp -R dist/* $out/
+      #  '';
+      #};
     in {
+      devShells = {
+        poetry = pkgs.mkShell {
+          packages = [
+            pkgs.poetry
+            pkgs.python311
+          ];
+        };
+        site = pkgs.mkShell {
+          buildInputs = [
+            pkgs.poetry
+            site-env
+          ];
+        };
+      };
       packages =
         {
           document = pkgs.stdenvNoCC.mkDerivation rec {
