@@ -16,6 +16,7 @@ in {
         (types.listOf taggedSubs)
         (types.attrsOf taggedSubs)
       );
+      default = {};
     };
     order = lib.mkOption {
       description = "The order in which the contents are written.";
