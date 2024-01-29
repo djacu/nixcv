@@ -31,8 +31,8 @@ in {
     };
     header = lib.mkOption {
       description = "The section header.";
-      type = types.str;
-      default = "";
+      type = types.nullOr types.str;
+      default = null;
       example = "Experience";
     };
   };
