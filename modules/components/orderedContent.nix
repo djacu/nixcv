@@ -10,6 +10,7 @@ in {
     content = lib.mkOption {
       description = "Content for this submodule.";
       type = types.either (types.listOf types.str) (types.attrsOf types.str);
+      default = {};
     };
     order = lib.mkOption {
       description = "The order in which the contents are written.";

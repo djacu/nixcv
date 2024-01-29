@@ -27,11 +27,13 @@ in {
     category = lib.mkOption {
       description = "A category name for the skills.";
       type = types.str;
+      default = "";
       example = "Web Development";
     };
     keywords = lib.mkOption {
       description = "The skills for this category.";
       type = types.listOf types.str;
+      default = [];
       example = ''
         [
           "HTML"

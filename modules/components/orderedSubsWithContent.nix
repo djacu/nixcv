@@ -17,6 +17,7 @@ in {
         (types.listOf subsWith)
         (types.attrsOf subsWith)
       );
+      default = {};
     };
     order = lib.mkOption {
       description = "The order in which the contents are written.";
