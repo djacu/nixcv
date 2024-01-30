@@ -242,7 +242,9 @@
   */
   optionToMarkdown = (
     opt: ''
-      ## ${opt.name}
+      ---
+
+      ## ${lib.escapeXML opt.name}
 
       ${opt.description}
 
