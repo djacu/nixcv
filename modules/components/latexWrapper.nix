@@ -9,6 +9,8 @@ in {
   options = {
     latexWrapper = lib.mkOption {
       description = "Submodules for wrapping LaTeX outputs.";
+      visible = false;
+      internal = true;
       type = (
         types.submodule {
           options = {
