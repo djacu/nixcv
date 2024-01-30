@@ -8,6 +8,28 @@ nav:
   - Home: index.md
   - Documentation:
     - documentation/index.md
+  - Options:
+    - Top:
+      - documentation/modules/top/nixcv.md
+      - documentation/modules/top/cv.md
+    - Sections:
+      - documentation/modules/sections/section.md
+      - documentation/modules/sections/personal.md
+    - Lists:
+      - documentation/modules/lists/itemlist.md
+      - documentation/modules/lists/item.md
+      - documentation/modules/lists/items.md
+      - documentation/modules/lists/profile.md
+    - Text:
+      - documentation/modules/text/text.md
+      - documentation/modules/text/paragraphs.md
+    - Skills:
+      - documentation/modules/skills/skills.md
+      - documentation/modules/skills/skill.md
+    - Bibliography:
+      - documentation/modules/biblatex/bibliography.md
+      - documentation/modules/biblatex/bibresources.md
+      - documentation/modules/biblatex/online.md
   - Blog:
     - blog/index.md
 
