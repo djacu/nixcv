@@ -45,16 +45,9 @@
         directory = ./.;
       };
 
-      nixcvEvalModules = pkgs.lib.evalModules {
-        # FIXME: Try using special args like `specialArgs = {modules = [ ... ]};
-        # Might be able to get section to build properly.
-        modules = [
-          ./modules/nixcv.nix
-          # why is this here?
-          # src says "Whether to check whether all option definitions have matching declarations."
-          # {_module.check = false;}
-        ];
-      };
+      documentationLib = import ./lib/documentation.nix {inherit self pkgs lib;};
+
+      moduleMarkdownDocs = documentationLib.generateMarkdownDocumentation {};
 
       site-env = mkPoetryEnv {
         projectDir = self + /site;
@@ -130,11 +123,21 @@
             '';
           };
         }
-        // packagingLib.examples;
+        // packagingLib.examples
+        // {
+          inherit
+            moduleMarkdownDocs
+            ;
+        };
 
       checks =
         {}
-        // packagingLib.examples;
+        // packagingLib.examples
+        // {
+          inherit
+            moduleMarkdownDocs
+            ;
+        };
 
       test = lib.listToAttrs (
         builtins.map
@@ -152,13 +155,5 @@
           )
         )
       );
-
-      moduleOptions = pkgs.nixosOptionsDoc {
-        options = (
-          builtins.removeAttrs
-          nixcvEvalModules.options
-          ["_module"]
-        );
-      };
     });
 }
