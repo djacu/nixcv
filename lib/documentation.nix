@@ -123,6 +123,15 @@
         (builtins.map removeTrailingNewlines)
         (lib.concatStringsSep "\n\n")
       ];
+
+    optionsJSON =
+      lib.foldl'
+      (acc: func: func acc)
+      path
+      [
+        pathToDocList
+        externalOptions
+      ];
   };
 
   /*
@@ -353,4 +362,24 @@
       (pathToModuleInfo args)
       (getFilteredFiles args)
     );
+
+  /*
+  The module options evaluated but not written to the nix store.
+  Useful for inspecting the attrset structure.
+  */
+  evaluatedModules = args: (
+    builtins.map
+    (pathToModuleInfo args)
+    (getFilteredFiles args)
+  );
+
+  copyMarkdownDocs =
+    pkgs.writeShellScriptBin
+    "copy-markdown-docs"
+    ''
+      #!/usr/bin/env bash
+      nix build .\#moduleMarkdownDocs
+      cp -r ./result/* ./site/docs/documentation/
+      chmod +w -R ./site/docs/documentation/modules
+    '';
 }

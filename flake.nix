@@ -130,6 +130,17 @@
             ;
         };
 
+      apps = {
+        copyMarkdownDocs = {
+          type = "app";
+          program = "${documentationLib.copyMarkdownDocs}/bin/copy-markdown-docs";
+        };
+      };
+
+      extra = {
+        evaluatedModules = documentationLib.evaluatedModules {};
+      };
+
       checks =
         {}
         // packagingLib.examples
