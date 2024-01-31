@@ -54,7 +54,7 @@ in {
             (lib.optional (options.begin.isDefined) cfg.begin)
             "}%"
             "{% end"
-            (lib.optional (options.begin.isDefined) cfg.end)
+            (lib.optional (options.end.isDefined) cfg.end)
             "}%"
           ]
         );
