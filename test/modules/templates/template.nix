@@ -3,10 +3,10 @@
 in {
   options = {
     test = {
-      templates = lib.mkOption {
+      template = lib.mkOption {
         type = (
           testUtils.createTestType
-          ../../../modules/templates/templates.nix
+          ../../../modules/templates/template.nix
           [
             "basic"
           ]
@@ -16,9 +16,9 @@ in {
   };
   config = {
     test = {
-      templates = {
+      template = {
         basic = {
-          content = {
+          template = {
             blockquote = {
               type = "newenvironment";
               name = "blockquote";
