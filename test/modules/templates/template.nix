@@ -48,6 +48,64 @@ in {
               before-code = ''\MakeUppercase'';
               after-code = ''\color{black}\titlerule'';
             };
+            nolabelList = {
+              type = "enumitem";
+              enumitem = {
+                nolabelNew = {
+                  type = "newlist";
+                  name = "nolabel";
+                  parent = "itemize";
+                };
+                nolabelOpt1 = {
+                  type = "setlist";
+                  name = "nolabel";
+                  levels = [1];
+                  format = {
+                    spacing = {
+                      parsep = "0em";
+                      itemsep = "1em";
+                    };
+                  };
+                };
+                nolabelOpt2 = {
+                  type = "setlist";
+                  name = "nolabel";
+                  levels = [2];
+                  format = {
+                    spacing = {
+                      leftmargin = "1em";
+                    };
+                    compact = {
+                      nosep = true;
+                    };
+                  };
+                };
+                nolabelOpt3 = {
+                  type = "setlist";
+                  name = "nolabel";
+                  levels = [3];
+                  format = {
+                    spacing = {
+                      leftmargin = "1.2em";
+                      topsep = "0.9em";
+                    };
+                  };
+                };
+                nolabelOpt4 = {
+                  type = "setlist";
+                  name = "nolabel";
+                  levels = [4];
+                  format = {
+                    spacing = {
+                      leftmargin = "3em";
+                      topsep = "0.4em";
+                      itemindent = "-1em";
+                      rightmargin = "2em";
+                    };
+                  };
+                };
+              };
+            };
           };
         };
       };

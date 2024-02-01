@@ -37,7 +37,6 @@
   getFilteredFiles = {
     modulesDir ? self + "/modules",
     pathFilter ? [
-      "enumitem" # TODO - remove when ready
       "component"
       "generic"
     ],

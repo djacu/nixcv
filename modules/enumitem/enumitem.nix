@@ -6,7 +6,7 @@
   inherit (lib) types;
   cfg = config;
 
-  contentName = "template";
+  contentName = "enumitem";
 in {
   imports = [
     (
@@ -15,9 +15,8 @@ in {
       {
         name = contentName;
         submodules = [
-          ../templates/newenvironment.nix
-          ../titlesec/titleformat.nix
-          ../enumitem/enumitem.nix
+          ./newlist.nix
+          ./setlist.nix
         ];
         ordered = false;
       }
@@ -25,9 +24,16 @@ in {
   ];
 
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["enumitem"];
+      default = "enumitem";
+      description = "Type";
+      internal = true;
+    };
+
     _out = {
-      template = lib.mkOption {
-        description = "This modules template output.";
+      latex = lib.mkOption {
+        description = "This modules enumitem output.";
         type = types.str;
         visible = false;
         internal = true;
@@ -38,9 +44,9 @@ in {
 
   config = {
     _out = {
-      template =
+      latex =
         lib.concatStringsSep
-        "\n\n"
+        "\n"
         (cfg."${contentName}OutOrdered" "latex");
     };
   };
