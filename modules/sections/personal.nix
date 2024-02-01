@@ -10,7 +10,7 @@ in {
     ../components/standardListStringOut.nix
     (
       import
-      ../components/orderedTaggedContent.nix
+      ../components/taggedContent.nix
       {
         submodules = [
           ../lists/itemlist.nix

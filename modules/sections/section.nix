@@ -13,7 +13,7 @@ in {
     ../components/latexWrapper.nix
     (
       import
-      ../components/orderedTaggedContent.nix
+      ../components/taggedContent.nix
       {
         submodules = [
           ../lists/itemlist.nix

@@ -13,7 +13,7 @@ in {
     ../templates/template.nix
     (
       import
-      ../components/orderedTaggedContent.nix
+      ../components/taggedContent.nix
       {
         submodules = [
           ../sections/personal.nix
