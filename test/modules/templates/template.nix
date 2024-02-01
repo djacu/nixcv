@@ -106,6 +106,40 @@ in {
                 };
               };
             };
+            rawlatexSettings = {
+              type = "rawlatex";
+              latex = ''
+                % Bibliography indented
+                % https://tex.stackexchange.com/questions/342467/indent-on-printbibliography
+                \defbibenvironment{bibliography}
+                {\list%
+                    {%
+                        \printtext[labelnumberwidth]{%
+                            \printfield{labelprefix}%
+                            \printfield{labelnumber}%
+                        }%
+                    }%
+                    {%
+                        \setlength{\labelwidth}{\labelnumberwidth}%
+                        \setlength{\leftmargin}{4em}%
+                        \setlength{\labelsep}{\biblabelsep}%
+                        \addtolength{\leftmargin}{\labelsep}%
+                        \addtolength{\leftmargin}{\leftskip}%<----- here
+                        \setlength{\itemsep}{\bibitemsep}%
+                        \setlength{\parsep}{\bibparsep}%
+                    }%
+                    \renewcommand*{\makelabel}[1]{\hss##1}}%
+                {\endlist}
+                {\item}
+
+                % see \defbibheading def in biblatex docs ~ pg.99
+                % see \titleformat def in titlesec docs ~ pg.4
+                \defbibheading{subbibliography}[\bibname]{%
+                    \titleformat{\subsection}{\large\bfseries}{}{}{\hspace{2em}}%
+                    \subsection*{#1}%
+                }
+              '';
+            };
           };
         };
       };

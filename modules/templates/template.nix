@@ -18,6 +18,7 @@ in {
           ../templates/newenvironment.nix
           ../titlesec/titleformat.nix
           ../enumitem/enumitem.nix
+          ../components/rawlatex.nix
         ];
         ordered = false;
       }
