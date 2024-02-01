@@ -11,10 +11,12 @@ in {
     (
       import
       ../components/orderedTaggedContent.nix
-      [
-        ../lists/itemlist.nix
-        ../text/text.nix
-      ]
+      {
+        submodules = [
+          ../lists/itemlist.nix
+          ../text/text.nix
+        ];
+      }
     )
   ];
   options = {

@@ -14,10 +14,12 @@ in {
     (
       import
       ../components/orderedTaggedContent.nix
-      [
-        ../sections/personal.nix
-        ../sections/section.nix
-      ]
+      {
+        submodules = [
+          ../sections/personal.nix
+          ../sections/section.nix
+        ];
+      }
     )
     (
       import

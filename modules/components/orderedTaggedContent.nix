@@ -1,4 +1,4 @@
-submodules: {
+{submodules}: {
   lib,
   config,
   ...

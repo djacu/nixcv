@@ -14,12 +14,14 @@ in {
     (
       import
       ../components/orderedTaggedContent.nix
-      [
-        ../lists/itemlist.nix
-        ../text/paragraphs.nix
-        ../skills/skills.nix
-        ../biblatex/bibliography.nix
-      ]
+      {
+        submodules = [
+          ../lists/itemlist.nix
+          ../text/paragraphs.nix
+          ../skills/skills.nix
+          ../biblatex/bibliography.nix
+        ];
+      }
     )
   ];
   options = {

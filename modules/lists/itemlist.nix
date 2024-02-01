@@ -12,12 +12,14 @@ in {
     (
       import
       ../components/orderedTaggedContent.nix
-      [
-        ./itemlist.nix
-        ./item.nix
-        ./items.nix
-        ./profile.nix
-      ]
+      {
+        submodules = [
+          ./itemlist.nix
+          ./item.nix
+          ./items.nix
+          ./profile.nix
+        ];
+      }
     )
     (
       import
