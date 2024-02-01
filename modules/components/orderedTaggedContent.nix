@@ -1,4 +1,7 @@
-{submodules}: {
+{
+  submodules,
+  ordered ? true,
+}: {
   lib,
   config,
   ...
@@ -21,6 +24,7 @@ in {
       description = "The order in which the contents are written.";
       type = types.nullOr (types.listOf types.str);
       default = null;
+      visible = ordered;
     };
 
     contentsOrdered = lib.mkOption {
