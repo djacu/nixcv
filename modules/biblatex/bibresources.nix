@@ -13,10 +13,13 @@ in {
     (
       import
       ../components/orderedTaggedName.nix
-      contentName
-      [
-        ./online.nix
-      ]
+      {
+        name = contentName;
+        submodules = [
+          ./online.nix
+        ];
+        ordered = false;
+      }
     )
   ];
   config = {
