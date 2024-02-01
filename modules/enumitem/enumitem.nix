@@ -5,15 +5,12 @@
 }: let
   inherit (lib) types;
   cfg = config;
-
-  contentName = "enumitem";
 in {
   imports = [
     (
       import
-      ../components/taggedName.nix
+      ../components/taggedContent.nix
       {
-        name = contentName;
         submodules = [
           ./newlist.nix
           ./setlist.nix
@@ -47,7 +44,7 @@ in {
       latex =
         lib.concatStringsSep
         "\n"
-        (cfg."${contentName}OutOrdered" "latex");
+        (cfg.outOrdered "latex");
     };
   };
 }

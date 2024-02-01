@@ -50,7 +50,7 @@ in {
             };
             nolabelList = {
               type = "enumitem";
-              enumitem = {
+              content = {
                 nolabelNew = {
                   type = "newlist";
                   name = "nolabel";
