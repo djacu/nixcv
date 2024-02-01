@@ -10,6 +10,7 @@ in {
     ../components/standardStringOut.nix
     ../components/latexWrapper.nix
     ../biblatex/bibresources.nix
+    ../templates/template.nix
     (
       import
       ../components/orderedTaggedContent.nix
