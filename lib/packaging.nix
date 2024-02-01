@@ -53,7 +53,15 @@ in rec {
             ++ (
               builtins.map
               (x: directory + /examples/${x})
-              (builtins.attrNames (builtins.readDir (directory + /examples)))
+              (
+                builtins.attrNames (
+                  lib.filterAttrs
+                  (name: value: value == "regular")
+                  (
+                    builtins.readDir (directory + /examples)
+                  )
+                )
+              )
             );
         }
       )
