@@ -11,7 +11,7 @@ in {
   imports = [
     (
       import
-      ../components/orderedTaggedName.nix
+      ../components/taggedName.nix
       {
         name = contentName;
         submodules = [

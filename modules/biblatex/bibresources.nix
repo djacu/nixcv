@@ -12,7 +12,7 @@ in {
     ../components/bibresourceStringOut.nix
     (
       import
-      ../components/orderedTaggedName.nix
+      ../components/taggedName.nix
       {
         name = contentName;
         submodules = [
