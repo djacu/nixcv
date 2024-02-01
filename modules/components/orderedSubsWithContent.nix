@@ -29,17 +29,6 @@ in {
       type = types.listOf (types.attrsOf (types.anything));
       internal = true;
       visible = false;
-      default =
-        if (builtins.typeOf cfg.content == "list")
-        then cfg.content
-        else if builtins.isNull cfg.order
-        then builtins.attrValues cfg.content
-        else
-          (
-            builtins.map
-            (elem: cfg.content.${elem})
-            cfg.order
-          );
     };
     outOrdered = lib.mkOption {
       description = "A function to get a specific ordered output.";
@@ -47,11 +36,25 @@ in {
       internal = true;
       visible = false;
       example = ''outOrdered "latex"'';
-      default = out: (
-        builtins.map
-        (x: x._out.${out})
-        cfg.contentsOrdered
-      );
     };
+  };
+
+  config = {
+    contentsOrdered =
+      if (builtins.typeOf cfg.content == "list")
+      then cfg.content
+      else if builtins.isNull cfg.order
+      then builtins.attrValues cfg.content
+      else
+        (
+          builtins.map
+          (elem: cfg.content.${elem})
+          cfg.order
+        );
+    outOrdered = out: (
+      builtins.map
+      (x: x._out.${out})
+      cfg.contentsOrdered
+    );
   };
 }
