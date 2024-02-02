@@ -21,7 +21,7 @@ in rec {
         };
         template = pkgs.writeTextFile {
           name = "nixcv-latex-${name}-template";
-          text = builtins.readFile (directory + /latex/cv.tex);
+          text = value._out.template;
           destination = "/cv.tex";
         };
 

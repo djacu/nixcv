@@ -26,6 +26,12 @@ in {
   ];
 
   options = {
+    templateFile = lib.mkOption {
+      description = "A LaTeX template that precedes any options defined in `template`.";
+      type = types.path;
+      default = ../../latex/cv.tex;
+    };
+
     _out = {
       template = lib.mkOption {
         description = "This modules template output.";
@@ -39,10 +45,16 @@ in {
 
   config = {
     _out = {
-      template =
+      template = (
         lib.concatStringsSep
         "\n\n"
-        (cfg."${contentName}OutOrdered" "latex");
+        (
+          [
+            (builtins.readFile cfg.templateFile)
+          ]
+          ++ (cfg."${contentName}OutOrdered" "latex")
+        )
+      );
     };
   };
 }
