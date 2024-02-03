@@ -14,7 +14,7 @@ in {
       #visible = "shallow";
       type = types.submodule {
         imports = [
-          ../templates/template.nix
+          ../templates/misc.nix
           #(
           #  import
           #  ../components/taggedName.nix
