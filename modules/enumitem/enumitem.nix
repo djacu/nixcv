@@ -53,7 +53,6 @@ in {
   config = {
     _out = {
       latex =
-        (builtins.trace cfg)
         lib.concatStringsSep
         "\n"
         (
