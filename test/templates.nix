@@ -15,7 +15,7 @@
     (lib.evalModules {
       modules = [
         ./modules/templates/newenvironment.nix
-        ./modules/templates/template.nix
+        ./modules/templates/templates.nix
       ];
     })
     .config

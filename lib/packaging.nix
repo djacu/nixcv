@@ -21,7 +21,7 @@ in rec {
         };
         template = pkgs.writeTextFile {
           name = "nixcv-latex-${name}-template";
-          text = value._out.template;
+          text = value._out.templates;
           destination = "/cv.tex";
         };
 

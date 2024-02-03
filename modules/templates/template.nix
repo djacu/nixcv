@@ -6,7 +6,7 @@
   inherit (lib) types;
   cfg = config;
 
-  contentName = "template";
+  contentName = "misc";
 in {
   imports = [
     (

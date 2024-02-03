@@ -26,11 +26,13 @@ nav:
     - Skills:
       - documentation/modules/skills/skills.md
       - documentation/modules/skills/skill.md
-    - Template:
+    - Templates:
+      - documentation/modules/templates/layout.md
       - documentation/modules/templates/template.md
-      - documentation/modules/enumitem/enumitem.md
-      - documentation/modules/enumitem/newlist.md
-      - documentation/modules/enumitem/setlist.md
+      - enumitem:
+        - documentation/modules/enumitem/enumitem.md
+        - documentation/modules/enumitem/newlist.md
+        - documentation/modules/enumitem/setlist.md
       - documentation/modules/templates/newenvironment.md
       - documentation/modules/titlesec/titleformat.md
     - Bibliography:
