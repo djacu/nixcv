@@ -27,7 +27,7 @@ nav:
       - documentation/modules/skills/skills.md
       - documentation/modules/skills/skill.md
     - Templates:
-      - documentation/modules/templates/templates.md
+      - documentation/modules/templates/template.md
       - documentation/modules/templates/layout.md
       - enumitem:
         - documentation/modules/enumitem/enumitem.md
