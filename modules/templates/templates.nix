@@ -14,21 +14,41 @@ in {
       #visible = "shallow";
       type = types.submodule {
         imports = [
-          ../templates/misc.nix
-          #(
-          #  import
-          #  ../components/taggedName.nix
-          #  {
-          #    name = "misc";
-          #    submodules = [
-          #      ../templates/newenvironment.nix
-          #      ../enumitem/enumitem.nix
-          #      ../components/rawlatex.nix
-          #      ../titlesec/titleformat.nix
-          #    ];
-          #    ordered = false;
-          #  }
-          #)
+          (
+            import
+            ../components/taggedName.nix
+            {
+              name = "environments";
+              submodules = [
+                ../templates/newenvironment.nix
+              ];
+              ordered = false;
+            }
+          )
+
+          (
+            import
+            ../components/taggedName.nix
+            {
+              name = "titlesec";
+              submodules = [
+                ../titlesec/titleformat.nix
+              ];
+              ordered = false;
+            }
+          )
+
+          (
+            import
+            ../components/taggedName.nix
+            {
+              name = "latex";
+              submodules = [
+                ../components/rawlatex.nix
+              ];
+              ordered = false;
+            }
+          )
         ];
 
         options = {
@@ -92,7 +112,12 @@ in {
               (
                 lib.concatStringsSep
                 "\n\n"
-                (cfg.templates.miscOutOrdered "latex")
+                (
+                  []
+                  ++ (cfg.templates.environmentsOutOrdered "latex")
+                  ++ (cfg.templates.titlesecOutOrdered "latex")
+                  ++ (cfg.templates.latexOutOrdered "latex")
+                )
               )
             ]
           );

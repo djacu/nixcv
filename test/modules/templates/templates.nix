@@ -82,7 +82,7 @@ in {
                 };
               };
             };
-            misc = {
+            environments = {
               blockquote = {
                 type = "newenvironment";
                 name = "blockquote";
@@ -102,6 +102,8 @@ in {
                   \ignorespacesafterend%
                   %'';
               };
+            };
+            titlesec = {
               sectionFormat = {
                 type = "titleformat";
                 command = ''\section'';
@@ -112,6 +114,8 @@ in {
                 before-code = ''\MakeUppercase'';
                 after-code = ''\color{black}\titlerule'';
               };
+            };
+            latex = {
               rawlatexSettings = {
                 type = "rawlatex";
                 latex = ''
