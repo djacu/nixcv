@@ -32,6 +32,12 @@ in {
         ];
 
         options = {
+          templateFile = lib.mkOption {
+            description = "A LaTeX template file. Will be used instead of any module settings.";
+            type = types.nullOr types.path;
+            default = null;
+          };
+
           enumitem = lib.mkOption {
             description = "Defines new lists and sets list options.";
             type = modulesLib.pathsToTaggedSubmodules [
@@ -73,19 +79,23 @@ in {
 
   config = {
     _out = {
-      templates = (
-        lib.concatStringsSep
-        "\n\n"
-        [
-          cfg.templates.layout._out.latex
-          cfg.templates.enumitem._out.latex
+      templates =
+        if (! builtins.isNull cfg.templates.templateFile)
+        then builtins.readFile cfg.templates.templateFile
+        else
           (
             lib.concatStringsSep
             "\n\n"
-            (cfg.templates.miscOutOrdered "latex")
-          )
-        ]
-      );
+            [
+              cfg.templates.layout._out.latex
+              cfg.templates.enumitem._out.latex
+              (
+                lib.concatStringsSep
+                "\n\n"
+                (cfg.templates.miscOutOrdered "latex")
+              )
+            ]
+          );
     };
   };
 }
