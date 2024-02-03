@@ -9,10 +9,21 @@ in {
   imports = [
     (
       import
-      ../components/taggedContent.nix
+      ../components/taggedName.nix
       {
+        name = "newlist";
         submodules = [
           ./newlist.nix
+        ];
+        ordered = false;
+      }
+    )
+    (
+      import
+      ../components/taggedName.nix
+      {
+        name = "setlist";
+        submodules = [
           ./setlist.nix
         ];
         ordered = false;
@@ -42,9 +53,14 @@ in {
   config = {
     _out = {
       latex =
+        (builtins.trace cfg)
         lib.concatStringsSep
         "\n"
-        (cfg.outOrdered "latex");
+        (
+          []
+          ++ (cfg.newlistOutOrdered "latex")
+          ++ (cfg.setlistOutOrdered "latex")
+        );
     };
   };
 }

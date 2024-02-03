@@ -24,12 +24,14 @@ in {
             #};
             enumitem = {
               type = "enumitem";
-              content = {
+              newlist = {
                 nolabelNew = {
                   type = "newlist";
                   name = "nolabel";
                   parent = "itemize";
                 };
+              };
+              setlist = {
                 nolabelOpt1 = {
                   type = "setlist";
                   name = "nolabel";
