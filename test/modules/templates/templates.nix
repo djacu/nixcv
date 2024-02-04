@@ -6,7 +6,7 @@ in {
       templates = lib.mkOption {
         type = (
           testUtils.createTestType
-          ../../../modules/templates/templates.nix
+          ../../../modules/templates/default.nix
           [
             "basic"
           ]
