@@ -378,6 +378,7 @@
     ''
       #!/usr/bin/env bash
       nix build .\#moduleMarkdownDocs
+      rm -rf site/docs/documentation/modules/*
       cp -r ./result/* ./site/docs/documentation/
       chmod +w -R ./site/docs/documentation/modules
     '';
