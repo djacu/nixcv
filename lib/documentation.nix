@@ -38,7 +38,6 @@
     modulesDir ? self + "/modules",
     pathFilter ? [
       "component"
-      "generic"
     ],
     ...
   }: (
