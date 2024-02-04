@@ -107,3 +107,6 @@ markdown_extensions:
       combine_header_slug: true
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/extra.css
