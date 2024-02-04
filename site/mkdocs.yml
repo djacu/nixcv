@@ -26,6 +26,8 @@ nav:
     - Skills:
       - documentation/modules/skills/skills.md
       - documentation/modules/skills/skill.md
+    - Bibliography:
+      - documentation/modules/biblatex/bibliography.md
     - Templates:
       - documentation/modules/templates/templates.md
       - enumitem:
@@ -39,8 +41,7 @@ nav:
       - documentation/modules/templates/layout.md
       - titlesec:
         - documentation/modules/titlesec/titleformat.md
-    - Bibliography:
-      - documentation/modules/biblatex/bibliography.md
+    - Bibresources:
       - documentation/modules/biblatex/bibresources.md
       - documentation/modules/biblatex/online.md
   - Blog:
