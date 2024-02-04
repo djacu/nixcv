@@ -27,15 +27,18 @@ nav:
       - documentation/modules/skills/skills.md
       - documentation/modules/skills/skill.md
     - Templates:
-      - documentation/modules/templates/template.md
-      - documentation/modules/templates/layout.md
+      - documentation/modules/templates/templates.md
       - enumitem:
         - documentation/modules/enumitem/enumitem.md
         - documentation/modules/enumitem/newlist.md
         - documentation/modules/enumitem/setlist.md
-      - documentation/modules/templates/newenvironment.md
-      - documentation/modules/titlesec/titleformat.md
-      - documentation/modules/templates/misc.md
+      - environments:
+        - documentation/modules/templates/newenvironment.md
+      - latex:
+        - documentation/modules/templates/rawlatex.md
+      - documentation/modules/templates/layout.md
+      - titlesec:
+        - documentation/modules/titlesec/titleformat.md
     - Bibliography:
       - documentation/modules/biblatex/bibliography.md
       - documentation/modules/biblatex/bibresources.md
