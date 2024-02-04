@@ -1330,14 +1330,14 @@
           entryKey = "jupyterwithNext";
           requiredFields = {
             author = "Daniel Baker";
-            title = "blog,tweag,nix,jupyter,jupyenv";
+            title = "Jupyterwith next";
             date = "2022-11";
           };
           optionalFields = {
             url = "https://www.tweag.io/blog/2022-11-17-jupyter-with-next/";
             language = "english";
             organization = "Tweag";
-            keywords = "blog,tweag,nix,jupyter";
+            keywords = "blog,tweag,nix,jupyter,jupyenv";
           };
         }; # jupyterwithNext
 
