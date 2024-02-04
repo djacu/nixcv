@@ -19,11 +19,23 @@ in {
       templates = {
         basic = {
           templates = {
+            layout = {
+              type = "layout";
+              documentclass = "article";
+              papersize = "letterpaper";
+              textwidth = "7in";
+              textheight = "9in";
+              textsize = "10pt";
+              pagestyle = "empty";
+            };
+            order = [
+              "packageSettings"
+              "listSettings"
+              "environmentSettings"
+              "sectionSettings"
+              "bibliographySettings"
+            ];
             content = {
-              #layout = {
-              #  type = "layout";
-              #};
-
               packageSettings = {
                 type = "templates";
                 packages = {
@@ -44,60 +56,62 @@ in {
               listSettings = {
                 type = "templates";
                 enumitem = {
-                  type = "enumitem";
-                  newlist = {
-                    nolabelNew = {
-                      type = "newlist";
-                      name = "nolabel";
-                      parent = "itemize";
-                    };
-                  };
-                  setlist = {
-                    nolabelOpt1 = {
-                      type = "setlist";
-                      name = "nolabel";
-                      levels = [1];
-                      format = {
-                        spacing = {
-                          parsep = "0em";
-                          itemsep = "1em";
-                        };
+                  nolabelList = {
+                    type = "enumitem";
+                    newlist = {
+                      nolabelNew = {
+                        type = "newlist";
+                        name = "nolabel";
+                        parent = "itemize";
                       };
                     };
-                    nolabelOpt2 = {
-                      type = "setlist";
-                      name = "nolabel";
-                      levels = [2];
-                      format = {
-                        spacing = {
-                          leftmargin = "1em";
-                        };
-                        compact = {
-                          nosep = true;
-                        };
-                      };
-                    };
-                    nolabelOpt3 = {
-                      type = "setlist";
-                      name = "nolabel";
-                      levels = [3];
-                      format = {
-                        spacing = {
-                          leftmargin = "1.2em";
-                          topsep = "0.9em";
+                    setlist = {
+                      nolabelOpt1 = {
+                        type = "setlist";
+                        name = "nolabel";
+                        levels = [1];
+                        format = {
+                          spacing = {
+                            parsep = "0em";
+                            itemsep = "1em";
+                          };
                         };
                       };
-                    };
-                    nolabelOpt4 = {
-                      type = "setlist";
-                      name = "nolabel";
-                      levels = [4];
-                      format = {
-                        spacing = {
-                          leftmargin = "3em";
-                          topsep = "0.4em";
-                          itemindent = "-1em";
-                          rightmargin = "2em";
+                      nolabelOpt2 = {
+                        type = "setlist";
+                        name = "nolabel";
+                        levels = [2];
+                        format = {
+                          spacing = {
+                            leftmargin = "1em";
+                          };
+                          compact = {
+                            nosep = true;
+                          };
+                        };
+                      };
+                      nolabelOpt3 = {
+                        type = "setlist";
+                        name = "nolabel";
+                        levels = [3];
+                        format = {
+                          spacing = {
+                            leftmargin = "1.2em";
+                            topsep = "0.9em";
+                          };
+                        };
+                      };
+                      nolabelOpt4 = {
+                        type = "setlist";
+                        name = "nolabel";
+                        levels = [4];
+                        format = {
+                          spacing = {
+                            leftmargin = "3em";
+                            topsep = "0.4em";
+                            itemindent = "-1em";
+                            rightmargin = "2em";
+                          };
                         };
                       };
                     };
