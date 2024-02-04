@@ -5,16 +5,25 @@
 }: let
   inherit (lib) types;
   cfg = config;
-
-  modulesLib = import ../../lib/modules.nix {inherit lib;};
 in {
   options = {
     templates = lib.mkOption {
       description = "Template configuration for the LaTeX output.";
-      visible = "shallow";
-      type = types.submodule ../templates/templates.nix;
+      #visible = "shallow";
+      type = types.submodule {
+        imports = [
+          (
+            import
+            ../components/taggedContent.nix
+            {
+              submodules = [
+                ../templates/templates.nix
+              ];
+            }
+          )
+        ];
+      };
     };
-
     _out = {
       templates = lib.mkOption {
         description = "This modules template output.";
@@ -29,28 +38,9 @@ in {
   config = {
     _out = {
       templates =
-        if (! builtins.isNull cfg.templates.templateFile)
-        then builtins.readFile cfg.templates.templateFile
-        else
-          (
-            lib.concatStringsSep
-            "\n\n"
-            [
-              cfg.templates.layout._out.latex
-              cfg.templates.enumitem._out.latex
-              (
-                lib.concatStringsSep
-                "\n\n"
-                (
-                  []
-                  ++ (cfg.templates.packagesOutOrdered "latex")
-                  ++ (cfg.templates.environmentsOutOrdered "latex")
-                  ++ (cfg.templates.titlesecOutOrdered "latex")
-                  ++ (cfg.templates.latexOutOrdered "latex")
-                )
-              )
-            ]
-          );
+        lib.concatStringsSep
+        "\n"
+        (cfg.templates.outOrdered "latex");
     };
   };
 }
