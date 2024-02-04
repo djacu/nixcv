@@ -10,7 +10,7 @@
 in {
   options = {
     templates = lib.mkOption {
-      description = "FIXME";
+      description = "Template configuration for the LaTeX output.";
       visible = "shallow";
       type = types.submodule ../templates/templates.nix;
     };
