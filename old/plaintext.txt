@@ -1,0 +1,132 @@
+Daniel Baker
+Software Engineer
+daniel.n.baker@gmail.com
+407-474-5339
+https://djacu.dev/
+Signal Hill, CA, USA, 90755
+https://mastodon.igl.ooo/@djacu
+https://www.linkedin.com/in/dannbaker/
+
+OBJECTIVE
+Seeking a full-time role in software engineering, signal processing, scientific data processing, or general analysis. I am passionate about creating clear, maintainable, and well tested code and reproducible systems and software. Experienced with large scale data processing. Experienced with creating production ready software for a variety of scientific algorithms. Looking to grow my data processing, application development, and functional programming skills. Experienced working in a remote environment and would prefer a remote based role but also willing to work in an office part time. 
+
+EDUCATION
+University of Southern California
+Master of Science in Electrical Engineering
+08/2016 - 05/2018
+
+Rose-Hulman Institute of Technology
+Bachelor of Science in Electrical Engineering
+08/2004 - 05/2008
+
+Rose-Hulman Institute of Technology
+Bachelor of Science in Applied Mathematics
+08/2004 - 05/2008
+
+EXPERIENCE
+Tweag
+Software Engineer
+Remote, USA
+02/2022 - 04/2023
+Role in jupyenv.
+Maintainer for an open source project, jupyenv, which provides a Nix-based framework for the definition of declarative and reproducible Jupyter environments.
+Rewrote the API to provide a better user experience and added several new kernels.
+Interacted with end users on GitHub and Matrix to resolve their issues and answer questions.
+Drastically improved the quantity and quality of documentation with the addition of how-to's, tutorials, reference documentation, and Nix options.
+Created a website, jupyenv.io, to host the newly created documentation and a project blog.
+Role in Nix Technical Group.
+Member of the Tweag's Nix technical group.
+Wrote posts for the Tweag blog demonstrating the capabilities of Nix.
+Assisted other Tweag employees with Nix questions and technical problems.
+Created and maintained packages for nixpkgs, the Nix package collection.
+
+The Aerospace Corporation
+Senior Member of Technical Staff
+El Segundo, CA, USA
+07/2020 - 02/2022
+Role in AMIGOS.
+Member of a software team developing a distributed federated satellite communications simulation tool in Java.
+Worked with laser physics subject matter experts and scientists to convert their pseudocode into production ready software.
+Created a rigorous set of regression tests to verify that the newly created software matched the original code to within floating point precision.
+Created a simple, light-weight, units library to help with units conversions and minimize the chance for errors.
+Role in Synthetic Aperture Radar.
+Developed radar signal processing analysis and processing tools.
+Responsible for code quality and accuracy reviews for multiple programs.
+Accelerated the use of the latest Python tools and other open source software tools.
+Mentored and guided new developers in good software practices.
+
+Raytheon
+Senior Systems Engineer
+El Segundo, CA, USA
+11/2014 - 07/2020
+Role in SOLDIER.
+Lead developer on a year long research and development effort implementing a radar signal processing algorithm.
+Leveraged the distributed computing capabilities of PySpark in an AWS EMR environment.
+Effort concluded with the customer being completely satisfied and a robust algorithm ready for deployment as part of a larger radar signal processing pipeline.
+Role in BELLAGIO.
+Key developer and systems engineering for an agile, behavior-driven, multi-contractor, radar signal processing development effort on AWS.
+Made significant contributions to requirement flow down and mapping, feature development, software architecture, coding, and testing.
+Worked with radar signal processing subject matter experts to convert pseudocode into production ready software.
+Worked on several specialized radar signal processing algorithms.
+Role in DRACO.
+Responsible for the integrating, testing, and characterizing a gimbal stabilized platform for a space payload.
+Created specialized tests to capture nanoradian angular movements in order to develop a high fidelity friction model.
+Planned and built a test system and prepared test procedures for future production units.
+Role in MFEOIR.
+Modeled a high-friction, low-inertia fluid rotary unit (FRU) with high fidelity gearing and friction.
+Designed a non-linear control algorithm to command the FRU to follow a decoupled gimbal.
+Used Matlab to auto-generate the controls algorithm code for the embedded system.
+Role in MFL.
+Responsible for designing and modeling an infrared auto-alignment loop.
+Created high fidelity models for fast steering mirros and an infrared sensor.
+Role in NGJ.
+Modeled the rigid body dynamics, sensors and actuators for a door controlled ram air turbine.
+Worked with mechanical designers to incorporate a flexible body model into the simulation.
+Role in JTO.
+Worked with multiple functional roles to architect, design, integrate, and test a power supply and a communications module.
+Created thermal and electrical simulations and analyses to drive design decisions.
+Mentored other junior engineers on good system and mechanical design.
+
+DRS Sensors & Targeting Systems
+Senior Systems Engineer
+Cypress, CA, USA
+06/2008 - 11/2014
+Role in Full Lifecycle Engineer.
+Responsible for designing, integrating, testing, fielding and supporting LRIP of multiple gimbal stabilized platforms.
+Modeling, analysis and design of control algorithms for a gimbal and isolator stabilized EO/IR system using MATLAB/SIMULINK.
+Responsible for integrating, calibrating and testing the sensor and actuator hardware for stabilized platforms.
+Derive algorithms for target location and geo-pointing including the use of Euler angles and quaternion rotations.
+Role in Systems Analysis.
+Responsible for first principles based synthetic imagery generation, modeling and analysis.
+Create complex urban scenery including using Blender.
+Apply material properties and render synthetic imagery for visible, infrared, hyperspectral and LIDAR systems using DIRSIG and supporting tools.
+Process raw imagery for analysis and exploitation algorithms using MATLAB and correlate results to real-world phenomenology.
+Rigid body and multi-body simulation using Newtonian mechanics.
+Role in Systems Engineer.
+Well versed with the roles and duties of a System Engineer.
+Performed requirements decomposition and allocation and developed specifications, processes and metrics.
+Performed analysis, modeling and trade studies at all levels and of the total system product.
+Prepared for and participated in program milestone events.
+
+VOLUNTEER
+Los Angeles County: Department of Public Health
+Software Engineer
+Remote, USA
+02/2021 - 11/2021
+As a volunteer, created a public vaccination dashboard website for the Vaccine Preventable Disease Control Program under LAC DPH that included dynamic maps, time series charts and tables to display residential vaccination data disaggregated by age group, ethnicity, gender, and geographic boundaries.
+Using Python to distill millions of vaccination entries from the California Immunization Registry into manageable data products that could be served on the website.
+Using JavaScript along with D3.js, DC.js, CrossFilter.js and DataTables.js to create all of the previously mentioned features.
+Working with the LAC Epidemiologists to check incoming data integrity and validate the quality of output data products.
+Spent two months training three DPH employees on JavaScript and how the site functioned so they could take over development.
+
+SKILLS
+Languages: Python, Java, Nix, JavaScript, HTML, CSS, Bash, Matlab
+Software Packaging: Nix, Nixpkgs, NixOS, C toolchain, Go toolchain, Python toolchain
+Domains: Software Engineering, Functional Programming, Applied Mathematics, Signal Processing, Image Processing, Synthetic Aperture Radar, Feedback Controls, Algorithms, Estimation, Modeling, Analysis
+Stabilized Platforms: Gimbals, Classic Controls, Newtonian Mechanics, Rigid Body Dynamics, Flexible Body Dynamics, Geo-Pointing, Quaternions, Euler Angles
+Network: Layer 2/3 using pfSense and Ubiquiti, VLAN configuration and routing, OpenVPN, Tailscale, WireGuard
+Front-End Web: HTML, CSS, JavaScript, Astro, Tailwind
+Operating Systems: Arch, BSD, CentOS, Linux, NixOS, RHEL, Ubuntu, ZFS, Btrfs
+DevOps: Bash Scripting, Git, CI/CD, GitHub Actions, Jenkins, Nginx, NixOS, Docker, Virtualization, SSH, Linode, Netlify
+Test: Hypothesis, Pytest
+Typesetting: LaTeX

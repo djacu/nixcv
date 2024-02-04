@@ -115,9 +115,9 @@
             '';
             installPhase = ''
               mkdir -p $out/{bin,share}
-              cp document.tex $out/share/document.tex
-              cp ./latex/cv.tex $out/share/cv.tex
-              cp self.bib $out/share/self.bib
+              cp ./old/document.tex $out/share/document.tex
+              cp ./old/cv.tex $out/share/cv.tex
+              cp ./old/self.bib $out/share/self.bib
               cp latex-demo-document $out/bin/latex-demo-document
               chmod u+x $out/bin/latex-demo-document
             '';
