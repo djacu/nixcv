@@ -39,6 +39,18 @@ in {
         ordered = false;
       }
     )
+
+    (
+      import
+      ../components/taggedName.nix
+      {
+        name = "packages";
+        submodules = [
+          ../templates/packages.nix
+        ];
+        ordered = false;
+      }
+    )
   ];
 
   options = {
