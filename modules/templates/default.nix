@@ -43,6 +43,7 @@ in {
                 "\n\n"
                 (
                   []
+                  ++ (cfg.templates.packagesOutOrdered "latex")
                   ++ (cfg.templates.environmentsOutOrdered "latex")
                   ++ (cfg.templates.titlesecOutOrdered "latex")
                   ++ (cfg.templates.latexOutOrdered "latex")

@@ -22,6 +22,19 @@ in {
             #layout = {
             #  type = "layout";
             #};
+            packages = {
+              icons = {
+                type = "packages";
+                package = "fontawesome5";
+                packageOptions = [
+                  "fixed"
+                ];
+              };
+              enumitem = {
+                type = "packages";
+                package = "enumitem";
+              };
+            };
             enumitem = {
               type = "enumitem";
               newlist = {
