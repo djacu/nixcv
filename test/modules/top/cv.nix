@@ -412,6 +412,7 @@ in {
               };
             }; # referencesSection
           };
+          templates = {};
         }; # basic
 
         bibliography =
