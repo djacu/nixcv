@@ -1,0 +1,112 @@
+site_name: nixcv
+site_url: https://nixcv.nix.みんな
+repo_url: https://github.com/djacu/nixcv
+repo_name: djacu/nixcv
+edit_uri: tree/main/site
+
+nav:
+  - Home: index.md
+  - Documentation:
+    - documentation/index.md
+  - Options:
+    - Top:
+      - documentation/modules/top/nixcv.md
+      - documentation/modules/top/cv.md
+    - Sections:
+      - documentation/modules/sections/section.md
+      - documentation/modules/sections/personal.md
+    - Lists:
+      - documentation/modules/lists/itemlist.md
+      - documentation/modules/lists/item.md
+      - documentation/modules/lists/items.md
+      - documentation/modules/lists/profile.md
+    - Text:
+      - documentation/modules/text/text.md
+      - documentation/modules/text/paragraphs.md
+    - Skills:
+      - documentation/modules/skills/skills.md
+      - documentation/modules/skills/skill.md
+    - Bibliography:
+      - documentation/modules/biblatex/bibliography.md
+    - Templates:
+      - documentation/modules/templates/templates.md
+      - enumitem:
+        - documentation/modules/enumitem/enumitem.md
+        - documentation/modules/enumitem/newlist.md
+        - documentation/modules/enumitem/setlist.md
+      - environments:
+        - documentation/modules/templates/newenvironment.md
+      - latex:
+        - documentation/modules/templates/rawlatex.md
+      - documentation/modules/templates/layout.md
+      - titlesec:
+        - documentation/modules/titlesec/titleformat.md
+    - Bibresources:
+      - documentation/modules/biblatex/bibresources.md
+      - documentation/modules/biblatex/online.md
+  - Blog:
+    - blog/index.md
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  features:
+    - content.action.view
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+  palette:
+  # Palette toggle for automatic mode
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to system preference
+
+plugins: 
+  - blog
+  - social
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/djacu
+    - icon: fontawesome/brands/mastodon 
+      link: https://mastodon.igl.ooo/@djacu
+    - icon: fontawesome/brands/linkedin 
+      link: https://www.linkedin.com/in/dannbaker/
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css

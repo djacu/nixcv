@@ -3,16 +3,25 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    poetry2nix.url = "github:nix-community/poetry2nix";
+    poetry2nix.inputs.flake-utils.follows = "flake-utils";
+    poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
     flake-utils,
+    poetry2nix,
   }:
     flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       lib = pkgs.lib;
+      inherit
+        (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;})
+        mkPoetryEnv
+        ;
+
       tex = pkgs.texlive.combine {
         inherit
           (pkgs.texlive)
@@ -31,44 +40,53 @@
           ;
       };
 
-      nixcvEvalModules = pkgs.lib.evalModules {
-        # FIXME: Try using special args like `specialArgs = {modules = [ ... ]};
-        # Might be able to get section to build properly.
-        modules = [
-          ./modules/nixcv.nix
-          # why is this here?
-          # src says "Whether to check whether all option definitions have matching declarations."
-          # {_module.check = false;}
-        ];
+      packagingLib = import ./lib/packaging.nix {
+        inherit pkgs tex;
+        directory = ./.;
       };
-      examples = lib.listToAttrs (
-        builtins.map
-        (
-          example:
-            lib.nameValuePair
-            "example-${example.fileType}-${lib.removeSuffix ".nix" example.fileName}"
-            (pkgs.lib.evalModules {
-              modules = [
-                ({config, ...}: {config._module.args = {inherit pkgs;};})
-                ./modules/toplevel/nixcv.nix
-                ./examples/${example.fileName}
-              ];
-            })
-            .config
-            .nixcv
-            ."${lib.removeSuffix ".nix" example.fileName}"
-            ._out
-            ."${example.fileType}File"
-        )
-        (
-          lib.cartesianProductOfSets
-          {
-            fileType = ["plaintext" "latex"];
-            fileName = builtins.attrNames (builtins.readDir ./examples);
-          }
-        )
-      );
+
+      documentationLib = import ./lib/documentation.nix {inherit self pkgs lib;};
+
+      moduleMarkdownDocs = documentationLib.generateMarkdownDocumentation {};
+
+      site-env = mkPoetryEnv {
+        projectDir = self + /site;
+        python = pkgs.python311;
+      };
+      #
+      #mkdocs = pkgs.python311.withPackages (ps: [
+      #  ps.mkdocs
+      #  ps.mkdocs-material
+      #]);
+      #
+      #site = pkgs.stdenvNoCC.mkDerivation {
+      #  name = "nixcv-site";
+      #  src = self + "/site";
+      #  nativeBuildInputs = [mkdocs];
+      #
+      #  buildPhase = ''
+      #    mkdocs build --site-dir dist
+      #  '';
+      #  installPhase = ''
+      #    mkdir $out
+      #    cp -R dist/* $out/
+      #  '';
+      #};
     in {
+      devShells = {
+        poetry = pkgs.mkShell {
+          packages = [
+            pkgs.poetry
+            pkgs.python311
+          ];
+        };
+        site = pkgs.mkShell {
+          buildInputs = [
+            pkgs.poetry
+            site-env
+          ];
+        };
+      };
       packages =
         {
           document = pkgs.stdenvNoCC.mkDerivation rec {
@@ -97,21 +115,41 @@
             '';
             installPhase = ''
               mkdir -p $out/{bin,share}
-              cp document.tex $out/share/document.tex
-              cp cv.tex $out/share/cv.tex
-              cp self.bib $out/share/self.bib
+              cp ./old/document.tex $out/share/document.tex
+              cp ./old/cv.tex $out/share/cv.tex
+              cp ./old/self.bib $out/share/self.bib
               cp latex-demo-document $out/bin/latex-demo-document
               chmod u+x $out/bin/latex-demo-document
             '';
           };
         }
-        // examples;
+        // packagingLib.examples
+        // {
+          inherit
+            moduleMarkdownDocs
+            ;
+        };
+
+      apps = {
+        copyMarkdownDocs = {
+          type = "app";
+          program = "${documentationLib.copyMarkdownDocs}/bin/copy-markdown-docs";
+        };
+      };
+
+      extra = {
+        evaluatedModules = documentationLib.evaluatedModules {};
+      };
 
       checks =
         {}
-        // examples;
+        // packagingLib.examples
+        // {
+          inherit
+            moduleMarkdownDocs
+            ;
+        };
 
-      #test = import ./test/plaintext.nix {inherit lib;};
       test = lib.listToAttrs (
         builtins.map
         (
@@ -128,13 +166,5 @@
           )
         )
       );
-
-      moduleOptions = pkgs.nixosOptionsDoc {
-        options = (
-          builtins.removeAttrs
-          nixcvEvalModules.options
-          ["_module"]
-        );
-      };
     });
 }

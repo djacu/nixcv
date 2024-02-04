@@ -106,4 +106,43 @@
   Same as concatStringsSepFiltered but the separator is a comma and space.
   */
   concatCommaFiltered = concatStringsSepFiltered ", ";
+
+  /*
+  Reshape an input list to a list of lists where the inner lists are length `n`.
+  `n` does not have to divide the input list, the last inner list will be shorter.
+
+  Type: reshape :: int -> list[a] -> list[list[a]]
+
+  Example
+    reshape 2 [1 2 3 4 5]
+    => [ [ 1 2 ] [ 3 4 ] [ 5 ] ]
+    reshape 2 [1 2 3 4 5 6]
+    => [ [ 1 2 ] [ 3 4 ] [ 5 6 ] ]
+    reshape 3 [1 2 3 4 5]
+    => [ [ 1 2 3 ] [ 4 5 ] ]
+    reshape 3 [1 2 3 4 5 6]
+    => [ [ 1 2 3 ] [ 4 5 6 ] ]
+    reshape 6 [1 2 3 4 5]
+    => [ [ 1 2 3 4 5 ] ]
+    reshape 2 [ ]
+    => [ ]
+  */
+  reshape = n: input:
+    builtins.foldl'
+    (reshapeHelper n)
+    []
+    input;
+
+  reshapeHelper = n: (
+    acc: x: (
+      # base case
+      if builtins.length acc == 0
+      then [[x]]
+      # last element is full so add new last element
+      else if (builtins.length (lib.last acc) == n)
+      then acc ++ [[x]]
+      # add more to last element
+      else (lib.init acc) ++ [((lib.last acc) ++ [x])]
+    )
+  );
 }

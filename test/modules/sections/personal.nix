@@ -9,7 +9,6 @@ in {
           ../../../modules/sections/personal.nix
           [
             "basic"
-            "order"
           ]
         );
       };
@@ -17,42 +16,57 @@ in {
   };
   config = {
     test = {
-      personal = rec {
+      personal = {
         basic = {
-          type = "personal";
-          name = "John Doe";
-          label = "Programmer";
-          email = "john@doe.com";
-          phone = "(123) 456-7890";
-          address = {
-            street = "123 Nunya Drive Unit 42";
-            city = "Clinton";
-            state = "MI";
-            country = "USA";
-            postalCode = "64735";
-          };
-          profiles = {
-            github = {
-              network = "github";
-              url = "https://github.com/jdoe";
+          order = [
+            "name"
+            "title"
+            "socials"
+          ];
+          content = {
+            name = {
+              type = "text";
+              content = "John Doe";
+              format = {
+                bold = true;
+                size = "Huge";
+              };
             };
-            mastodon = {
-              network = "mastodon";
-              url = "https://mastodon.com/@jdoe";
+            title = {
+              type = "text";
+              content = "Software Developer";
+              format = {
+                size = "Large";
+              };
+            };
+
+            socials = {
+              type = "itemlist";
+              order = [
+                "location"
+                "phone"
+                "github"
+              ];
+              content = {
+                location = {
+                  type = "profile";
+                  content = "Nunya, USA";
+                  icon = "map-marker-alt";
+                };
+                phone = {
+                  type = "profile";
+                  content = "123.456.7890";
+                  icon = "phone-alt";
+                };
+                github = {
+                  type = "profile";
+                  content = "github.com/jdoe";
+                  icon = "github";
+                };
+              };
             };
           };
         };
-        order =
-          basic
-          // {
-            order = [
-              "name"
-              "label"
-              "phone"
-              "email"
-              "profiles"
-            ];
-          };
       };
     };
   };

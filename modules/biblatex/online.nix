@@ -28,8 +28,16 @@
 in {
   imports = [
     ./common.nix
+    ../components/standardStringOut.nix
+    ../components/bibresourceStringOut.nix
   ];
   options = {
+    type = lib.mkOption {
+      type = lib.types.enum ["online"];
+      default = "online";
+      description = "Type";
+      internal = true;
+    };
     requiredFields = {
       author = lib.mkOption {
         type = types.str;
@@ -121,116 +129,107 @@ in {
         default = null;
       };
     };
-    _outPlaintext = lib.mkOption {
-      description = "This modules plaintext output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
-    _outBibEntry = lib.mkOption {
-      description = "This modules biblatex entry output.";
-      type = types.str;
-      visible = false;
-      readOnly = true;
-    };
   };
   config = {
-    _outPlaintext =
-      lib.concatStringsSep
-      " "
-      (
-        builtins.filter
-        (x: x != "")
-        [
-          (formatField {
-            content = cfg.requiredFields.author;
-            delimiter = ".";
-          })
-          # FIXME: no subtitle or titleaddon
-          (formatField {
-            content = cfg.requiredFields.title;
-            prefix = "\"";
-            suffix = "\"";
-            delimiter = ".";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.language;
-            delimiter = ".";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.editor;
-            delimiter = ",";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.version;
-            prefix = "Ed. version ";
-            delimiter = ",";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.note;
-            delimiter = ",";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.organization;
-            delimiter = ".";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.eprinttype;
-            delimiter = ":";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.eprint;
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.eprintclass;
-            prefix = "(";
-            suffix = ")";
-            delimiter = ".";
-          })
-          (formatField {
-            content = cfg.requiredFields.date;
-            prefix = "(";
-            suffix = ")";
-            delimiter = ",";
-          })
-          "[Online]."
-          (formatOptionalField {
-            content = cfg.optionalFields.url;
-            prefix = "Available: ";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.urldate;
-            prefix = "(";
-            suffix = ")";
-            delimiter = ".";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.addendum;
-            delimiter = ",";
-          })
-          (formatOptionalField {
-            content = cfg.optionalFields.pubstate;
-            delimiter = ".";
-          })
-        ]
-      );
-    _outBibEntry = let
-      allFields = (
-        lib.filterAttrs
-        (name: value: ! builtins.isNull value)
-        (cfg.requiredFields // cfg.optionalFields)
-      );
-      mappedFields = (
-        lib.mapAttrsToList
-        (name: value: "${name} = {${value}}")
-        allFields
-      );
-    in
-      (
+    _out = {
+      latex = "";
+      plaintext =
         lib.concatStringsSep
-        ",\n  "
-        (["@online{${cfg.entryKey}"] ++ mappedFields)
-      )
-      + ",\n}";
+        " "
+        (
+          builtins.filter
+          (x: x != "")
+          [
+            (formatField {
+              content = cfg.requiredFields.author;
+              delimiter = ".";
+            })
+            # FIXME: no subtitle or titleaddon
+            (formatField {
+              content = cfg.requiredFields.title;
+              prefix = "\"";
+              suffix = "\"";
+              delimiter = ".";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.language;
+              delimiter = ".";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.editor;
+              delimiter = ",";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.version;
+              prefix = "Ed. version ";
+              delimiter = ",";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.note;
+              delimiter = ",";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.organization;
+              delimiter = ".";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.eprinttype;
+              delimiter = ":";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.eprint;
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.eprintclass;
+              prefix = "(";
+              suffix = ")";
+              delimiter = ".";
+            })
+            (formatField {
+              content = cfg.requiredFields.date;
+              prefix = "(";
+              suffix = ")";
+              delimiter = ",";
+            })
+            "[Online]."
+            (formatOptionalField {
+              content = cfg.optionalFields.url;
+              prefix = "Available: ";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.urldate;
+              prefix = "(";
+              suffix = ")";
+              delimiter = ".";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.addendum;
+              delimiter = ",";
+            })
+            (formatOptionalField {
+              content = cfg.optionalFields.pubstate;
+              delimiter = ".";
+            })
+          ]
+        );
+      bibliography = let
+        allFields = (
+          lib.filterAttrs
+          (name: value: ! builtins.isNull value)
+          (cfg.requiredFields // cfg.optionalFields)
+        );
+        mappedFields = (
+          lib.mapAttrsToList
+          (name: value: "${name} = {${value}}")
+          allFields
+        );
+      in
+        (
+          lib.concatStringsSep
+          ",\n  "
+          (["@online{${cfg.entryKey}"] ++ mappedFields)
+        )
+        + ",\n}";
+    };
   };
 }

@@ -1,4 +1,4 @@
-{lib}: {
+{lib}: rec {
   /*
   A type that is one of several submodules, similiar to types.oneOf, but can be used with multiple attrset-like types (e.g. `attrs`, `attrsOf`, `submodule`).
   Submodules need an option called `type` that is of type `types.str`. It is used to find the correct type during `check` and `merge`.
@@ -36,5 +36,37 @@
         )
         {};
       nestedTypes = types;
+    };
+
+  /*
+  Takes list of submodules and returns a taggedSubmodules type.
+  Can be used as a type for a module option.
+
+  Type: pathsToTaggedSubmodules :: [Path] -> Type
+
+  Example:
+    {
+      options = {
+        content = lib.mkOption {
+          description = "Content for this submodule.";
+          type = pathsToTaggedSubmodules [./modules/text/text.nix];
+        };
+      };
+    }
+  */
+  pathsToTaggedSubmodules = paths:
+    taggedSubmodules {
+      types = (
+        lib.listToAttrs (
+          builtins.map
+          (
+            path:
+              lib.nameValuePair
+              (lib.removeSuffix ".nix" (builtins.baseNameOf path))
+              (lib.types.submodule path)
+          )
+          paths
+        )
+      );
     };
 }
