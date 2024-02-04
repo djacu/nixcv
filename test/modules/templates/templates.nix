@@ -37,7 +37,7 @@ in {
             ];
             content = {
               packageSettings = {
-                type = "templates";
+                type = "templatesContent";
                 packages = {
                   icons = {
                     type = "packages";
@@ -54,7 +54,7 @@ in {
               };
 
               listSettings = {
-                type = "templates";
+                type = "templatesContent";
                 enumitem = {
                   nolabelList = {
                     type = "enumitem";
@@ -120,7 +120,7 @@ in {
               };
 
               environmentSettings = {
-                type = "templates";
+                type = "templatesContent";
                 environments = {
                   blockquote = {
                     type = "newenvironment";
@@ -145,7 +145,7 @@ in {
               };
 
               sectionSettings = {
-                type = "templates";
+                type = "templatesContent";
                 titlesec = {
                   sectionFormat = {
                     type = "titleformat";
@@ -161,7 +161,7 @@ in {
               };
 
               bibliographySettings = {
-                type = "templates";
+                type = "templatesContent";
                 latex = {
                   rawlatexSettings = {
                     type = "rawlatex";
