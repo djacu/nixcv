@@ -20,7 +20,7 @@ in {
     latex = lib.mkOption {
       type = types.str;
       description = "User-defined raw latex.";
-      example = ''\pdfgentounicode=1'';
+      example = lib.literalExpression "''\\pdfgentounicode=1''";
     };
   };
 

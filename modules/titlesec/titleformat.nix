@@ -28,7 +28,7 @@ in {
         ''\subparagraph''
       ];
       description = "The sectioning command to be redefined.";
-      example = ''\section'';
+      example = lib.literalExpression "''\\section''";
     };
     shape = lib.mkOption {
       type = (
@@ -51,13 +51,13 @@ in {
       type = types.str;
       default = "";
       description = "The format applied to the whole title—label and text.";
-      example = ''\LARGE\bfseries'';
+      example = lib.literalExpression "''\\LARGE\\bfseries''";
     };
     label = lib.mkOption {
       type = types.str;
       default = "";
       description = "The label to the left of the title.";
-      example = ''Section \thesection'';
+      example = lib.literalExpression "''Section \\thesection''";
     };
     sep = lib.mkOption {
       type = types.str;
@@ -69,12 +69,12 @@ in {
       type = types.str;
       default = "";
       description = "The code preceding the title body. The very last command can take an argument, which is the title text.";
-      example = ''\MakeUppercase'';
+      example = lib.literalExpression "''\\MakeUppercase''";
     };
     after-code = lib.mkOption {
       type = types.str;
       description = "The code following the title body.";
-      example = ''\color{black}\titlerule'';
+      example = lib.literalExpression "''\\color{black}\\titlerule''";
     };
   };
   config = {

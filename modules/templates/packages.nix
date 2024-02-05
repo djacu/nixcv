@@ -29,7 +29,7 @@ in {
       type = types.nullOr (types.either (types.str) (types.listOf types.str));
       description = "LaTeX that will follow the package import.";
       default = null;
-      example = ''\pdfgentounicode=1'';
+      example = lib.literalExpression "''\\pdfgentounicode=1''";
     };
   };
   config = {
