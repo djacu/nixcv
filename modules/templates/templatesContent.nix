@@ -88,7 +88,7 @@ in {
       plaintext = "";
       latex = (
         lib.concatStringsSep
-        "\n"
+        "\n\n"
         (
           []
           ++ (cfg.packagesOutOrdered "latex")
