@@ -1,10 +1,7 @@
-{...}: {
+{
   layout = {
     type = "layout";
     documentclass = "article";
-    papersize = "letterpaper";
-    textwidth = "7in";
-    textheight = "9in";
     textsize = "10pt";
     pagestyle = "empty";
   };
@@ -22,6 +19,16 @@
     packageSettings = {
       type = "templatesContent";
       packages = {
+        # Geometry
+        geometry = {
+          type = "packages";
+          package = "geometry";
+          packageOptions = [
+            "letterpaper"
+            "total={7in, 9in}"
+          ];
+        };
+
         # Icons
         icons = {
           type = "packages";
