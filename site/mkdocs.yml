@@ -30,6 +30,9 @@ nav:
       - documentation/modules/biblatex/bibliography.md
     - Templates:
       - documentation/modules/templates/templates.md
+      - documentation/modules/templates/layout.md
+    - TemplatesContent:
+      - documentation/modules/templates/templatesContent.md
       - enumitem:
         - documentation/modules/enumitem/enumitem.md
         - documentation/modules/enumitem/newlist.md
@@ -38,7 +41,8 @@ nav:
         - documentation/modules/templates/newenvironment.md
       - latex:
         - documentation/modules/templates/rawlatex.md
-      - documentation/modules/templates/layout.md
+      - packages:
+        - documentation/modules/templates/packages.md
       - titlesec:
         - documentation/modules/titlesec/titleformat.md
     - Bibresources:

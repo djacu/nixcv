@@ -25,30 +25,51 @@ in {
       description = "Optional arguments for the package.";
       default = null;
     };
+    latex = lib.mkOption {
+      type = types.nullOr (types.either (types.str) (types.listOf types.str));
+      description = "LaTeX that will follow the package import.";
+      default = null;
+      example = lib.literalExpression "''\\pdfgentounicode=1''";
+    };
   };
   config = {
     _out = {
       plaintext = "";
-      latex =
+      latex = (
         lib.concatStringsSep
-        ""
+        "\n"
         (
           lib.flatten
           [
-            ''\usepackage''
             (
-              if builtins.isNull cfg.packageOptions
-              then ""
-              else
-                (
-                  "["
-                  + (lib.concatStringsSep "," cfg.packageOptions)
-                  + "]"
-                )
+              lib.concatStringsSep
+              ""
+              (
+                lib.flatten
+                [
+                  ''\usepackage''
+                  (
+                    if builtins.isNull cfg.packageOptions
+                    then ""
+                    else
+                      (
+                        "["
+                        + (lib.concatStringsSep "," cfg.packageOptions)
+                        + "]"
+                      )
+                  )
+                  "{${cfg.package}}"
+                ]
+              )
             )
-            "{${cfg.package}}"
+            (
+              if builtins.isNull cfg.latex
+              then []
+              else cfg.latex
+            )
           ]
-        );
+        )
+      );
     };
   };
 }

@@ -27,13 +27,14 @@ in {
       # By default, LaTeX has a limit of 5 nesting levels.
       type = types.listOf (types.ints.between 0 5);
       default = [0];
-      example = [1 2];
+      defaultText = lib.literalExpression "[0]";
+      example = lib.literalExpression "[1 2]";
     };
     label = lib.mkOption {
       description = "The label for the declared level of the list.";
       type = types.str;
       default = "";
-      example = ''\textbullet'';
+      example = lib.literalExpression "''\\textbullet''";
     };
   };
   config = {

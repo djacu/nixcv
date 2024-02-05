@@ -14,7 +14,6 @@ in {
       visible = "shallow";
       type = types.submodule ../templates/templates.nix;
     };
-
     _out = {
       templates = lib.mkOption {
         description = "This modules template output.";
@@ -32,25 +31,16 @@ in {
         if (! builtins.isNull cfg.templates.templateFile)
         then builtins.readFile cfg.templates.templateFile
         else
-          (
-            lib.concatStringsSep
-            "\n\n"
-            [
-              cfg.templates.layout._out.latex
-              cfg.templates.enumitem._out.latex
-              (
-                lib.concatStringsSep
-                "\n\n"
-                (
-                  []
-                  ++ (cfg.templates.packagesOutOrdered "latex")
-                  ++ (cfg.templates.environmentsOutOrdered "latex")
-                  ++ (cfg.templates.titlesecOutOrdered "latex")
-                  ++ (cfg.templates.latexOutOrdered "latex")
-                )
-              )
-            ]
-          );
+          lib.concatStringsSep
+          "\n\n"
+          [
+            cfg.templates.layout._out.latex
+            (
+              lib.concatStringsSep
+              "\n\n"
+              (cfg.templates.outOrdered "latex")
+            )
+          ];
     };
   };
 }
