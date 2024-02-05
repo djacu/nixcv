@@ -1357,9 +1357,7 @@
           };
         }; # unittestnix
       }; # bibresources
-      templates = {
-        templateFile = ../latex/cv.tex;
-      };
+      templates = import ../templates/simple.nix;
     }; # generic
   };
 }

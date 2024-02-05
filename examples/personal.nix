@@ -4,9 +4,7 @@
       content = {
         personalSection = import ./sections/personal.nix;
       }; # content
-      templates = {
-        templateFile = ../latex/cv.tex;
-      };
+      templates = import ../templates/simple.nix;
     }; # generic
   }; # nixcv
 }

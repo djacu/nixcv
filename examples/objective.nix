@@ -4,9 +4,7 @@
       content = {
         objectiveSection = import ./sections/objective.nix;
       }; # content
-      templates = {
-        templateFile = ../latex/cv.tex;
-      };
+      templates = import ../templates/simple.nix;
     }; # objective
   }; # nixcv
 }
