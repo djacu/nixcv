@@ -166,5 +166,8 @@
           )
         )
       );
-    });
+    })
+    // {
+      nixosModules.templates.simple = ./templates/simple.nix;
+    };
 }

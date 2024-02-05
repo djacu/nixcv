@@ -31,58 +31,6 @@ in {
         "beamer"
       ];
     };
-    papersize = lib.mkOption {
-      description = "Set paper/media size.";
-      default = "letterpaper";
-      type = types.enum [
-        "a0paper"
-        "a1paper"
-        "a2paper"
-        "a3paper"
-        "a4paper"
-        "a5paper"
-        "a6paper"
-        "b0paper"
-        "b1paper"
-        "b2paper"
-        "b3paper"
-        "b4paper"
-        "b5paper"
-        "b6paper"
-        "c0paper"
-        "c1paper"
-        "c2paper"
-        "c3paper"
-        "c4paper"
-        "c5paper"
-        "c6paper"
-        "b0j"
-        "b1j"
-        "b2j"
-        "b3j"
-        "b4j"
-        "b5j"
-        "b6j"
-        "ansiapaper"
-        "ansibpaper"
-        "ansicpaper"
-        "ansidpaper"
-        "ansiepaper"
-        "letterpaper"
-        "executivepaper"
-        "legalpaper"
-      ];
-    };
-    textwidth = lib.mkOption {
-      description = "The width of the text body.";
-      type = types.str;
-      default = "7in";
-    };
-    textheight = lib.mkOption {
-      description = "The height of the text body.";
-      type = types.str;
-      default = "9in";
-    };
     textsize = lib.mkOption {
       description = "Sets the size of the main font in the document.";
       type = types.str;
@@ -116,25 +64,6 @@ in {
               ''{''
               ''${cfg.documentclass}''
               ''}''
-            ]
-          )
-          (
-            lib.concatStringsSep
-            ""
-            [
-              ''\usepackage''
-              ''[''
-              (
-                lib.concatStringsSep
-                ","
-                [
-                  ''paper=${cfg.papersize}''
-                  ''width=${cfg.textwidth}''
-                  ''height=${cfg.textheight}''
-                ]
-              )
-              '']''
-              ''{geometry}''
             ]
           )
           ''\pagestyle{${cfg.pagestyle}}''
