@@ -22,11 +22,10 @@ jobs:
 
       - name: Build Site
         run: |
-          nix develop .#site
-          nix run .#copyMarkdownDocs
-          nix run .#copyExampleDocs
-          cd site
-          mkdocs build --site-dir dist
+          nix build .#site
+          mkdir ./dist
+          cp -R ./result/* ./dist/
+          chmod -R +w .dist/
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0

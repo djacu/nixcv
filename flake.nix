@@ -55,25 +55,23 @@
         projectDir = self + /site;
         python = pkgs.python311;
       };
-      #
-      #mkdocs = pkgs.python311.withPackages (ps: [
-      #  ps.mkdocs
-      #  ps.mkdocs-material
-      #]);
-      #
-      #site = pkgs.stdenvNoCC.mkDerivation {
-      #  name = "nixcv-site";
-      #  src = self + "/site";
-      #  nativeBuildInputs = [mkdocs];
-      #
-      #  buildPhase = ''
-      #    mkdocs build --site-dir dist
-      #  '';
-      #  installPhase = ''
-      #    mkdir $out
-      #    cp -R dist/* $out/
-      #  '';
-      #};
+
+      site = pkgs.stdenvNoCC.mkDerivation {
+        name = "nixcv-site";
+        src = self + "/site";
+        nativeBuildInputs = [site-env];
+
+        buildPhase = ''
+          cp -r ${moduleMarkdownDocs}/* ./docs/documentation/
+          cp -r ${examplePdfDocs}/* ./docs/
+          ls -FhoAR
+          mkdocs build --site-dir dist
+        '';
+        installPhase = ''
+          mkdir $out
+          cp -R dist/* $out/
+        '';
+      };
     in {
       devShells = {
         poetry = pkgs.mkShell {
@@ -130,6 +128,7 @@
           inherit
             moduleMarkdownDocs
             examplePdfDocs
+            site
             ;
         };
 

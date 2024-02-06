@@ -94,7 +94,7 @@ theme:
 
 plugins: 
   - blog
-  - social
+    #- social
   - macros
 
 extra:
