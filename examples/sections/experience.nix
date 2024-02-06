@@ -26,8 +26,8 @@
             "title"
             "location"
             "dates"
-            "jupyenv"
-            "nixgroup"
+            "nix-developer"
+            "web-developer"
           ];
           content = {
             title = {
@@ -48,7 +48,7 @@
                 italic = true;
               };
             }; # dates
-            jupyenv = {
+            nix-developer = {
               type = "itemlist";
               content = {
                 _role = {
@@ -69,8 +69,8 @@
                   };
                 }; # responsibilities
               }; # content
-            }; # jupyenv
-            nixgroup = {
+            }; # nix-developer
+            web-developer = {
               type = "itemlist";
               content = {
                 _role = {
@@ -90,10 +90,10 @@
                   };
                 }; # responsibilities
               }; # content
-            }; # nixgroup
+            }; # web-developer
           }; # content
         }; # details
       }; # content
-    };
+    }; # nixos-foundation
   };
 }

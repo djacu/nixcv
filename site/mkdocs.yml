@@ -13,6 +13,7 @@ nav:
     - examples/personal.md
     - examples/objective.md
     - examples/education.md
+    - examples/experience.md
   - Options:
     - Top:
       - documentation/modules/top/nixcv.md
