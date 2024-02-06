@@ -25,7 +25,7 @@ jobs:
           nix build .#site
           mkdir ./dist
           cp -R ./result/* ./dist/
-          chmod -R +w .dist/
+          chmod -R +w ./dist/
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
