@@ -46,8 +46,10 @@
       };
 
       documentationLib = import ./lib/documentation.nix {inherit self pkgs lib;};
+      examplesLib = import ./lib/examples.nix {inherit self system pkgs lib;};
 
       moduleMarkdownDocs = documentationLib.generateMarkdownDocumentation {};
+      examplePdfDocs = examplesLib.generateExamplesDocumentation {};
 
       site-env = mkPoetryEnv {
         projectDir = self + /site;
@@ -127,6 +129,7 @@
         // {
           inherit
             moduleMarkdownDocs
+            examplePdfDocs
             ;
         };
 
@@ -134,6 +137,10 @@
         copyMarkdownDocs = {
           type = "app";
           program = "${documentationLib.copyMarkdownDocs}/bin/copy-markdown-docs";
+        };
+        copyExampleDocs = {
+          type = "app";
+          program = "${examplesLib.copyExampleDocs}/bin/copy-example-docs";
         };
       };
 
@@ -147,6 +154,7 @@
         // {
           inherit
             moduleMarkdownDocs
+            examplePdfDocs
             ;
         };
 

@@ -8,6 +8,11 @@ nav:
   - Home: index.md
   - Documentation:
     - documentation/index.md
+  - Examples:
+    - examples/index.md
+    - examples/personal.md
+    - examples/objective.md
+    - examples/education.md
   - Options:
     - Top:
       - documentation/modules/top/nixcv.md
@@ -86,6 +91,7 @@ theme:
 plugins: 
   - blog
   - social
+  - macros
 
 extra:
   social:
@@ -111,6 +117,11 @@ markdown_extensions:
       combine_header_slug: true
   - toc:
       permalink: true
+  - pymdownx.pathconverter:
+      base_path: '' # default: ''
+      relative_path: '' # default ''
+      absolute: false # default: false
+      tags: 'a script img link object embed'
 
 extra_css:
   - stylesheets/extra.css

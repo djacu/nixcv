@@ -11,6 +11,7 @@ mkdocs-material = "^9.5.5"
 paginate = "^0.5.6"
 pillow = "^10.2.0"
 cairosvg = "^2.7.1"
+mkdocs-macros-plugin = "^1.0.5"
 
 
 [build-system]
