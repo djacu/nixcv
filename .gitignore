@@ -1,3 +1,4 @@
+### Any locally created PDF files ###
 *.pdf
 
 ### Nix ###
@@ -5,3 +6,8 @@ result
 
 ### Site ###
 site/.cache
+# Examples are included during nix build except for the index file
+!site/docs/examples/index.md
+site/docs/examples/
+# Options docs are included during nix build
+site/docs/documentation/modules/
