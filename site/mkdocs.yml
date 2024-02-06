@@ -8,6 +8,14 @@ nav:
   - Home: index.md
   - Documentation:
     - documentation/index.md
+  - Examples:
+    - examples/index.md
+    - examples/personal.md
+    - examples/objective.md
+    - examples/education.md
+    - examples/experience.md
+    - examples/skills.md
+    - examples/bibliography.md
   - Options:
     - Top:
       - documentation/modules/top/nixcv.md
@@ -57,6 +65,7 @@ theme:
   favicon: assets/favicon.png
   features:
     - content.action.view
+    - content.code.copy
     - navigation.footer
     - navigation.indexes
     - navigation.sections
@@ -86,6 +95,7 @@ theme:
 plugins: 
   - blog
   - social
+  - macros
 
 extra:
   social:
@@ -111,6 +121,11 @@ markdown_extensions:
       combine_header_slug: true
   - toc:
       permalink: true
+  - pymdownx.pathconverter:
+      base_path: '' # default: ''
+      relative_path: '' # default ''
+      absolute: false # default: false
+      tags: 'a script img link object embed'
 
 extra_css:
   - stylesheets/extra.css
