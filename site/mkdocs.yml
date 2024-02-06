@@ -15,6 +15,7 @@ nav:
     - examples/education.md
     - examples/experience.md
     - examples/skills.md
+    - examples/bibliography.md
   - Options:
     - Top:
       - documentation/modules/top/nixcv.md
