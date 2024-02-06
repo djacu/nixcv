@@ -65,6 +65,7 @@ theme:
   favicon: assets/favicon.png
   features:
     - content.action.view
+    - content.code.copy
     - navigation.footer
     - navigation.indexes
     - navigation.sections
