@@ -64,7 +64,8 @@
         buildPhase = ''
           cp -r ${moduleMarkdownDocs}/* ./docs/
           cp -r ${examplePdfDocs}/* ./docs/
-          ls -FhoAR
+          mkdir -p .cache/plugin/social
+          cp ${pkgs.roboto}/share/fonts/truetype/Roboto-* .cache/plugin/social/
           mkdocs build --site-dir dist
         '';
         installPhase = ''
