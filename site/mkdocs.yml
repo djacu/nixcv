@@ -94,8 +94,10 @@ theme:
 
 plugins: 
   - blog
-    #- social
   - macros
+  - social:
+      cards_layout_options:
+        font_family: Roboto
 
 extra:
   social:
