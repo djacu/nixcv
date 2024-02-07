@@ -10,4 +10,4 @@ site/.cache
 !site/docs/examples/index.md
 site/docs/examples/
 # Options docs are included during nix build
-site/docs/documentation/modules/
+site/docs/modules/

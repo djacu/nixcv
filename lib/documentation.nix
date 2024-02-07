@@ -38,6 +38,9 @@
     modulesDir ? self + "/modules",
     pathFilter ? [
       "component"
+      "biblatex/common"
+      "enumitem/setlistOptions"
+      "templates/default"
     ],
     ...
   }: (
@@ -377,8 +380,8 @@
     ''
       #!/usr/bin/env bash
       nix build .\#moduleMarkdownDocs
-      rm -rf site/docs/documentation/modules/*
-      cp -r ./result/* ./site/docs/documentation/
-      chmod +w -R ./site/docs/documentation/modules
+      rm -rf site/docs/modules/*
+      cp -r ./result/* ./site/docs/
+      chmod +w -R ./site/docs/modules
     '';
 }
