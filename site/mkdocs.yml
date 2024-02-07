@@ -18,44 +18,44 @@ nav:
     - examples/bibliography.md
   - Options:
     - Top:
-      - documentation/modules/top/nixcv.md
-      - documentation/modules/top/cv.md
+      - modules/top/nixcv.md
+      - modules/top/cv.md
     - Sections:
-      - documentation/modules/sections/section.md
-      - documentation/modules/sections/personal.md
+      - modules/sections/section.md
+      - modules/sections/personal.md
     - Lists:
-      - documentation/modules/lists/itemlist.md
-      - documentation/modules/lists/item.md
-      - documentation/modules/lists/items.md
-      - documentation/modules/lists/profile.md
+      - modules/lists/itemlist.md
+      - modules/lists/item.md
+      - modules/lists/items.md
+      - modules/lists/profile.md
     - Text:
-      - documentation/modules/text/text.md
-      - documentation/modules/text/paragraphs.md
+      - modules/text/text.md
+      - modules/text/paragraphs.md
     - Skills:
-      - documentation/modules/skills/skills.md
-      - documentation/modules/skills/skill.md
+      - modules/skills/skills.md
+      - modules/skills/skill.md
     - Bibliography:
-      - documentation/modules/biblatex/bibliography.md
+      - modules/biblatex/bibliography.md
     - Templates:
-      - documentation/modules/templates/templates.md
-      - documentation/modules/templates/layout.md
+      - modules/templates/templates.md
+      - modules/templates/layout.md
     - TemplatesContent:
-      - documentation/modules/templates/templatesContent.md
+      - modules/templates/templatesContent.md
       - enumitem:
-        - documentation/modules/enumitem/enumitem.md
-        - documentation/modules/enumitem/newlist.md
-        - documentation/modules/enumitem/setlist.md
+        - modules/enumitem/enumitem.md
+        - modules/enumitem/newlist.md
+        - modules/enumitem/setlist.md
       - environments:
-        - documentation/modules/templates/newenvironment.md
+        - modules/templates/newenvironment.md
       - latex:
-        - documentation/modules/templates/rawlatex.md
+        - modules/templates/rawlatex.md
       - packages:
-        - documentation/modules/templates/packages.md
+        - modules/templates/packages.md
       - titlesec:
-        - documentation/modules/titlesec/titleformat.md
+        - modules/titlesec/titleformat.md
     - Bibresources:
-      - documentation/modules/biblatex/bibresources.md
-      - documentation/modules/biblatex/online.md
+      - modules/biblatex/bibresources.md
+      - modules/biblatex/online.md
   - Blog:
     - blog/index.md
 
