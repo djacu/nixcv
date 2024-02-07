@@ -38,6 +38,9 @@
     modulesDir ? self + "/modules",
     pathFilter ? [
       "component"
+      "biblatex/common"
+      "enumitem/setlistOptions"
+      "templates/default"
     ],
     ...
   }: (
