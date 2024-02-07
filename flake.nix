@@ -62,7 +62,7 @@
         nativeBuildInputs = [site-env];
 
         buildPhase = ''
-          cp -r ${moduleMarkdownDocs}/* ./docs/documentation/
+          cp -r ${moduleMarkdownDocs}/* ./docs/
           cp -r ${examplePdfDocs}/* ./docs/
           ls -FhoAR
           mkdocs build --site-dir dist
